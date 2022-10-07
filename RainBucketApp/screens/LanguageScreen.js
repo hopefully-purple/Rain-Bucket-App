@@ -90,6 +90,14 @@ const ListOfWords = langWords => {
   let c = langWords.langWords.filter(i => i.word.charAt(0) === 'c');
   let g = langWords.langWords.filter(i => i.word.charAt(0) === 'g');
 
+  //Section gameplan:
+  // List of alphabet characters (oo including spanish characters??)
+  // for each letter, do the filter charAt
+  // if resulting list is not empty
+  // create a new section object with title = letter and data = list
+  // add section object to section array
+  // pass section array to SectionList component
+
   // let sectionL = [
   //   {
   //     title: 'A',
