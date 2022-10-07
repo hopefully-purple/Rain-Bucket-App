@@ -47,43 +47,6 @@ const styles = StyleSheet.create({
   },
 });
 
-const ListOfWordsEx = langWords => {
-  // Below is a completely working section list render example
-  const animals = [
-    {id: 1, animal: 'Dog'},
-    {id: 2, animal: 'Bird'},
-    {id: 3, animal: 'Cat'},
-    {id: 4, animal: 'Mouse'},
-    {id: 5, animal: 'Horse'},
-  ];
-  console.log(animals[0]); //works!
-  console.log(animals[4].animal); //works!
-  let a = animals.filter(item => item.animal.includes('e')); //.map(i => i.animal);
-  console.log(a);
-  let list = ['b', 'c', 'd'];
-  console.log(list[0]); // works!
-
-  let sectionL = [
-    {
-      title: 'Yet to B alphabetized',
-      data: a,
-    },
-  ];
-
-  return (
-    <View style={styles.container}>
-      <SectionList
-        sections={sectionL}
-        renderItem={({item}) => <Text style={styles.item}>{item.animal}</Text>}
-        renderSectionHeader={({section}) => (
-          <Text style={styles.sectionHeader}>{section.title}</Text>
-        )}
-        keyExtractor={(item, index) => `basicListEntry-${item.id}`}
-      />
-    </View>
-  );
-};
-
 const ListOfWords = ({sectionL}) => {
   //Section gameplan:
   // List of alphabet characters (oo including spanish characters??)
@@ -191,7 +154,6 @@ const LanguageScreen = () => {
   const wordInputLabel = 'New ' + languageObj.language + ' word';
   return (
     <SafeAreaView style={styles.screenContainer}>
-      {/* <ScrollView style={styles.screenContainer}> */}
       <Text style={styles.text}>{languageObj.language} Screen!</Text>
       <TextInput
         label={wordInputLabel}
@@ -219,7 +181,6 @@ const LanguageScreen = () => {
         Add!
       </Button>
       <ListOfWords sectionL={sectionList} />
-      {/* </ScrollView> */}
     </SafeAreaView>
   );
 };
