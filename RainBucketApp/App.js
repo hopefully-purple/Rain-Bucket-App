@@ -17,6 +17,11 @@ const languageObject = {
   ],
 };
 
+const beginningObject = {
+  language: 'Spanish',
+  words: [],
+};
+
 const getLanguageObject = async () => {
   try {
     const jsonValue = await AsyncStorage.getItem('Spanish');
@@ -49,7 +54,7 @@ const setLanguageObject = async (languageObject) => {
 };
 
 const App = () => {
-  const [languageObj, setLanguageObj] = useState(languageObject);
+  const [languageObj, setLanguageObj] = useState(beginningObject);
   const appState = useRef(AppState.currentState);
   // Set langobj to Async storage contents!!
   useEffect(() => {
@@ -67,7 +72,7 @@ const App = () => {
             console.log('Below is the json object we get in response');
             console.log(JSON.stringify(asyncLO, undefined, 2));
             // console.log('Hopefully updates context?');
-            // setLanguageObj(response);
+            setLanguageObj(response);
             // console.log('Print new context?');
             // console.log(JSON.stringify(languageObj, undefined, 2));
           });
@@ -81,6 +86,8 @@ const App = () => {
           console.log('line after set await');
         }
         setLanguageData();
+      } else if (appState.current.match(/active/)) {
+        setLanguageObj(languageObj);
       }
 
       appState.current = nextAppState;
