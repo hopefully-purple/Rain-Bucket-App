@@ -156,8 +156,11 @@ const LanguageScreen = () => {
       newLOW.push(newWordItem);
       setLanguageObj({...languageObj, words: newLOW});
       console.log(JSON.stringify(languageObj.words, undefined, 2));
+
       this.wordInput.current.clear();
       this.definitionInput.current.clear();
+      setWord('');
+      setDefinition('');
     } else {
       console.log('Nothing to add');
     }
