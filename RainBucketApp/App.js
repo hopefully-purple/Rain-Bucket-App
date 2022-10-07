@@ -8,11 +8,11 @@ import LanguageScreen from './screens/LanguageScreen';
 
 const languageObject = {
   language: 'Spanish',
-  words: {
-    "baja": 'down',
-    "cerrado": 'closed',
-    "afuera": 'outside',
-  },
+  words: [
+    {id: 1, word: "baja", definition: 'down'},
+    {id: 2, word: "cerrado", definition: 'closed'},
+    {id: 3, word: "afuera", definition: 'outside'},
+  ],
 };
 
 const App = () => {
