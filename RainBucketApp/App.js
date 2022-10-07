@@ -40,10 +40,10 @@ const getLanguageObject = async () => {
   }
 };
 
-const setLanguageObject = async (languageObject) => {
+const setLanguageObject = async (languageObj) => {
   try {
-    const jsonValue = JSON.stringify(languageObject);
-    await AsyncStorage.setItem(languageObject.language, jsonValue);
+    const jsonValue = JSON.stringify(languageObj);
+    await AsyncStorage.setItem(languageObj.language, jsonValue);
   } catch(e) {
     // save error
     console.log('Async storage threw an error when setting: ' + e);
