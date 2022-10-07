@@ -84,47 +84,24 @@ const ListOfWordsEx = langWords => {
   );
 };
 
-const ListOfWords = langWords => {
-  let a = langWords.langWords.filter(i => i.word.charAt(0) === 'a');
-  let b = langWords.langWords.filter(i => i.word.charAt(0) === 'b');
-  let c = langWords.langWords.filter(i => i.word.charAt(0) === 'c');
-  let g = langWords.langWords.filter(i => i.word.charAt(0) === 'g');
-
+const ListOfWords = ({sectionL}) => {
   //Section gameplan:
   // List of alphabet characters (oo including spanish characters??)
   // for each letter, do the filter charAt
+  //let a = langWords.langWords.filter(i => i.word.charAt(0) === 'a');
   // if resulting list is not empty
   // create a new section object with title = letter and data = list
   // add section object to section array
   // pass section array to SectionList component
-
   // let sectionL = [
   //   {
-  //     title: 'A',
-  //     data: a,
-  //   },
-  //   {
-  //     title: 'B',
-  //     data: b,
-  //   },
-  //   {
-  //     title: 'C',
-  //     data: c,
-  //   },
-  //   {
-  //     title: 'G',
-  //     data: g,
+  //     title: '',
+  //     data: [{id: 0, word: '', definition: ''}],
   //   },
   // ];
-
-  const sorted = langWords.langWords.sort((a, b) => (a.word > b.word ? 1 : -1));
-
-  const sectionL = [
-    {
-      title: 'Spanish Words',
-      data: sorted,
-    },
-  ];
+  // console.log(
+  //   '(listOfWords comp) SectionL = ' + JSON.stringify(sectionL, undefined, 2),
+  // );
 
   return (
     <View style={styles.container}>
@@ -147,32 +124,69 @@ const ListOfWords = langWords => {
 const LanguageScreen = () => {
   const [word, setWord] = useState('');
   const [definition, setDefinition] = useState('');
-  // const [lang, setLang] = useState('');
   const {languageObj, setLanguageObj} = useContext(LanguageObjectContext);
 
   this.wordInput = React.createRef();
   this.definitionInput = React.createRef();
 
+  const saveData = async () => {
+    try {
+      await AsyncStorage.setItem(
+        languageObj.language,
+        JSON.stringify(languageObj.words),
+      );
+      console.log('(saveData) Data successfully saved');
+    } catch (e) {
+      console.log('(saveData) Failed to save the data to the storage');
+      throw e;
+    }
+  };
+
   const handleAddWord = () => {
     if (word !== '' && definition !== '') {
+      //Create word object
       const newWordItem = {
         id: languageObj.words.length + 1,
         word,
         definition,
       };
+
+      //Update languageObj context
       const newLOW = languageObj.words;
       newLOW.push(newWordItem);
       setLanguageObj({...languageObj, words: newLOW});
       console.log(JSON.stringify(languageObj.words, undefined, 2));
 
+      //Clear inputs
       this.wordInput.current.clear();
       this.definitionInput.current.clear();
       setWord('');
       setDefinition('');
+
+      //Save to async storage
+      saveData();
     } else {
       console.log('Nothing to add');
     }
   };
+
+  const [sectionList, setSectionList] = useState([]);
+  useEffect(
+    function createSectionList() {
+      console.log('(LS.createSectionList) how often is useEffect called?');
+      const sorted = languageObj.words.sort((a, b) =>
+        a.word > b.word ? 1 : -1,
+      );
+      const newSectionL = [
+        {
+          title: 'Words',
+          data: sorted,
+        },
+      ];
+      setSectionList(newSectionL);
+    },
+    [languageObj.words],
+  );
 
   const wordInputLabel = 'New ' + languageObj.language + ' word';
   return (
@@ -204,7 +218,7 @@ const LanguageScreen = () => {
       <Button mode="elevated" style={styles.addButton} onPress={handleAddWord}>
         Add!
       </Button>
-      <ListOfWords langWords={languageObj.words} />
+      <ListOfWords sectionL={sectionList} />
       {/* </ScrollView> */}
     </SafeAreaView>
   );

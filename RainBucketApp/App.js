@@ -19,86 +19,56 @@ const languageObject = {
 
 const beginningObject = {
   language: 'Spanish',
-  words: [],
-};
-
-const getLanguageObject = async () => {
-  try {
-    const jsonValue = await AsyncStorage.getItem('Spanish');
-    console.log('get async jsonValue=' + jsonValue);
-    return new Promise((resolve, reject) => {
-      if (jsonValue != null) {
-        resolve(JSON.parse(jsonValue));
-      } else {
-        reject(languageObject);
-      }
-    });
-  } catch(e) {
-    // read error
-    console.log('Async storage threw an error when getting: ' + e);
-    throw e;
-  }
-};
-
-const setLanguageObject = async (languageObj) => {
-  try {
-    const jsonValue = JSON.stringify(languageObj);
-    await AsyncStorage.setItem(languageObj.language, jsonValue);
-  } catch(e) {
-    // save error
-    console.log('Async storage threw an error when setting: ' + e);
-    throw e;
-  }
-
-  console.log('Async set Done.');
+  words: [{id: 0, word: '', definition: ''}],
 };
 
 const App = () => {
   const [languageObj, setLanguageObj] = useState(beginningObject);
-  const appState = useRef(AppState.currentState);
+  // const appState = useRef(AppState.currentState);
   // Set langobj to Async storage contents!!
-  useEffect(() => {
-    const subscription = AppState.addEventListener('change', nextAppState => {
-      if (
-        appState.current.match(/inactive|background/) &&
-        nextAppState === 'active'
-      ) {
-        console.log(
-          'App has come to the foreground! -- Loading async storage into context',
-        );
-        async function fetchLanguageData() {
-          const response = await getLanguageObject();
-          response.then((asyncLO) => {
-            console.log('Below is the json object we get in response');
-            console.log(JSON.stringify(asyncLO, undefined, 2));
-            // console.log('Hopefully updates context?');
-            setLanguageObj(response);
-            // console.log('Print new context?');
-            // console.log(JSON.stringify(languageObj, undefined, 2));
-          });
-        }
-        fetchLanguageData();
-      } else if (appState.current.match(/inactive|background/)) {
-        console.log('App is inactive or in background -- Update async with context');
-        async function setLanguageData() {
-          await setLanguageObject(languageObj);
-          // const r = await getLanguageObject();
-          console.log('line after set await');
-        }
-        setLanguageData();
-      } else if (appState.current.match(/active/)) {
-        setLanguageObj(languageObj);
+
+  const readData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('Spanish');
+      console.log('(App.readData) value:' + value);
+      if (value !== null) {
+        beginningObject.words = JSON.parse(value);
+        setLanguageObj(beginningObject);
+      } else {
+        console.log('(App.readData).getItem value is null!');
       }
+    } catch (e) {
+      console.log('(App.readData) Failed to fetch the input from storage: ' + e);
+      throw e;
+    }
+  };
 
-      appState.current = nextAppState;
-      // setAppStateVisible(appState.current);
-      console.log('AppState', appState.current);
-    });
+  useEffect(() => {
+    console.log('App.useEffect');
+    readData();
+  }, []);
 
-    return () => {
-      subscription.remove();
-    };
-  }, [languageObj]);
+  // useEffect(() => {
+  //   const subscription = AppState.addEventListener('change', nextAppState => {
+  //     if (
+  //       appState.current.match(/inactive|background/) &&
+  //       nextAppState === 'active'
+  //     ) {
+  //       console.log(
+  //         'App has come to the foreground! -- Loading async storage into context',
+  //       );
+  //       readData();
+  //     }
+
+  //     appState.current = nextAppState;
+  //     // setAppStateVisible(appState.current);
+  //     console.log('AppState', appState.current);
+  //   });
+
+  //   return () => {
+  //     subscription.remove();
+  //   };
+  // }, []);
   return (
     <LanguageObjectContext.Provider value={{languageObj, setLanguageObj}}>
       <LanguageScreen />
