@@ -6,6 +6,7 @@ import {
   Alert,
   View,
   SectionList,
+  StatusBar,
 } from 'react-native';
 import {TextInput, Button} from 'react-native-paper';
 import LanguageObjectContext from '../contexts/LanguageObject';
@@ -42,12 +43,16 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     backgroundColor: 'rgba(247,247,247,1.0)',
-    // backgroundColor: Colors.LIGHT_PURPLE,
   },
   item: {
     padding: 10,
     fontSize: 18,
     height: 44,
+  },
+  container: {
+    flex: 1,
+    paddingTop: StatusBar.currentHeight,
+    marginHorizontal: 16,
   },
 });
 
@@ -59,7 +64,6 @@ function organizeIntoAlphabetizedSections(langObj) {
     const newS = [
       {
         title: 'Words',
-        // data: sorted,
         data: langObj.words,
       },
     ];
@@ -93,14 +97,9 @@ function organizeIntoAlphabetizedSections(langObj) {
 
 const ListOfWords = ({sectionL, langObj, setLanguageObj}) => {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <SectionList
         sections={sectionL}
-        // renderItem={({item}) => (
-        //   <Text style={styles.item}>
-        //     {item.word} - {item.definition}
-        //   </Text>
-        // )}
         renderItem={({item}) => (
           <Item item={item} langObj={langObj} setLanguageObj={setLanguageObj} />
         )}
@@ -109,17 +108,19 @@ const ListOfWords = ({sectionL, langObj, setLanguageObj}) => {
         )}
         keyExtractor={(item, index) => `basicListEntry-${item.id}`}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
 const Item = ({item, langObj, setLanguageObj}) => (
-  <TouchableOpacity
-    onLongPress={() => changeItemAlert(item, langObj, setLanguageObj)}>
-    <Text style={styles.item}>
-      {item.word} - {item.definition}
-    </Text>
-  </TouchableOpacity>
+  <View>
+    <TouchableOpacity
+      onLongPress={() => changeItemAlert(item, langObj, setLanguageObj)}>
+      <Text style={styles.item}>
+        {item.word} - {item.definition}
+      </Text>
+    </TouchableOpacity>
+  </View>
 );
 
 const changeItemAlert = (item, langObj, setLanguageObj) =>
@@ -130,7 +131,6 @@ const changeItemAlert = (item, langObj, setLanguageObj) =>
     },
     {
       text: 'Delete',
-      // onPress: () => console.log('Delete ' + item.id + ' Pressed'),
       onPress: () => deleteItemInWords(item.id, langObj, setLanguageObj),
     },
     {text: 'Done', onPress: () => console.log('Done Pressed')},
