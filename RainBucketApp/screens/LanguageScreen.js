@@ -84,7 +84,7 @@ const ListOfWords = ({sectionL}) => {
   );
 };
 
-const LanguageScreen = () => {
+const LanguageScreen = ({navigation}) => {
   const [word, setWord] = useState('');
   const [definition, setDefinition] = useState('');
   const {languageObj, setLanguageObj} = useContext(LanguageObjectContext);
