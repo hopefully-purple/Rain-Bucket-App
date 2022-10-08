@@ -11,10 +11,12 @@ import {TextInput, Button} from 'react-native-paper';
 import LanguageObjectContext from '../contexts/LanguageObject';
 import Colors from '../assets/styles/colors';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
+    backgroundColor: Colors.WHITE,
   },
   input: {
     margin: 10,
@@ -50,9 +52,35 @@ const styles = StyleSheet.create({
 const SetOfLanguagesScreen = ({navigation}) => {
   const {languageObj, setLanguageObj} = useContext(LanguageObjectContext);
 
+  const readData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('Spanish');
+      console.log('(App.readData) value:' + value);
+      if (value !== null) {
+        // setLanguageObj({...beginningObject, words: JSON.parse(value)});
+        setLanguageObj({...languageObj, words: JSON.parse(value)});
+      } else {
+        console.log('(App.readData).getItem value is null!');
+      }
+    } catch (e) {
+      console.log(
+        '(App.readData) Failed to fetch the input from storage: ' + e,
+      );
+      throw e;
+    }
+  };
+
+  const handleLanguageSelection = () => {
+    readData();
+    navigation.navigate('LanguageScreen');
+  };
+
   return (
     <SafeAreaView style={styles.screenContainer}>
       <Text style={styles.text}>Choose a languague!</Text>
+      <TouchableOpacity onPress={() => handleLanguageSelection()}>
+        <Text style={styles.text}>Spanish</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };
