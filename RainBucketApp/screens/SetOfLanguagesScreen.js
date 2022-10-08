@@ -26,10 +26,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     margin: 10,
   },
-  addButton: {
-    backgroundColor: Colors.LIGHT_PURPLE,
+  clearButton: {
+    backgroundColor: Colors.BRIGHT_RED,
     borderRadius: 12,
-    width: 100,
+    width: 200,
     alignSelf: 'center',
     margin: 10,
   },
@@ -52,15 +52,34 @@ const styles = StyleSheet.create({
 const SetOfLanguagesScreen = ({navigation}) => {
   const {languageObj, setLanguageObj} = useContext(LanguageObjectContext);
 
-  const readData = async () => {
+  const clearAllData = async () => {
     try {
-      const value = await AsyncStorage.getItem('Spanish');
+      await AsyncStorage.clear();
+    } catch (e) {
+      // clear error
+      console.log('clear storage threw error ' + e);
+      throw e;
+    }
+
+    console.log('Done.');
+  };
+
+  const readData = async language => {
+    try {
+      const value = await AsyncStorage.getItem(language);
       console.log('(App.readData) value:' + value);
       if (value !== null) {
         // setLanguageObj({...beginningObject, words: JSON.parse(value)});
         setLanguageObj({...languageObj, words: JSON.parse(value)});
       } else {
-        console.log('(App.readData).getItem value is null!');
+        console.log(
+          '(App.readData).getItem value is null! create a new language object',
+        );
+        const newLanguage = {
+          language: language,
+          words: [{id: 0, word: '', definition: ''}],
+        };
+        setLanguageObj(newLanguage);
       }
     } catch (e) {
       console.log(
@@ -70,17 +89,26 @@ const SetOfLanguagesScreen = ({navigation}) => {
     }
   };
 
-  const handleLanguageSelection = () => {
-    readData();
+  const handleLanguageSelection = language => {
+    readData(language);
     navigation.navigate('LanguageScreen');
   };
 
   return (
     <SafeAreaView style={styles.screenContainer}>
       <Text style={styles.text}>Choose a languague!</Text>
-      <TouchableOpacity onPress={() => handleLanguageSelection()}>
+      <TouchableOpacity onPress={() => handleLanguageSelection('Spanish')}>
         <Text style={styles.text}>Spanish</Text>
       </TouchableOpacity>
+      <TouchableOpacity onPress={() => handleLanguageSelection('Japanese')}>
+        <Text style={styles.text}>Japanese</Text>
+      </TouchableOpacity>
+      <Button
+        style={styles.clearButton}
+        textColor={Colors.TEST_CREAM}
+        onPress={() => clearAllData()}>
+        CLEAR STORAGE
+      </Button>
     </SafeAreaView>
   );
 };
