@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   clearButton: {
-    backgroundColor: Colors.BRIGHT_RED,
+    backgroundColor: Colors.LIGHT_RED,
     borderRadius: 12,
     width: 200,
     alignSelf: 'center',
