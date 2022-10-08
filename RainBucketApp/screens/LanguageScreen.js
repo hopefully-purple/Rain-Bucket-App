@@ -15,47 +15,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {SPANISH} from '../assets/alphabets/Alphabets';
 
-const styles = StyleSheet.create({
-  screenContainer: {
-    flex: 1,
-    backgroundColor: Colors.WHITE,
-  },
-  input: {
-    margin: 10,
-  },
-  text: {
-    color: Colors.DD_DARK_GRAY,
-    fontSize: 20,
-    margin: 10,
-  },
-  addButton: {
-    backgroundColor: Colors.LIGHT_PURPLE,
-    borderRadius: 12,
-    width: 100,
-    alignSelf: 'center',
-    margin: 10,
-  },
-  sectionHeader: {
-    paddingTop: 2,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 2,
-    fontSize: 14,
-    fontWeight: 'bold',
-    backgroundColor: 'rgba(247,247,247,1.0)',
-  },
-  item: {
-    padding: 10,
-    fontSize: 18,
-    height: 44,
-  },
-  container: {
-    flex: 1,
-    paddingTop: StatusBar.currentHeight,
-    marginHorizontal: 16,
-  },
-});
-
 // Packages to consider in place of doing by hand:
 // https://npm.io/package/rn-alphabet-section-list
 function organizeIntoAlphabetizedSections(langObj) {
@@ -89,8 +48,8 @@ function organizeIntoAlphabetizedSections(langObj) {
       newSL.push(newS);
     }
   }
-  console.log('(organize) resulting newSL:');
-  console.log(JSON.stringify(newSL, undefined, 2));
+  // console.log('(organize) resulting newSL:');
+  // console.log(JSON.stringify(newSL, undefined, 2));
   // pass section array to SectionList component
   return newSL;
 }
@@ -141,7 +100,7 @@ function deleteItemInWords(id, langObj, setLanguageObj) {
     return item.id !== id;
   }
   const words = langObj.words.filter(getItem);
-  console.log(words);
+  // console.log(words);
   setLanguageObj({...langObj, words: words});
   const saveData = async () => {
     try {
@@ -178,8 +137,6 @@ const LanguageScreen = ({navigation}) => {
     }
   };
 
-  const onChangeSearch = query => setSearchQuery(query);
-
   const handleAddWord = () => {
     if (word !== '' && definition !== '') {
       // console.log(
@@ -201,7 +158,7 @@ const LanguageScreen = ({navigation}) => {
       //console.log('(handleAddWord) SortedNL:');
       //console.log(JSON.stringify(sortedNL, undefined, 2));
       setLanguageObj({...languageObj, words: sortedNL});
-      console.log(JSON.stringify(languageObj.words, undefined, 2));
+      // console.log(JSON.stringify(languageObj.words, undefined, 2));
 
       //Clear inputs
       this.wordInput.current.clear();
@@ -230,17 +187,37 @@ const LanguageScreen = ({navigation}) => {
     [languageObj],
   );
 
+  const onChangeSearch = query => {
+    setSearchQuery(query);
+    // console.log(searchQuery);
+  };
+
+  const onSubmitSearch = () => {
+    console.log('Search for ' + searchQuery);
+  };
+
   const wordInputLabel = 'New ' + languageObj.language + ' word/phrase';
   return (
     <SafeAreaView style={styles.screenContainer}>
-      <TouchableOpacity onPress={() => navigation.navigate('SetOfLanguages')}>
-        <Text style={styles.text}>{languageObj.language} Screen!</Text>
-      </TouchableOpacity>
-      <Searchbar
-        placeholder="Search"
-        onChangeText={onChangeSearch}
-        value={searchQuery}
-      />
+      <View style={styles.screenTop}>
+        <TouchableOpacity onPress={() => navigation.navigate('SetOfLanguages')}>
+          <Text style={styles.text}>{languageObj.language} Screen!</Text>
+        </TouchableOpacity>
+        <TextInput
+          label="Search"
+          mode="outlined"
+          dense="true"
+          blurOnSubmit="true"
+          activeOutlineColor={Colors.TEST_PURPLE}
+          value={searchQuery}
+          autoCorrect={false}
+          autoCapitalize={false}
+          onChangeText={onChangeSearch}
+          onSubmitEditing={onSubmitSearch}
+          style={styles.searchBar}
+          left={<TextInput.Icon icon="magnify" color={Colors.TEST_PURPLE} />}
+        />
+      </View>
       <TextInput
         label={wordInputLabel}
         value={word}
@@ -250,6 +227,7 @@ const LanguageScreen = ({navigation}) => {
         activeOutlineColor={Colors.TEST_PURPLE}
         autoCorrect={false}
         autoCapitalize={false}
+        blurOnSubmit="true"
         ref={this.wordInput}
       />
       <TextInput
@@ -261,6 +239,7 @@ const LanguageScreen = ({navigation}) => {
         activeOutlineColor={Colors.TEST_PURPLE}
         autoCapitalize={false}
         autoCorrect={false}
+        blurOnSubmit="true"
         ref={this.definitionInput}
       />
       <Button mode="elevated" style={styles.addButton} onPress={handleAddWord}>
@@ -278,5 +257,57 @@ const LanguageScreen = ({navigation}) => {
 // RegistrationScreen.defaultProps = {
 //   groupName: "My"
 // }
+
+const styles = StyleSheet.create({
+  screenContainer: {
+    flex: 1,
+    backgroundColor: Colors.WHITE,
+  },
+  input: {
+    margin: 10,
+  },
+  text: {
+    color: Colors.DD_DARK_GRAY,
+    fontSize: 20,
+    margin: 10,
+  },
+  addButton: {
+    backgroundColor: Colors.LIGHT_PURPLE,
+    borderRadius: 12,
+    width: 100,
+    alignSelf: 'center',
+    margin: 10,
+  },
+  sectionHeader: {
+    paddingTop: 2,
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingBottom: 2,
+    fontSize: 14,
+    fontWeight: 'bold',
+    backgroundColor: 'rgba(247,247,247,1.0)',
+  },
+  item: {
+    padding: 10,
+    fontSize: 18,
+    height: 44,
+    // flexWrap: 'wrap', //does nothing
+  },
+  container: {
+    flex: 1,
+    paddingTop: StatusBar.currentHeight,
+    marginHorizontal: 16,
+  },
+  screenTop: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  searchBar: {
+    width: 100,
+    // height: 20,
+    flexGrow: 1,
+    marginRight: 10,
+  },
+});
 
 export default LanguageScreen;
