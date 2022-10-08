@@ -3,7 +3,7 @@ import {
   Text,
   SafeAreaView,
   StyleSheet,
-  ScrollView,
+  Alert,
   View,
   SectionList,
 } from 'react-native';
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const ListOfWords = ({sectionL}) => {
+const ListOfWords = ({sectionL, langObj, setLanguageObj}) => {
   //Section gameplan:
   // List of alphabet characters (oo including spanish characters??)
   // for each letter, do the filter charAt
@@ -73,10 +73,13 @@ const ListOfWords = ({sectionL}) => {
     <View style={styles.container}>
       <SectionList
         sections={sectionL}
+        // renderItem={({item}) => (
+        //   <Text style={styles.item}>
+        //     {item.word} - {item.definition}
+        //   </Text>
+        // )}
         renderItem={({item}) => (
-          <Text style={styles.item}>
-            {item.word} - {item.definition}
-          </Text>
+          <Item item={item} langObj={langObj} setLanguageObj={setLanguageObj} />
         )}
         renderSectionHeader={({section}) => (
           <Text style={styles.sectionHeader}>{section.title}</Text>
@@ -86,6 +89,49 @@ const ListOfWords = ({sectionL}) => {
     </View>
   );
 };
+
+const Item = ({item, langObj, setLanguageObj}) => (
+  <TouchableOpacity
+    onLongPress={() => changeItemAlert(item, langObj, setLanguageObj)}>
+    <Text style={styles.item}>
+      {item.word} - {item.definition}
+    </Text>
+  </TouchableOpacity>
+);
+
+const changeItemAlert = (item, langObj, setLanguageObj) =>
+  Alert.alert(item.word, item.definition, [
+    {
+      text: 'Edit',
+      onPress: () => console.log('Edit Pressed'),
+    },
+    {
+      text: 'Delete',
+      // onPress: () => console.log('Delete ' + item.id + ' Pressed'),
+      onPress: () => deleteItemInWords(item.id, langObj, setLanguageObj),
+    },
+    {text: 'Done', onPress: () => console.log('Done Pressed')},
+  ]);
+
+function deleteItemInWords(id, langObj, setLanguageObj) {
+  function getItem(item) {
+    return item.id !== id;
+  }
+  const words = langObj.words.filter(getItem);
+  console.log(words);
+  setLanguageObj({...langObj, words: words});
+  const saveData = async () => {
+    try {
+      await AsyncStorage.setItem(langObj.language, JSON.stringify(words));
+      console.log('(saveData) Data successfully saved');
+    } catch (e) {
+      console.log('(saveData) Failed to save the data to the storage');
+      throw e;
+    }
+  };
+
+  saveData();
+}
 
 const LanguageScreen = ({navigation}) => {
   const [word, setWord] = useState('');
@@ -185,7 +231,11 @@ const LanguageScreen = ({navigation}) => {
       <Button mode="elevated" style={styles.addButton} onPress={handleAddWord}>
         Add!
       </Button>
-      <ListOfWords sectionL={sectionList} />
+      <ListOfWords
+        sectionL={sectionList}
+        langObj={languageObj}
+        setLanguageObj={setLanguageObj}
+      />
     </SafeAreaView>
   );
 };
