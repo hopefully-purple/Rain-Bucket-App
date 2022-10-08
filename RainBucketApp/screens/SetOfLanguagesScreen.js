@@ -69,15 +69,16 @@ const SetOfLanguagesScreen = ({navigation}) => {
       const value = await AsyncStorage.getItem(language);
       console.log('(App.readData) value:' + value);
       if (value !== null) {
-        // setLanguageObj({...beginningObject, words: JSON.parse(value)});
-        setLanguageObj({...languageObj, words: JSON.parse(value)});
+        setLanguageObj({language: language, words: JSON.parse(value)});
       } else {
         console.log(
-          '(App.readData).getItem value is null! create a new language object',
+          '(App.readData).getItem value is null! create a new ' +
+            language +
+            ' object',
         );
         const newLanguage = {
           language: language,
-          words: [{id: 0, word: '', definition: ''}],
+          words: [],
         };
         setLanguageObj(newLanguage);
       }
