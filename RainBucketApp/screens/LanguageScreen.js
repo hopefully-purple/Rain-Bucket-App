@@ -191,8 +191,10 @@ const LanguageScreen = ({navigation}) => {
 
   const createSearchSectionList = query => {
     // Filter languagObj.words on .word
-    let searchList = languageObj.words.filter(i =>
-      i.word.toLowerCase().includes(query.toLowerCase()),
+    let searchList = languageObj.words.filter(
+      i =>
+        i.word.toLowerCase().includes(query.toLowerCase()) ||
+        i.definition.toLowerCase().includes(query.toLowerCase()),
     );
     // Set resulting array to section list
     // console.log(JSON.stringify(searchList, undefined, 2));
