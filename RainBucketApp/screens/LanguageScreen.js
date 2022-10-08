@@ -298,12 +298,15 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   titleTouchable: {
-    // padding: 1,
+    // margin: 1,
   },
   text: {
     color: Colors.DD_DARK_GRAY,
     fontSize: 20,
     margin: 10,
+    backgroundColor: Colors.LIGHT_PURPLE,
+    // padding: 1,
+    // paddingBottom: 10,
   },
   addButton: {
     backgroundColor: Colors.LIGHT_PURPLE,
@@ -340,6 +343,7 @@ const styles = StyleSheet.create({
     width: 100,
     // height: 20,
     flexGrow: 1,
+    // flexShrink: 1,
     marginRight: 10,
   },
 });

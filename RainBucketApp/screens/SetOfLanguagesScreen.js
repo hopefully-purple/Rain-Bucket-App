@@ -1,53 +1,10 @@
-import React, {useState, useContext, createContext, useEffect} from 'react';
-import {
-  Text,
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  SectionList,
-} from 'react-native';
+import React, {useContext} from 'react';
+import {Text, SafeAreaView, StyleSheet, View, Image} from 'react-native';
 import {TextInput, Button} from 'react-native-paper';
 import LanguageObjectContext from '../contexts/LanguageObject';
 import Colors from '../assets/styles/colors';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-
-const styles = StyleSheet.create({
-  screenContainer: {
-    flex: 1,
-    backgroundColor: Colors.WHITE,
-  },
-  input: {
-    margin: 10,
-  },
-  text: {
-    color: Colors.DD_DARK_GRAY,
-    fontSize: 20,
-    margin: 10,
-  },
-  clearButton: {
-    backgroundColor: Colors.LIGHT_RED,
-    borderRadius: 12,
-    width: 200,
-    alignSelf: 'center',
-    margin: 10,
-  },
-  sectionHeader: {
-    paddingTop: 2,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 2,
-    fontSize: 14,
-    fontWeight: 'bold',
-    backgroundColor: 'rgba(247,247,247,1.0)',
-  },
-  item: {
-    padding: 10,
-    fontSize: 18,
-    height: 44,
-  },
-});
 
 const SetOfLanguagesScreen = ({navigation}) => {
   const {languageObj, setLanguageObj} = useContext(LanguageObjectContext);
@@ -67,7 +24,7 @@ const SetOfLanguagesScreen = ({navigation}) => {
   const readData = async language => {
     try {
       const value = await AsyncStorage.getItem(language);
-      console.log('(App.readData) value:' + value);
+      // console.log('(App.readData) value:' + value);
       if (value !== null) {
         setLanguageObj({language: language, words: JSON.parse(value)});
       } else {
@@ -97,12 +54,12 @@ const SetOfLanguagesScreen = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.screenContainer}>
-      <Text style={styles.text}>Choose a languague!</Text>
+      <Text style={styles.titleText}>Choose a language!</Text>
       <TouchableOpacity onPress={() => handleLanguageSelection('Spanish')}>
-        <Text style={styles.text}>Spanish</Text>
+        <Text style={styles.languageText}>Spanish</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => handleLanguageSelection('Japanese')}>
-        <Text style={styles.text}>Japanese</Text>
+        <Text style={styles.languageText}>Japanese</Text>
       </TouchableOpacity>
       <Button
         style={styles.clearButton}
@@ -110,9 +67,58 @@ const SetOfLanguagesScreen = ({navigation}) => {
         onPress={() => clearAllData()}>
         CLEAR STORAGE
       </Button>
+      <View styles={styles.logoContainer}>
+        <Image
+          style={styles.logo}
+          source={require('../assets/images/purple_rainbucket_2.jpeg')}
+        />
+        <Text style={styles.logoText}>Rainbucket App</Text>
+      </View>
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  screenContainer: {
+    flex: 1,
+    backgroundColor: Colors.WHITE,
+  },
+  titleText: {
+    color: Colors.DD_DARK_GRAY,
+    fontSize: 25,
+    margin: 10,
+    padding: 5,
+    backgroundColor: Colors.LIGHT_PURPLE,
+  },
+  languageText: {
+    color: Colors.DD_DARK_GRAY,
+    fontSize: 20,
+    margin: 10,
+    // backgroundColor: Colors.LIGHT_PURPLE,
+  },
+  clearButton: {
+    backgroundColor: Colors.LIGHT_RED,
+    borderRadius: 12,
+    width: 200,
+    alignSelf: 'center',
+    margin: 10,
+  },
+  logoContainer: {
+    // margin: 100,
+  },
+  logo: {
+    height: 300,
+    marginTop: 100,
+    alignSelf: 'center',
+  },
+  logoText: {
+    color: Colors.TEST_PURPLE,
+    fontSize: 25,
+    margin: 10,
+    padding: 5,
+    alignSelf: 'center',
+  },
+});
 
 // RegistrationScreen.defaultProps = {
 //   groupName: "My"
