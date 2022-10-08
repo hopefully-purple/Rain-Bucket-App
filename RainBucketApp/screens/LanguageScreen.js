@@ -34,9 +34,10 @@ function organizeIntoAlphabetizedSections(langObj) {
   for (let letter of SPANISH) {
     let section = langObj.words.filter(
       i =>
-        i.word.charAt(0) === letter ||
-        (i.word.charAt(0) === '¡' && i.word.charAt(1) === letter) ||
-        (i.word.charAt(0) === '¿' && i.word.charAt(1) === letter),
+        i.word.charAt(0).toUpperCase() === letter ||
+        (i.word.charAt(0) === '¡' &&
+          i.word.charAt(1).toUpperCase() === letter) ||
+        (i.word.charAt(0) === '¿' && i.word.charAt(1).toUpperCase() === letter),
     );
     if (section.length > 0) {
       // create a new section object with title = letter and data = list
