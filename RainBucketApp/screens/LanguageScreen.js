@@ -11,10 +11,12 @@ import {TextInput, Button} from 'react-native-paper';
 import LanguageObjectContext from '../contexts/LanguageObject';
 import Colors from '../assets/styles/colors';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
+    backgroundColor: Colors.WHITE,
   },
   input: {
     margin: 10,
@@ -39,6 +41,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     backgroundColor: 'rgba(247,247,247,1.0)',
+    // backgroundColor: Colors.LIGHT_PURPLE,
   },
   item: {
     padding: 10,
@@ -84,7 +87,7 @@ const ListOfWords = ({sectionL}) => {
   );
 };
 
-const LanguageScreen = () => {
+const LanguageScreen = ({navigation}) => {
   const [word, setWord] = useState('');
   const [definition, setDefinition] = useState('');
   const {languageObj, setLanguageObj} = useContext(LanguageObjectContext);
@@ -154,7 +157,9 @@ const LanguageScreen = () => {
   const wordInputLabel = 'New ' + languageObj.language + ' word';
   return (
     <SafeAreaView style={styles.screenContainer}>
-      <Text style={styles.text}>{languageObj.language} Screen!</Text>
+      <TouchableOpacity onPress={() => navigation.navigate('SetOfLanguages')}>
+        <Text style={styles.text}>{languageObj.language} Screen!</Text>
+      </TouchableOpacity>
       <TextInput
         label={wordInputLabel}
         value={word}
