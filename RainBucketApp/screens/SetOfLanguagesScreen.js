@@ -70,7 +70,7 @@ const SetOfLanguagesScreen = ({navigation}) => {
       <View styles={styles.logoContainer}>
         <Image
           style={styles.logo}
-          source={require('../assets/images/purple_rainbucket_2.jpeg')}
+          source={require('../assets/images/ORIGpurple_rainbucket_2.jpeg')}
         />
         <Text style={styles.logoText}>Rainbucket App</Text>
       </View>
