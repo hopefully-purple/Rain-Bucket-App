@@ -12,6 +12,7 @@ import LanguageObjectContext from '../contexts/LanguageObject';
 import Colors from '../assets/styles/colors';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import {SPANISH} from '../assets/alphabets/Alphabets';
 
 const styles = StyleSheet.create({
   screenContainer: {
@@ -50,25 +51,47 @@ const styles = StyleSheet.create({
   },
 });
 
-const ListOfWords = ({sectionL, langObj, setLanguageObj}) => {
+// Packages to consider in place of doing by hand:
+// https://npm.io/package/rn-alphabet-section-list
+function organizeIntoAlphabetizedSections(langObj) {
   //Section gameplan:
+  if (langObj.language !== 'Spanish') {
+    const newS = [
+      {
+        title: 'Words',
+        // data: sorted,
+        data: langObj.words,
+      },
+    ];
+    return newS;
+  }
   // List of alphabet characters (oo including spanish characters??)
   // for each letter, do the filter charAt
-  //let a = langWords.langWords.filter(i => i.word.charAt(0) === 'a');
-  // if resulting list is not empty
-  // create a new section object with title = letter and data = list
-  // add section object to section array
+  let newSL = [];
+  for (let letter of SPANISH) {
+    let section = langObj.words.filter(
+      i =>
+        i.word.charAt(0) === letter ||
+        (i.word.charAt(0) === '¡' && i.word.charAt(1) === letter) ||
+        (i.word.charAt(0) === '¿' && i.word.charAt(1) === letter),
+    );
+    if (section.length > 0) {
+      // create a new section object with title = letter and data = list
+      const newS = {
+        title: letter,
+        data: section,
+      };
+      // add section object to section array
+      newSL.push(newS);
+    }
+  }
+  console.log('(organize) resulting newSL:');
+  console.log(JSON.stringify(newSL, undefined, 2));
   // pass section array to SectionList component
-  // let sectionL = [
-  //   {
-  //     title: '',
-  //     data: [{id: 0, word: '', definition: ''}],
-  //   },
-  // ];
-  // console.log(
-  //   '(listOfWords comp) SectionL = ' + JSON.stringify(sectionL, undefined, 2),
-  // );
+  return newSL;
+}
 
+const ListOfWords = ({sectionL, langObj, setLanguageObj}) => {
   return (
     <View style={styles.container}>
       <SectionList
@@ -193,23 +216,18 @@ const LanguageScreen = ({navigation}) => {
   const [sectionList, setSectionList] = useState([]);
   useEffect(
     function createSectionList() {
-      console.log('(LS.createSectionList) how often is useEffect called?');
+      // console.log('(LS.createSectionList) how often is useEffect called?');
       // const sorted = languageObj.words.sort((a, b) =>
       //   a.word > b.word ? 1 : -1,
       // );
-      const newSectionL = [
-        {
-          title: 'Words',
-          // data: sorted,
-          data: languageObj.words,
-        },
-      ];
+
+      const newSectionL = organizeIntoAlphabetizedSections(languageObj);
       setSectionList(newSectionL);
     },
-    [languageObj.words],
+    [languageObj],
   );
 
-  const wordInputLabel = 'New ' + languageObj.language + ' word';
+  const wordInputLabel = 'New ' + languageObj.language + ' word/phrase';
   return (
     <SafeAreaView style={styles.screenContainer}>
       <TouchableOpacity onPress={() => navigation.navigate('SetOfLanguages')}>
