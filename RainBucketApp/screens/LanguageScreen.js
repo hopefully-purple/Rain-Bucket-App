@@ -8,7 +8,7 @@ import {
   SectionList,
   StatusBar,
 } from 'react-native';
-import {TextInput, Button} from 'react-native-paper';
+import {TextInput, Button, Searchbar} from 'react-native-paper';
 import LanguageObjectContext from '../contexts/LanguageObject';
 import Colors from '../assets/styles/colors';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -159,6 +159,7 @@ function deleteItemInWords(id, langObj, setLanguageObj) {
 const LanguageScreen = ({navigation}) => {
   const [word, setWord] = useState('');
   const [definition, setDefinition] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
   const {languageObj, setLanguageObj} = useContext(LanguageObjectContext);
 
   this.wordInput = React.createRef();
@@ -176,6 +177,8 @@ const LanguageScreen = ({navigation}) => {
       throw e;
     }
   };
+
+  const onChangeSearch = query => setSearchQuery(query);
 
   const handleAddWord = () => {
     if (word !== '' && definition !== '') {
@@ -233,6 +236,11 @@ const LanguageScreen = ({navigation}) => {
       <TouchableOpacity onPress={() => navigation.navigate('SetOfLanguages')}>
         <Text style={styles.text}>{languageObj.language} Screen!</Text>
       </TouchableOpacity>
+      <Searchbar
+        placeholder="Search"
+        onChangeText={onChangeSearch}
+        value={searchQuery}
+      />
       <TextInput
         label={wordInputLabel}
         value={word}
