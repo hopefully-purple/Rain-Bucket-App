@@ -156,23 +156,24 @@ const LanguageScreen = ({navigation}) => {
 
   const handleAddWord = () => {
     if (word !== '' && definition !== '') {
-      console.log(
-        '(handleaddword) languageObj.words.length=' + languageObj.words.length,
-      );
+      // console.log(
+      //   '(handleaddword) languageObj.words.length=' + languageObj.words.length,
+      // );
+      let newID = languageObj.words.length + 1;
       //Create word object
       const newWordItem = {
-        id: languageObj.words.length + 1,
+        id: newID + ' ' + word,
         word,
         definition,
       };
-      console.log('(handleAddWord) newWordItem.id=' + newWordItem.id);
+      //console.log('(handleAddWord) newWordItem.id=' + newWordItem.id);
 
       //Update languageObj context
       const newLOW = languageObj.words;
       newLOW.push(newWordItem);
       const sortedNL = newLOW.sort((a, b) => (a.word > b.word ? 1 : -1));
-      console.log('(handleAddWord) SortedNL:');
-      console.log(JSON.stringify(sortedNL, undefined, 2));
+      //console.log('(handleAddWord) SortedNL:');
+      //console.log(JSON.stringify(sortedNL, undefined, 2));
       setLanguageObj({...languageObj, words: sortedNL});
       console.log(JSON.stringify(languageObj.words, undefined, 2));
 

@@ -11,7 +11,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 const beginningObject = {
   language: '',
-  words: [{id: 0, word: '', definition: ''}],
+  words: [{id: '0', word: '', definition: ''}],
 };
 
 const Stack = createNativeStackNavigator();
