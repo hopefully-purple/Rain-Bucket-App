@@ -78,7 +78,7 @@ const SetOfLanguagesScreen = ({navigation}) => {
         );
         const newLanguage = {
           language: language,
-          words: [],
+          words: [{id: 0, word: '', definition: ''}],
         };
         setLanguageObj(newLanguage);
       }

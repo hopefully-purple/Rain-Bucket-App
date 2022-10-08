@@ -156,17 +156,24 @@ const LanguageScreen = ({navigation}) => {
 
   const handleAddWord = () => {
     if (word !== '' && definition !== '') {
+      console.log(
+        '(handleaddword) languageObj.words.length=' + languageObj.words.length,
+      );
       //Create word object
       const newWordItem = {
         id: languageObj.words.length + 1,
         word,
         definition,
       };
+      console.log('(handleAddWord) newWordItem.id=' + newWordItem.id);
 
       //Update languageObj context
       const newLOW = languageObj.words;
       newLOW.push(newWordItem);
-      setLanguageObj({...languageObj, words: newLOW});
+      const sortedNL = newLOW.sort((a, b) => (a.word > b.word ? 1 : -1));
+      console.log('(handleAddWord) SortedNL:');
+      console.log(JSON.stringify(sortedNL, undefined, 2));
+      setLanguageObj({...languageObj, words: sortedNL});
       console.log(JSON.stringify(languageObj.words, undefined, 2));
 
       //Clear inputs
@@ -186,13 +193,14 @@ const LanguageScreen = ({navigation}) => {
   useEffect(
     function createSectionList() {
       console.log('(LS.createSectionList) how often is useEffect called?');
-      const sorted = languageObj.words.sort((a, b) =>
-        a.word > b.word ? 1 : -1,
-      );
+      // const sorted = languageObj.words.sort((a, b) =>
+      //   a.word > b.word ? 1 : -1,
+      // );
       const newSectionL = [
         {
           title: 'Words',
-          data: sorted,
+          // data: sorted,
+          data: languageObj.words,
         },
       ];
       setSectionList(newSectionL);
