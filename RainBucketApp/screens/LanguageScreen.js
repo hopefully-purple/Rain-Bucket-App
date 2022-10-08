@@ -121,6 +121,7 @@ const LanguageScreen = ({navigation}) => {
   const [searchQuery, setSearchQuery] = useState('');
   const {languageObj, setLanguageObj} = useContext(LanguageObjectContext);
 
+  this.searchInput = React.createRef();
   this.wordInput = React.createRef();
   this.definitionInput = React.createRef();
 
@@ -180,27 +181,53 @@ const LanguageScreen = ({navigation}) => {
       // const sorted = languageObj.words.sort((a, b) =>
       //   a.word > b.word ? 1 : -1,
       // );
-
-      const newSectionL = organizeIntoAlphabetizedSections(languageObj);
-      setSectionList(newSectionL);
+      if (searchQuery === '') {
+        const newSectionL = organizeIntoAlphabetizedSections(languageObj);
+        setSectionList(newSectionL);
+      }
     },
-    [languageObj],
+    [languageObj, searchQuery],
   );
+
+  const createSearchSectionList = query => {
+    // Filter languagObj.words on .word
+    let searchList = languageObj.words.filter(i =>
+      i.word.toLowerCase().includes(query.toLowerCase()),
+    );
+    // Set resulting array to section list
+    // console.log(JSON.stringify(searchList, undefined, 2));
+    const newS = [
+      {
+        title: 'Words including ' + query,
+        data: searchList,
+      },
+    ];
+    return newS;
+  };
 
   const onChangeSearch = query => {
     setSearchQuery(query);
     // console.log(searchQuery);
+    setSectionList(createSearchSectionList(query));
   };
 
   const onSubmitSearch = () => {
-    console.log('Search for ' + searchQuery);
+    this.searchInput.current.blur();
   };
 
   const wordInputLabel = 'New ' + languageObj.language + ' word/phrase';
   return (
-    <SafeAreaView style={styles.screenContainer}>
+    <SafeAreaView
+      style={styles.screenContainer}
+      onTouchStart={() => {
+        this.searchInput.current.blur();
+        this.wordInput.current.blur();
+        this.definitionInput.current.blur();
+      }}>
       <View style={styles.screenTop}>
-        <TouchableOpacity onPress={() => navigation.navigate('SetOfLanguages')}>
+        <TouchableOpacity
+          style={styles.titleTouchable}
+          onPress={() => navigation.navigate('SetOfLanguages')}>
           <Text style={styles.text}>{languageObj.language} Screen!</Text>
         </TouchableOpacity>
         <TextInput
@@ -216,6 +243,7 @@ const LanguageScreen = ({navigation}) => {
           onSubmitEditing={onSubmitSearch}
           style={styles.searchBar}
           left={<TextInput.Icon icon="magnify" color={Colors.TEST_PURPLE} />}
+          ref={this.searchInput}
         />
       </View>
       <TextInput
@@ -265,6 +293,9 @@ const styles = StyleSheet.create({
   },
   input: {
     margin: 10,
+  },
+  titleTouchable: {
+    // padding: 1,
   },
   text: {
     color: Colors.DD_DARK_GRAY,
