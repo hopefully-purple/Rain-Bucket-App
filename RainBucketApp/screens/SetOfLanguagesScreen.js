@@ -23,7 +23,7 @@ const SetOfLanguagesScreen = ({navigation}) => {
         );
         const newLanguage = {
           language: language,
-          words: [{id: '0', word: '', definition: ''}],
+          words: [{id: '0', word: '', pronun: '', definition: ''}],
         };
         setLanguageObj(newLanguage);
       }

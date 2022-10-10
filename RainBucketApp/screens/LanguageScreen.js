@@ -77,10 +77,10 @@ const Item = ({item, nav}) => {
 
   function deleteItemInWords() {
     // Filter condition
-    function getItem(i) {
+    function excludeItem(i) {
       return i.id !== item.id;
     }
-    const words = languageObj.words.filter(getItem);
+    const words = languageObj.words.filter(excludeItem);
     // console.log(words);
     setLanguageObj({...languageObj, words: words});
     const saveData = async () => {
@@ -158,6 +158,7 @@ const LanguageScreen = ({navigation}) => {
       const newWordItem = {
         id: newID + ' ' + word,
         word,
+        pronun: '',
         definition,
       };
       //console.log('(handleAddWord) newWordItem.id=' + newWordItem.id);

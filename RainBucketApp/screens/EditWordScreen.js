@@ -16,15 +16,28 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 //Item format as it comes from Add: {id: '0 word', word: '', definition: ''}
 
 const EditWordScreen = ({navigation}) => {
-  //   const {languageObj, setLanguageObj} = useContext(LanguageObjectContext);
+  const {languageObj, setLanguageObj} = useContext(LanguageObjectContext);
   const {selectedItem, setSelectedItem} = useContext(SelectedItemContext);
 
   const [word, setWord] = useState(selectedItem.word);
-  const [pronunciation, setPron] = useState('');
+  const [pronunciation, setPron] = useState(selectedItem.pronun);
   const [definition, setDefinition] = useState(selectedItem.definition);
   const [notes, setNotes] = useState('');
 
   const [defHeight, setDefHeight] = useState(0);
+
+  const saveData = async () => {
+    try {
+      await AsyncStorage.setItem(
+        languageObj.language,
+        JSON.stringify(languageObj.words),
+      );
+      console.log('(saveData) Data successfully saved');
+    } catch (e) {
+      console.log('(saveData) Failed to save the data to the storage');
+      throw e;
+    }
+  };
 
   const handleSave = () => {
     console.log('New stuff:');
@@ -32,6 +45,34 @@ const EditWordScreen = ({navigation}) => {
     console.log(pronunciation);
     console.log(definition);
     console.log(notes);
+
+    if (pronunciation !== '') {
+      // Add pronunciation prop to selected Item object
+      //   console.log(JSON.stringify(selectedItem, undefined, 2));
+      const newI = {
+        ...selectedItem,
+        pronun: pronunciation,
+      };
+      //Get selectedItem from langaugeObj and replace with new selected item
+      //console.log(JSON.stringify(newI, undefined, 2));
+      // Filter condition (remove old item from array)
+      function excludeItem(i) {
+        return i.id !== selectedItem.id;
+      }
+      const filteredWords = languageObj.words.filter(excludeItem);
+      //console.log(JSON.stringify(word, undefined, 2));
+      // Put newI in array
+      filteredWords.push(newI);
+      const sortedNL = filteredWords.sort((a, b) => (a.word > b.word ? 1 : -1));
+      //console.log('(handleAddWord) SortedNL:');
+      //console.log(JSON.stringify(sortedNL, undefined, 2));
+      setLanguageObj({...languageObj, words: sortedNL});
+      setSelectedItem(newI); //Maybe
+
+      //Save to async (need to start thinking about changing structure)
+      //^^ when implementing other props changes, need to be smart about when this happens
+      saveData();
+    }
     //if (word !== '' && definition !== '') {
     //   // console.log(
     //   //   '(handleaddword) languageObj.words.length=' + languageObj.words.length,
