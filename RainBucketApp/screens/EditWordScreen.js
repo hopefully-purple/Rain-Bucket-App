@@ -39,6 +39,26 @@ const EditWordScreen = ({navigation}) => {
     }
   };
 
+  const updateContextAndStorage = newI => {
+    // Filter condition (remove old item from array)
+    function excludeItem(i) {
+      return i.id !== selectedItem.id;
+    }
+    const filteredWords = languageObj.words.filter(excludeItem);
+    //console.log(JSON.stringify(word, undefined, 2));
+    // Put newI in array
+    filteredWords.push(newI);
+    const sortedNL = filteredWords.sort((a, b) => (a.word > b.word ? 1 : -1));
+    //console.log('(handleAddWord) SortedNL:');
+    //console.log(JSON.stringify(sortedNL, undefined, 2));
+    setLanguageObj({...languageObj, words: sortedNL});
+    setSelectedItem(newI); //Maybe
+
+    //Save to async (need to start thinking about changing structure)
+    //^^ when implementing other props changes, need to be smart about when this happens
+    saveData();
+  };
+
   const handleSave = () => {
     console.log('New stuff:');
     console.log(word);
@@ -46,66 +66,53 @@ const EditWordScreen = ({navigation}) => {
     console.log(definition);
     console.log(notes);
 
-    if (pronunciation !== '' && pronunciation !== undefined) {
-      // Add pronunciation prop to selected Item object
-      console.log(JSON.stringify(selectedItem, undefined, 2));
-      const newI = {
-        ...selectedItem,
+    console.log('\n\n current selected item before any checks:');
+    console.log(JSON.stringify(selectedItem, undefined, 2));
+
+    //Make comparisons to state and context and update accordingly.
+    let newI = {...selectedItem};
+    console.log('NewI=' + JSON.stringify(newI, undefined, 2));
+    let changesMade = false;
+
+    if (word !== selectedItem.word) {
+      console.log('Word check: ' + word + ' !== ' + selectedItem.word);
+      newI = {
+        ...newI,
+        word,
+      };
+      changesMade = true;
+      console.log('newI:' + JSON.stringify(newI, undefined, 2));
+    }
+    if (pronunciation !== selectedItem.pronun) {
+      console.log(
+        'Pronun check: ' + pronunciation + ' !== ' + selectedItem.pronun,
+      );
+      newI = {
+        ...newI,
         pronun: pronunciation,
       };
-      //Get selectedItem from langaugeObj and replace with new selected item
-      //console.log(JSON.stringify(newI, undefined, 2));
-      // Filter condition (remove old item from array)
-      function excludeItem(i) {
-        return i.id !== selectedItem.id;
-      }
-      const filteredWords = languageObj.words.filter(excludeItem);
-      //console.log(JSON.stringify(word, undefined, 2));
-      // Put newI in array
-      filteredWords.push(newI);
-      const sortedNL = filteredWords.sort((a, b) => (a.word > b.word ? 1 : -1));
-      //console.log('(handleAddWord) SortedNL:');
-      //console.log(JSON.stringify(sortedNL, undefined, 2));
-      setLanguageObj({...languageObj, words: sortedNL});
-      setSelectedItem(newI); //Maybe
-
-      //Save to async (need to start thinking about changing structure)
-      //^^ when implementing other props changes, need to be smart about when this happens
-      saveData();
+      console.log('newI:' + JSON.stringify(newI, undefined, 2));
+      changesMade = true;
     }
-    //if (word !== '' && definition !== '') {
-    //   // console.log(
-    //   //   '(handleaddword) languageObj.words.length=' + languageObj.words.length,
-    //   // );
-    //   let newID = languageObj.words.length + 1;
-    //   //Create word object
-    //   const newWordItem = {
-    //     id: newID + ' ' + word,
-    //     word,
-    //     definition,
-    //   };
-    //   //console.log('(handleAddWord) newWordItem.id=' + newWordItem.id);
+    if (definition !== selectedItem.definition) {
+      console.log(
+        'Definition check: ' + definition + ' !== ' + selectedItem.definition,
+      );
+      newI = {
+        ...newI,
+        definition,
+      };
+      changesMade = true;
+      console.log('newI:' + JSON.stringify(newI, undefined, 2));
+    }
+    //TODO: Eventually will do notes and tags
 
-    //   //Update languageObj context
-    //   const newLOW = languageObj.words;
-    //   newLOW.push(newWordItem);
-    //   const sortedNL = newLOW.sort((a, b) => (a.word > b.word ? 1 : -1));
-    //   //console.log('(handleAddWord) SortedNL:');
-    //   //console.log(JSON.stringify(sortedNL, undefined, 2));
-    //   setLanguageObj({...languageObj, words: sortedNL});
-    //   // console.log(JSON.stringify(languageObj.words, undefined, 2));
-
-    //   //Clear inputs
-    //   this.wordInput.current.clear();
-    //   this.definitionInput.current.clear();
-    //   setWord('');
-    //   setDefinition('');
-
-    //   //Save to async storage
-    //   saveData();
-    // } else {
-    //   console.log('Nothing to add');
-    // }
+    //Get selectedItem from langaugeObj and replace with new selected item
+    if (changesMade) {
+      updateContextAndStorage(newI);
+    } else {
+      console.log('Nothing to change : pronunciation=' + pronunciation);
+    }
   };
 
   return (
