@@ -349,6 +349,7 @@ const styles = StyleSheet.create({
     // marginRight: 5,
     fontSize: 18,
     height: 44,
+    // overflow: 'scroll',
     // overflow: 'hidden',
     // flexWrap: 'nowrap', //does nothing
   },
