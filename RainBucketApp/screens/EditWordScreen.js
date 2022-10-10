@@ -10,15 +10,19 @@ import {
 } from 'react-native';
 import {TextInput, Button, Searchbar} from 'react-native-paper';
 import LanguageObjectContext from '../contexts/LanguageObject';
+import SelectedItemContext from '../contexts/SelectedItem';
 import Colors from '../assets/styles/colors';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+//Item format as it comes from Add: {id: '0 word', word: '', definition: ''}
+
 const EditWordScreen = ({navigation}) => {
-  const {languageObj, setLanguageObj} = useContext(LanguageObjectContext);
+  //   const {languageObj, setLanguageObj} = useContext(LanguageObjectContext);
+  const {selectedItem, setSelectedItem} = useContext(SelectedItemContext);
 
   return (
     <SafeAreaView style={styles.screenContainer}>
-      <Text>Edit word screen</Text>
+      <Text>Edit {selectedItem.word}</Text>
     </SafeAreaView>
   );
 };

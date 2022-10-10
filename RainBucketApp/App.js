@@ -1,9 +1,11 @@
 import 'react-native-gesture-handler';
 import React, {useState, useEffect} from 'react';
 import LanguageObjectContext from './contexts/LanguageObject';
+import SelectedItemContext from './contexts/SelectedItem';
 import SetOfLanguagesScreen from './screens/SetOfLanguagesScreen';
 import LanguageScreen from './screens/LanguageScreen';
 import SettingsScreen from './screens/SettingsScreen';
+import EditWordScreen from './screens/EditWordScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
@@ -16,6 +18,7 @@ const Stack = createNativeStackNavigator();
 
 function App() {
   const [languageObj, setLanguageObj] = useState(beginningObject);
+  const [selectedItem, setSelectedItem] = useState({});
 
   // const readData = async () => {
   //   try {
@@ -40,25 +43,32 @@ function App() {
   // }, []);
   return (
     <LanguageObjectContext.Provider value={{languageObj, setLanguageObj}}>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="SetOfLanguages">
-          <Stack.Screen
-            name="SetOfLanguages"
-            component={SetOfLanguagesScreen}
-            options={{headerShown: false}}
-          />
-          <Stack.Screen
-            name="Settings"
-            component={SettingsScreen}
-            options={{headerShown: true}}
-          />
-          <Stack.Screen
-            name="LanguageScreen"
-            component={LanguageScreen}
-            options={{headerShown: false}}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <SelectedItemContext.Provider value={{selectedItem, setSelectedItem}}>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="SetOfLanguages">
+            <Stack.Screen
+              name="SetOfLanguages"
+              component={SetOfLanguagesScreen}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="Settings"
+              component={SettingsScreen}
+              options={{headerShown: true}}
+            />
+            <Stack.Screen
+              name="LanguageScreen"
+              component={LanguageScreen}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="EditingScreen"
+              component={EditWordScreen}
+              options={{headerShown: false}}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SelectedItemContext.Provider>
     </LanguageObjectContext.Provider>
   );
 }

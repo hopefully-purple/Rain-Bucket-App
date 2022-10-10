@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import {TextInput, Button, Searchbar} from 'react-native-paper';
 import LanguageObjectContext from '../contexts/LanguageObject';
+import SelectedItemContext from '../contexts/SelectedItem';
 import Colors from '../assets/styles/colors';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {TouchableOpacity} from 'react-native-gesture-handler';
@@ -55,14 +56,12 @@ function organizeIntoAlphabetizedSections(langObj) {
   return newSL;
 }
 
-const ListOfWords = ({sectionL, langObj, setLanguageObj}) => {
+const ListOfWords = ({sectionL, nav}) => {
   return (
     <SafeAreaView style={styles.container}>
       <SectionList
         sections={sectionL}
-        renderItem={({item}) => (
-          <Item item={item} langObj={langObj} setLanguageObj={setLanguageObj} />
-        )}
+        renderItem={({item}) => <Item item={item} nav={nav} />}
         renderSectionHeader={({section}) => (
           <Text style={styles.sectionHeader}>{section.title}</Text>
         )}
@@ -72,58 +71,65 @@ const ListOfWords = ({sectionL, langObj, setLanguageObj}) => {
   );
 };
 
-const Item = ({item, langObj, setLanguageObj}) => (
-  <View>
-    <TouchableOpacity
-      style={styles.item}
-      onLongPress={() => changeItemAlert(item, langObj, setLanguageObj)}>
-      {/* <Text style={styles.item}>
-        {item.word} - {item.definition}
-      </Text> */}
-      <Text style={styles.itemWord}>{item.word}</Text>
-      <Text style={styles.itemDefinition}> - {item.definition}</Text>
-    </TouchableOpacity>
-  </View>
-);
+const Item = ({item, nav}) => {
+  const {languageObj, setLanguageObj} = useContext(LanguageObjectContext);
+  const {selectedItem, setSelectedItem} = useContext(SelectedItemContext);
 
-const changeItemAlert = (item, langObj, setLanguageObj) =>
-  Alert.alert(item.word, item.definition, [
-    {
-      text: 'Edit',
-      onPress: () => console.log('Edit Pressed'),
-    },
-    {
-      text: 'Delete',
-      onPress: () => deleteItemInWords(item.id, langObj, setLanguageObj),
-    },
-    {text: 'Done', onPress: () => console.log('Done Pressed')},
-  ]);
-
-function deleteItemInWords(id, langObj, setLanguageObj) {
-  function getItem(item) {
-    return item.id !== id;
-  }
-  const words = langObj.words.filter(getItem);
-  // console.log(words);
-  setLanguageObj({...langObj, words: words});
-  const saveData = async () => {
-    try {
-      await AsyncStorage.setItem(langObj.language, JSON.stringify(words));
-      console.log('(saveData) Data successfully saved');
-    } catch (e) {
-      console.log('(saveData) Failed to save the data to the storage');
-      throw e;
+  function deleteItemInWords() {
+    // Filter condition
+    function getItem(i) {
+      return i.id !== item.id;
     }
-  };
+    const words = languageObj.words.filter(getItem);
+    // console.log(words);
+    setLanguageObj({...languageObj, words: words});
+    const saveData = async () => {
+      try {
+        await AsyncStorage.setItem(languageObj.language, JSON.stringify(words));
+        console.log('(saveData) Data successfully saved');
+      } catch (e) {
+        console.log('(saveData) Failed to save the data to the storage');
+        throw e;
+      }
+    };
 
-  saveData();
-}
+    saveData();
+  }
+
+  const changeItemAlert = () =>
+    Alert.alert(item.word, item.definition, [
+      {
+        text: 'Edit',
+        onPress: () => {
+          setSelectedItem(item);
+          nav.navigate('EditingScreen');
+        },
+      },
+      {
+        text: 'Delete',
+        onPress: () => deleteItemInWords(),
+      },
+      {text: 'Done', onPress: () => console.log('Done Pressed')},
+    ]);
+
+  return (
+    <View>
+      <TouchableOpacity
+        style={styles.item}
+        onLongPress={() => changeItemAlert()}>
+        <Text style={styles.itemWord}>{item.word}</Text>
+        <Text style={styles.itemDefinition}> - {item.definition}</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 const LanguageScreen = ({navigation}) => {
   const [word, setWord] = useState('');
   const [definition, setDefinition] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const {languageObj, setLanguageObj} = useContext(LanguageObjectContext);
+  // const {selectedItem, setSelectedItem} = useContext(SelectedItemContext);
 
   this.searchInput = React.createRef();
   this.wordInput = React.createRef();
@@ -279,11 +285,7 @@ const LanguageScreen = ({navigation}) => {
       <Button mode="elevated" style={styles.addButton} onPress={handleAddWord}>
         Add!
       </Button>
-      <ListOfWords
-        sectionL={sectionList}
-        langObj={languageObj}
-        setLanguageObj={setLanguageObj}
-      />
+      <ListOfWords sectionL={sectionList} nav={navigation} />
     </SafeAreaView>
   );
 };
