@@ -75,10 +75,13 @@ const ListOfWords = ({sectionL, langObj, setLanguageObj}) => {
 const Item = ({item, langObj, setLanguageObj}) => (
   <View>
     <TouchableOpacity
+      style={styles.item}
       onLongPress={() => changeItemAlert(item, langObj, setLanguageObj)}>
-      <Text style={styles.item}>
+      {/* <Text style={styles.item}>
         {item.word} - {item.definition}
-      </Text>
+      </Text> */}
+      <Text style={styles.itemWord}>{item.word}</Text>
+      <Text style={styles.itemDefinition}> - {item.definition}</Text>
     </TouchableOpacity>
   </View>
 );
@@ -325,10 +328,27 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(247,247,247,1.0)',
   },
   item: {
-    padding: 10,
+    flexDirection: 'row',
+    paddingTop: 10,
+    // marginRight: 10,
+  },
+  itemWord: {
+    // padding: 10,
     fontSize: 18,
     height: 44,
+    // backgroundColor: Colors.LIGHT_PURPLE,
+    color: Colors.TEST_PURPLE,
+    // borderColor: Colors.BRIGHT_RED,
+    // borderWidth: 1,
     // flexWrap: 'wrap', //does nothing
+  },
+  itemDefinition: {
+    // paddingRight: 5,
+    // marginRight: 5,
+    fontSize: 18,
+    height: 44,
+    // overflow: 'hidden',
+    // flexWrap: 'nowrap', //does nothing
   },
   container: {
     flex: 1,
