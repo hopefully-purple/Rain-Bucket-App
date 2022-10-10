@@ -1,11 +1,9 @@
 import 'react-native-gesture-handler';
 import React, {useState, useEffect} from 'react';
-// import {Text, NavigationContainer, SafeAreaView, View} from 'react-native';
-import {View, SafeAreaView, Text} from 'react-native';
 import LanguageObjectContext from './contexts/LanguageObject';
 import SetOfLanguagesScreen from './screens/SetOfLanguagesScreen';
 import LanguageScreen from './screens/LanguageScreen';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import SettingsScreen from './screens/SettingsScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
@@ -48,6 +46,11 @@ function App() {
             name="SetOfLanguages"
             component={SetOfLanguagesScreen}
             options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="Settings"
+            component={SettingsScreen}
+            options={{headerShown: true}}
           />
           <Stack.Screen
             name="LanguageScreen"

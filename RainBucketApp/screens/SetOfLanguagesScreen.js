@@ -9,18 +9,6 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 const SetOfLanguagesScreen = ({navigation}) => {
   const {languageObj, setLanguageObj} = useContext(LanguageObjectContext);
 
-  const clearAllData = async () => {
-    try {
-      await AsyncStorage.clear();
-    } catch (e) {
-      // clear error
-      console.log('clear storage threw error ' + e);
-      throw e;
-    }
-
-    console.log('Done.');
-  };
-
   const readData = async language => {
     try {
       const value = await AsyncStorage.getItem(language);
@@ -61,18 +49,16 @@ const SetOfLanguagesScreen = ({navigation}) => {
       <TouchableOpacity onPress={() => handleLanguageSelection('Japanese')}>
         <Text style={styles.languageText}>Japanese</Text>
       </TouchableOpacity>
-      <Button
-        style={styles.clearButton}
-        textColor={Colors.TEST_CREAM}
-        onPress={() => clearAllData()}>
-        CLEAR STORAGE
-      </Button>
       <View styles={styles.logoContainer}>
         <Image
           style={styles.logo}
           source={require('../assets/images/ORIGpurple_rainbucket_2.jpeg')}
         />
-        <Text style={styles.logoText}>Rainbucket App</Text>
+        <Text
+          style={styles.logoText}
+          onPress={() => navigation.navigate('Settings')}>
+          Rainbucket App
+        </Text>
       </View>
     </SafeAreaView>
   );
@@ -95,13 +81,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     margin: 10,
     // backgroundColor: Colors.LIGHT_PURPLE,
-  },
-  clearButton: {
-    backgroundColor: Colors.LIGHT_RED,
-    borderRadius: 12,
-    width: 200,
-    alignSelf: 'center',
-    margin: 10,
   },
   logoContainer: {
     // margin: 100,
