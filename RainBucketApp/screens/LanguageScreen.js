@@ -96,8 +96,12 @@ const Item = ({item, nav}) => {
     saveData();
   }
 
-  const changeItemAlert = () =>
-    Alert.alert(item.word, item.definition, [
+  const changeItemAlert = () => {
+    let body = item.definition;
+    if (item.pronun !== undefined && item.pronun !== '') {
+      body = '(' + item.pronun + ')\n' + item.definition;
+    }
+    Alert.alert(item.word, body, [
       {
         text: 'Edit',
         onPress: () => {
@@ -111,6 +115,7 @@ const Item = ({item, nav}) => {
       },
       {text: 'Done', onPress: () => console.log('Done Pressed')},
     ]);
+  };
 
   return (
     <View>

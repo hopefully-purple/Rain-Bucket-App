@@ -42,13 +42,13 @@ const EditWordScreen = ({navigation}) => {
   const handleSave = () => {
     console.log('New stuff:');
     console.log(word);
-    console.log(pronunciation);
+    console.log('/' + pronunciation + '/');
     console.log(definition);
     console.log(notes);
 
-    if (pronunciation !== '') {
+    if (pronunciation !== '' && pronunciation !== undefined) {
       // Add pronunciation prop to selected Item object
-      //   console.log(JSON.stringify(selectedItem, undefined, 2));
+      console.log(JSON.stringify(selectedItem, undefined, 2));
       const newI = {
         ...selectedItem,
         pronun: pronunciation,
