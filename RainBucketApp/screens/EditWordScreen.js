@@ -71,6 +71,10 @@ const EditWordScreen = ({navigation}) => {
 
     //Make comparisons to state and context and update accordingly.
     let newI = {...selectedItem};
+    if (selectedItem.id === undefined) {
+      let newID = languageObj.words.length + 1;
+      newI = {...newI, id: newID + ' ' + word};
+    }
     console.log('NewI=' + JSON.stringify(newI, undefined, 2));
     let changesMade = false;
 
@@ -110,6 +114,8 @@ const EditWordScreen = ({navigation}) => {
     //Get selectedItem from langaugeObj and replace with new selected item
     if (changesMade) {
       updateContextAndStorage(newI);
+      setSelectedItem({});
+      navigation.goBack();
     } else {
       console.log('Nothing to change : pronunciation=' + pronunciation);
     }

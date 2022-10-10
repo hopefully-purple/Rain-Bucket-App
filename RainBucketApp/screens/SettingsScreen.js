@@ -12,9 +12,11 @@ import {TextInput, Button, Searchbar} from 'react-native-paper';
 import LanguageObjectContext from '../contexts/LanguageObject';
 import Colors from '../assets/styles/colors';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {ScrollView} from 'react-native-gesture-handler';
 
 const SettingsScreen = ({navigation}) => {
   const {languageObj, setLanguageObj} = useContext(LanguageObjectContext);
+  const [output, setOutput] = useState('');
 
   const clearAllData = async () => {
     let didUserConfirm = false;
@@ -43,6 +45,61 @@ const SettingsScreen = ({navigation}) => {
     }
   };
 
+  const getCurrentLData = async () => {
+    console.log(languageObj.language);
+    try {
+      const result = await AsyncStorage.getItem(languageObj.language);
+      let itemCount = JSON.parse(result).length;
+      setOutput('ITEMCOUNT=' + itemCount + '\n' + result);
+    } catch (e) {
+      // clear error
+      console.log('getCurrentData storage threw error ' + e);
+      throw e;
+    }
+  };
+
+  const getAllKeys = async () => {
+    let keys = [];
+    try {
+      keys = await AsyncStorage.getAllKeys();
+    } catch (e) {
+      // read key error
+      console.log('getAllKeys storage threw error ' + e);
+      throw e;
+    }
+
+    setOutput(keys[0] + ', ' + keys[1]);
+    // return keys;
+    // console.log(JSON.stringify(keys));
+    // return [];
+    // example console.log result:
+    // ['@MyApp_user', '@MyApp_key']
+  };
+
+  const deleteCertainData = async () => {
+    setOutput('Deleted words from context and storage that are missing an id');
+
+    // Filter condition
+    function excludeItems(i) {
+      return i.id !== undefined;
+    }
+    const words = languageObj.words.filter(excludeItems);
+    // console.log(words);
+    setLanguageObj({...languageObj, words: words});
+    const saveData = async () => {
+      try {
+        await AsyncStorage.setItem(languageObj.language, JSON.stringify(words));
+        console.log('(saveData) Data successfully saved');
+      } catch (e) {
+        console.log('(saveData) Failed to save the data to the storage');
+        throw e;
+      }
+    };
+
+    saveData();
+  };
+
+  console.log('Settings screen');
   return (
     <SafeAreaView style={styles.screenContainer}>
       <Button
@@ -51,6 +108,27 @@ const SettingsScreen = ({navigation}) => {
         onPress={() => clearAllData()}>
         CLEAR STORAGE
       </Button>
+      <Button
+        style={styles.clearButton}
+        textColor={Colors.TEST_CREAM}
+        onPress={() => getAllKeys()}>
+        GET ALL KEYS STORAGE
+      </Button>
+      <Button
+        style={styles.clearButton}
+        textColor={Colors.TEST_CREAM}
+        onPress={() => getCurrentLData()}>
+        LIST CURRENT LANGUAGE STORAGE
+      </Button>
+      <Button
+        style={styles.clearButton}
+        textColor={Colors.TEST_CREAM}
+        onPress={() => deleteCertainData()}>
+        RUN CUSTOM DELETE METHOD
+      </Button>
+      <ScrollView>
+        <Text style={styles.text}>{output}</Text>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -71,7 +149,7 @@ const styles = StyleSheet.create({
     color: Colors.DD_DARK_GRAY,
     fontSize: 20,
     margin: 10,
-    backgroundColor: Colors.LIGHT_PURPLE,
+    // backgroundColor: Colors.LIGHT_PURPLE,
     // padding: 1,
     // paddingBottom: 10,
   },

@@ -1,4 +1,10 @@
-import React, {useState, useContext, createContext, useEffect} from 'react';
+import React, {
+  useState,
+  useContext,
+  createContext,
+  useEffect,
+  useCallback,
+} from 'react';
 import {
   Text,
   SafeAreaView,
@@ -15,6 +21,7 @@ import Colors from '../assets/styles/colors';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {SPANISH} from '../assets/alphabets/Alphabets';
+import {useFocusEffect} from '@react-navigation/native';
 
 // Packages to consider in place of doing by hand:
 // https://npm.io/package/rn-alphabet-section-list
@@ -134,7 +141,7 @@ const LanguageScreen = ({navigation}) => {
   const [definition, setDefinition] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const {languageObj, setLanguageObj} = useContext(LanguageObjectContext);
-  // const {selectedItem, setSelectedItem} = useContext(SelectedItemContext);
+  const {selectedItem, setSelectedItem} = useContext(SelectedItemContext);
 
   this.searchInput = React.createRef();
   this.wordInput = React.createRef();
@@ -234,6 +241,18 @@ const LanguageScreen = ({navigation}) => {
   };
 
   const wordInputLabel = 'New ' + languageObj.language + ' word/phrase';
+
+  useFocusEffect(
+    useCallback(() => {
+      // const unsubscribe = API.subscribe(userId, user => setUser(user));
+      // return () => unsubscribe();
+      //Clear inputs
+      this.wordInput.current.clear();
+      this.definitionInput.current.clear();
+      setWord('');
+      setDefinition('');
+    }, []),
+  );
   return (
     <SafeAreaView
       style={styles.screenContainer}
@@ -288,9 +307,23 @@ const LanguageScreen = ({navigation}) => {
         blurOnSubmit="true"
         ref={this.definitionInput}
       />
-      <Button mode="elevated" style={styles.addButton} onPress={handleAddWord}>
-        Add!
-      </Button>
+      <View style={styles.buttonLayout}>
+        <Button
+          mode="elevated"
+          style={styles.addButton}
+          onPress={handleAddWord}>
+          Add!
+        </Button>
+        <Button
+          mode="elevated"
+          style={styles.detailButton}
+          onPress={() => {
+            setSelectedItem({word, definition});
+            navigation.navigate('EditingScreen');
+          }}>
+          Add with details
+        </Button>
+      </View>
       <ListOfWords sectionL={sectionList} nav={navigation} />
     </SafeAreaView>
   );
@@ -319,11 +352,21 @@ const styles = StyleSheet.create({
     // padding: 1,
     // paddingBottom: 10,
   },
+  buttonLayout: {
+    flexDirection: 'row',
+    // alignItems: '',
+    marginLeft: 40,
+  },
   addButton: {
     backgroundColor: Colors.LIGHT_PURPLE,
     borderRadius: 12,
     width: 100,
-    alignSelf: 'center',
+    margin: 10,
+  },
+  detailButton: {
+    backgroundColor: Colors.LIGHT_PURPLE,
+    borderRadius: 12,
+    width: 200,
     margin: 10,
   },
   sectionHeader: {
