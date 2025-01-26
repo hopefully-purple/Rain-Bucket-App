@@ -10,7 +10,7 @@ Mobile iOS and Android App for foreign language learners.
 ## The Idea
 ### Origin: The 'Rain Bucket' Concept
 
-I took Spanish classes all throughout high school up to AP Spanish my senior year. Every year my Spanish teacher would pass out mini Composition notebooks to use as 'rain buckets'. These were meant to be kept on hand wherever we went. If we learned a new word or phrase, we could write it down in the mini notebook, like collecting raindrops in a bucket.
+Every year in high school, my Spanish teacher would pass out mini Composition notebooks to use as 'rain buckets'. These were meant to be kept on hand wherever we went. If we learned a new word or phrase, we could write it down in the mini notebook, like collecting raindrops in a bucket.
 
 Later, in my college years, I started using the Notes app on my phone as my rainbucket, but quickly became frustrated with the limitations it presented. Hence, the **Rain Bucket App**.
 
