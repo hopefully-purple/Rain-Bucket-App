@@ -9,6 +9,7 @@ Mobile iOS and Android App for foreign language learners.
 ## Table of Contents
 - [The Idea](#the-idea)
 - [Features](#features)
+- [Usage](#usage)
 
 
 ## The Idea
