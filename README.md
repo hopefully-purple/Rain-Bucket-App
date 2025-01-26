@@ -2,6 +2,10 @@
  
 Mobile iOS and Android App for foreign language learners. 
 
+![180](https://github.com/user-attachments/assets/b52b383e-5b77-4a6e-836d-a8d8a5f96700)
+
+
+
 ## Table of Contents
 - [The Idea](#the-idea)
 - [Features](#features)
