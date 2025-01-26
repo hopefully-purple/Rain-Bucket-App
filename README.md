@@ -24,3 +24,6 @@ The Rain Bucket App provides a way for users to make customizable lists of words
 
 (demo videos coming soon)
 
+## Usage
+
+Currently unavailable for download in stores. Instructions on installing and set up to come in the future
