@@ -1,5 +1,5 @@
 {
-  "name": "rainbucketappv2",
+  "name": "rainbucketapp",
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {

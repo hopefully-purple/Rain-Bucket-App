@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "RainBucketAppV2",
-    "slug": "RainBucketAppV2",
+    "name": "RainBucketApp",
+    "slug": "RainBucketApp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/1024purple_rainbucket_2.jpeg",
