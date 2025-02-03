@@ -8,6 +8,7 @@ Mobile iOS and Android App for foreign language learners.
 - [The Idea](#the-idea)
 - [Features](#features)
 - [Usage](#usage)
+- [Expo](#get-started)
 
 
 ## The Idea
