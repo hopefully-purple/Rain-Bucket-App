@@ -15,7 +15,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
 import { ILanguageObject, IWord } from "@/interfaces/languageObjectInterface";
 import { asyncStorageSaveData } from "@/utilities/utility-async-storage";
-import { updateWordInLanguageObject } from "@/utilities/utility-context";
+import { updateOrAddWordInLanguageObject } from "@/utilities/utility-context";
 
 //Item format as it comes from Add: {id: '0 word', word: '', definition: ''}
 // TODO - rename as [word].tsx for a better route path
@@ -88,7 +88,7 @@ export default function EditWordScreen() {
     if (changesMade) {
       console.log("#3a(handlesave) changesMade = true, call update word in lang obj");
       // Update the language object with new word object
-      const newLanguageObject = updateWordInLanguageObject(languageObj, newI, selectedItem.id);
+      const newLanguageObject = updateOrAddWordInLanguageObject(languageObj, newI, selectedItem.id);
       console.log("#4(handlesave) newLanguageObject = ");
       console.log(JSON.stringify(newLanguageObject, undefined, 2));
 

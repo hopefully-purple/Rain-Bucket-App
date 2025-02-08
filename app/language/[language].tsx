@@ -18,6 +18,7 @@ import ListOfWords from "@/components/ListOfWords";
 import { organizeIntoAlphabetizedSections } from "@/utilities/utility-strings";
 import { ISectionListData } from "@/interfaces/sectionListInterface";
 import { asyncStorageSaveData } from "@/utilities/utility-async-storage";
+import { updateOrAddWordInLanguageObject } from "@/utilities/utility-context";
 
 export default function LanguageScreen(this: any) {
   const [word, setWord] = useState("");
@@ -46,14 +47,15 @@ export default function LanguageScreen(this: any) {
         definition,
       };
       console.log("(handleAddWord) newWordItem.id=" + newWordItem.id);
+      
+      console.log("(handleAddWord) call updateOrAddWordInLanguageObject");
+      const newLanguageObject = updateOrAddWordInLanguageObject(languageObj, newWordItem);
+      console.log("(handleAddWord) resulting newLanguageObject: ");
+      console.log(JSON.stringify(newLanguageObject, undefined, 2));
 
-      //Update languageObj context TODO USE UTILITY FUNCTION
-      const newLOW: IWord[] = languageObj.words;
-      newLOW.push(newWordItem);
-      const sortedNL = newLOW.sort((a, b) => (a.word > b.word ? 1 : -1));
-      console.log("(handleAddWord) SortedNL:");
-      console.log(JSON.stringify(sortedNL, undefined, 2));
-      setLanguageObj({ ...languageObj, words: sortedNL }); // TODO - how come this works here but not in edit?
+      console.log("(handleAddWord) update languageObject context");
+      setLanguageObj({...languageObj, words: newLanguageObject.words}); // TODO - how come this works here but not in edit?
+
       console.log("(handleAddWord) is languageObj updated with new words?");
       console.log(JSON.stringify(languageObj.words, undefined, 2));
 
@@ -64,6 +66,7 @@ export default function LanguageScreen(this: any) {
       setDefinition("");
 
       //Save to async storage
+      console.log("(handleAddWord) call asyncStorageSaveData");
       const isDataSaved = await asyncStorageSaveData(languageObj);
       if (!isDataSaved) {
         // TODO - handle this better!
@@ -78,7 +81,7 @@ export default function LanguageScreen(this: any) {
   useEffect(
     function createSectionList() {
       console.log(
-        "([language].createSectionList) how often is useEffect called?"
+        "([language].createSectionList) how often is useEffect called? TODO is this called when we go back?? should it be .nav instead? what would stack look like then? would data save if user popped the stack?"
       );
       // const sorted = languageObj.words.sort((a, b) =>
       //   a.word > b.word ? 1 : -1,
