@@ -54,7 +54,7 @@ export default function LanguageScreen(this: any) {
       console.log(JSON.stringify(newLanguageObject, undefined, 2));
 
       console.log("(handleAddWord) update languageObject context");
-      setLanguageObj({...languageObj, words: newLanguageObject.words}); // TODO - how come this works here but not in edit?
+      setLanguageObj({...languageObj, words: newLanguageObject.words});
 
       console.log("(handleAddWord) is languageObj updated with new words?");
       console.log(JSON.stringify(languageObj.words, undefined, 2));
@@ -81,7 +81,7 @@ export default function LanguageScreen(this: any) {
   useEffect(
     function createSectionList() {
       console.log(
-        "([language].createSectionList) how often is useEffect called? TODO is this called when we go back?? should it be .nav instead? what would stack look like then? would data save if user popped the stack?"
+        "([language].createSectionList) how often is useEffect called?"
       );
       // const sorted = languageObj.words.sort((a, b) =>
       //   a.word > b.word ? 1 : -1,

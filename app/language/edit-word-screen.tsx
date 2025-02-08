@@ -82,7 +82,8 @@ export default function EditWordScreen() {
       changesMade = true;
       console.log("newI:" + JSON.stringify(newI, undefined, 2));
     }
-    //TODO: Eventually will do notes and tags
+    //TODO: Implement checking Notes!!
+    //TODO: Implement checking Tags! Is tags even a thing yet?
 
     //Get selectedItem from langaugeObj and replace with new selected item
     if (changesMade) {
@@ -93,7 +94,7 @@ export default function EditWordScreen() {
       console.log(JSON.stringify(newLanguageObject, undefined, 2));
 
       // Set language object
-      setLanguageObj(newLanguageObject);
+      setLanguageObj({...languageObj, words: newLanguageObject.words});
 
       //Save to async ( // TODO - need to start thinking about changing structure)
       //^^ when implementing other props changes, need to be smart about when this happens
