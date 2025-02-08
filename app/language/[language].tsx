@@ -4,22 +4,15 @@ import {
   SafeAreaView,
   View,
   TouchableOpacity,
-  // TextInput,
-  // Button,
   Text,
   StatusBar,
-  SectionList,
-  Alert,
   StyleSheet,
 } from "react-native";
 import { Colors } from "react-native/Libraries/NewAppScreen";
-import { SPANISH } from "@/assets/alphabets/Alphabets";
 import LanguageObjectContext from "@/contexts/LanguageObject";
 import SelectedItemContext from "@/contexts/SelectedItem";
-// import Button from "@/components/Button";
-import { Button, Searchbar, TextInput } from "react-native-paper";
+import { Button, TextInput } from "react-native-paper";
 import {
-  ILanguageObject,
   IWord,
 } from "@/interfaces/languageObjectInterface";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -93,7 +86,7 @@ export default function LanguageScreen(this: any) {
   const [sectionList, setSectionList] = useState([] as ISectionListData);
   useEffect(
     function createSectionList() {
-      console.log("(LS.createSectionList) how often is useEffect called?");
+      console.log("([language].createSectionList) how often is useEffect called?");
       // const sorted = languageObj.words.sort((a, b) =>
       //   a.word > b.word ? 1 : -1,
       // );
@@ -214,6 +207,7 @@ export default function LanguageScreen(this: any) {
           mode="elevated"
           style={styles.detailButton}
           onPress={() => {
+            console.log("#1(addWDetails) onPress - set selectedItem (should that happen?) and navigate to edit-word");
             setSelectedItem({word, definition});
             router.navigate("/language/edit-word-screen");
           }}
