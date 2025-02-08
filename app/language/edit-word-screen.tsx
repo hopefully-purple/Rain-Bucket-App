@@ -13,7 +13,9 @@ import SelectedItemContext from "@/contexts/SelectedItem";
 import Colors from "@/assets/colors/colors";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
-import { IWord } from "@/interfaces/languageObjectInterface";
+import { ILanguageObject, IWord } from "@/interfaces/languageObjectInterface";
+import { asyncStorageSaveData } from "@/utilities/utility-async-storage";
+import { updateWordInLanguageObject } from "@/utilities/utility-context";
 
 //Item format as it comes from Add: {id: '0 word', word: '', definition: ''}
 // TODO - rename as [word].tsx for a better route path
@@ -29,51 +31,7 @@ export default function EditWordScreen() {
 
   const [defHeight, setDefHeight] = useState(0);
 
-  const saveData = async () => {
-    // TODO - Move into a new utilities/storage helper file? Or was there a reason it needed to be here?
-    try {
-      console.log("#9(saveData) Current LanguageObj to save:");
-      console.log(JSON.stringify(languageObj, undefined, 2));
-      // !!!!! Bug. LanguageObj is out of date
-      await AsyncStorage.setItem(
-        languageObj.language,
-        JSON.stringify(languageObj.words)
-      );
-      console.log("#10(saveData) Data successfully saved");
-    } catch (e) {
-      console.log("(saveData) Failed to save the data to the storage");
-      throw e;
-    }
-  };
-
-  const updateContextAndStorage = (newI: IWord) => {
-    console.log("#4(updateContext&Storage) find the object");
-    // Filter condition (remove old item from array)
-    function excludeItem(i: IWord) {
-      // TODO - turn this into arrow func
-      return i.id !== selectedItem.id;
-    }
-    const filteredWords: IWord[] = languageObj.words.filter(excludeItem);
-    //console.log(JSON.stringify(word, undefined, 2));
-    // Put newI in array
-    filteredWords.push(newI);
-    const sortedNL = filteredWords.sort((a, b) => (a.word > b.word ? 1 : -1));
-    console.log("#5(updateContext&Store) Set langObject to SortedNL:");
-    console.log(JSON.stringify(sortedNL, undefined, 2));
-    // ROOT OF Save BUG !!!!!!!! langaugeObject is not properly updated here...
-    setLanguageObj({ ...languageObj, words: sortedNL });
-    console.log("#6 !!! PLACE OF BUG (updateContext&Stor) is new lang updated? "); // NOPE
-    console.log(JSON.stringify(languageObj, undefined, 2));
-    console.log("#7(updateContext&Store) setSelectedItem to newI");
-    setSelectedItem(newI); //Maybe
-
-    //Save to async ( // TODO - need to start thinking about changing structure)
-    //^^ when implementing other props changes, need to be smart about when this happens
-    console.log("#8(updateContext&Store) call saveData"); // logs after 11 and 12
-    saveData();
-  };
-
-  const handleSave = () => {
+  const handleSave = async () => {
     console.log("#2(handlesave)New stuff:");
     console.log(word);
     console.log("/" + pronunciation + "/");
@@ -83,6 +41,7 @@ export default function EditWordScreen() {
     console.log("\n\n current selected item before any checks:");
     console.log(JSON.stringify(selectedItem, undefined, 2));
 
+    // TODO - move this logic somewhere else
     //Make comparisons to state and context and update accordingly.
     let newI = { ...selectedItem };
     if (selectedItem.id === undefined) {
@@ -127,17 +86,31 @@ export default function EditWordScreen() {
 
     //Get selectedItem from langaugeObj and replace with new selected item
     if (changesMade) {
-      console.log("#3a(handlesave) changesMade = true, call update contextstor");
-      updateContextAndStorage(newI);
-      console.log("#11(handlesave) set selectedItem to empty???");
+      console.log("#3a(handlesave) changesMade = true, call update word in lang obj");
+      // Update the language object with new word object
+      const newLanguageObject = updateWordInLanguageObject(languageObj, newI, selectedItem.id);
+      console.log("#4(handlesave) newLanguageObject = ");
+      console.log(JSON.stringify(newLanguageObject, undefined, 2));
+
+      // Set language object
+      setLanguageObj(newLanguageObject);
+
+      //Save to async ( // TODO - need to start thinking about changing structure)
+      //^^ when implementing other props changes, need to be smart about when this happens
+      console.log("#5(handlesave) call saveData");
+      const isDataSaved = await asyncStorageSaveData(newLanguageObject);
+      if (!isDataSaved) {
+        console.log("------AAAAA???--------");
+      }
+      console.log("#8(handlesave) set selectedItem to empty???");
       setSelectedItem({});
-      // navigation.goBack();
-      console.log("#12(handlesave) router back");
+      console.log("#9(handlesave) router back");
       router.back();
     } else {
       console.log(
         "#3b(handlesave)Nothing to change : pronunciation=" + pronunciation
       );
+      // TODO - should this router.back?
     }
   };
 

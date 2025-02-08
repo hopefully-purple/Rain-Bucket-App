@@ -33,7 +33,7 @@ export default function LanguageScreen(this: any) {
   // this.wordInput = React.createRef();
   // this.definitionInput = React.createRef();
 
-  const saveData = async () => {
+  const saveData = async () => { // TODO - use utility function
     try {
       await AsyncStorage.setItem(
         languageObj.language,
@@ -61,13 +61,13 @@ export default function LanguageScreen(this: any) {
       };
       console.log("(handleAddWord) newWordItem.id=" + newWordItem.id);
 
-      //Update languageObj context
+      //Update languageObj context TODO USE UTILITY FUNCTION
       const newLOW: IWord[] = languageObj.words;
       newLOW.push(newWordItem);
       const sortedNL = newLOW.sort((a, b) => (a.word > b.word ? 1 : -1));
       console.log("(handleAddWord) SortedNL:");
       console.log(JSON.stringify(sortedNL, undefined, 2));
-      setLanguageObj({ ...languageObj, words: sortedNL });
+      setLanguageObj({ ...languageObj, words: sortedNL }); // TODO - how come this works here but not in edit?
       console.log(JSON.stringify(languageObj.words, undefined, 2));
 
       //Clear inputs
@@ -77,7 +77,7 @@ export default function LanguageScreen(this: any) {
       setDefinition("");
 
       //Save to async storage
-      saveData();
+      saveData(); // TODO - use utility save data
     } else {
       console.log("Nothing to add");
     }

@@ -9,6 +9,15 @@ import {
   SectionItem,
 } from "@/interfaces/sectionListInterface";
 
+/**
+ * TODO - should this be more generic?
+ * @param array array of IWord objects
+ * @returns new sorted array
+ */
+export function sortWords(array: IWord[]) {
+  return array.sort((a, b) => a.word > b.word ? 1 : -1);
+}
+
 export function organizeIntoAlphabetizedSections(langObj: ILanguageObject) {
   //Section gameplan:
   if (langObj.language !== "Spanish") {
