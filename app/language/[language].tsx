@@ -12,13 +12,12 @@ import { Colors } from "react-native/Libraries/NewAppScreen";
 import LanguageObjectContext from "@/contexts/LanguageObject";
 import SelectedItemContext from "@/contexts/SelectedItem";
 import { Button, TextInput } from "react-native-paper";
-import {
-  IWord,
-} from "@/interfaces/languageObjectInterface";
+import { IWord } from "@/interfaces/languageObjectInterface";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ListOfWords from "@/components/ListOfWords";
 import { organizeIntoAlphabetizedSections } from "@/utilities/utility-strings";
 import { ISectionListData } from "@/interfaces/sectionListInterface";
+import { asyncStorageSaveData } from "@/utilities/utility-async-storage";
 
 export default function LanguageScreen(this: any) {
   const [word, setWord] = useState("");
@@ -33,20 +32,7 @@ export default function LanguageScreen(this: any) {
   // this.wordInput = React.createRef();
   // this.definitionInput = React.createRef();
 
-  const saveData = async () => { // TODO - use utility function
-    try {
-      await AsyncStorage.setItem(
-        languageObj.language,
-        JSON.stringify(languageObj.words)
-      );
-      console.log("(saveData) Data successfully saved");
-    } catch (e) {
-      console.log("(saveData) Failed to save the data to the storage");
-      throw e;
-    }
-  };
-
-  const handleAddWord = () => {
+  const handleAddWord = async () => {
     if (word !== "" && definition !== "") {
       console.log(
         "(handleaddword) languageObj.words.length=" + languageObj.words.length
@@ -68,6 +54,7 @@ export default function LanguageScreen(this: any) {
       console.log("(handleAddWord) SortedNL:");
       console.log(JSON.stringify(sortedNL, undefined, 2));
       setLanguageObj({ ...languageObj, words: sortedNL }); // TODO - how come this works here but not in edit?
+      console.log("(handleAddWord) is languageObj updated with new words?");
       console.log(JSON.stringify(languageObj.words, undefined, 2));
 
       //Clear inputs
@@ -77,7 +64,11 @@ export default function LanguageScreen(this: any) {
       setDefinition("");
 
       //Save to async storage
-      saveData(); // TODO - use utility save data
+      const isDataSaved = await asyncStorageSaveData(languageObj);
+      if (!isDataSaved) {
+        // TODO - handle this better!
+        console.log("------AAAAA???--------");
+      }
     } else {
       console.log("Nothing to add");
     }
@@ -86,7 +77,9 @@ export default function LanguageScreen(this: any) {
   const [sectionList, setSectionList] = useState([] as ISectionListData);
   useEffect(
     function createSectionList() {
-      console.log("([language].createSectionList) how often is useEffect called?");
+      console.log(
+        "([language].createSectionList) how often is useEffect called?"
+      );
       // const sorted = languageObj.words.sort((a, b) =>
       //   a.word > b.word ? 1 : -1,
       // );
@@ -207,8 +200,10 @@ export default function LanguageScreen(this: any) {
           mode="elevated"
           style={styles.detailButton}
           onPress={() => {
-            console.log("#1(addWDetails) onPress - set selectedItem (should that happen?) and navigate to edit-word");
-            setSelectedItem({word, definition});
+            console.log(
+              "#1(addWDetails) onPress - set selectedItem (should that happen?) and navigate to edit-word"
+            );
+            setSelectedItem({ word, definition });
             router.navigate("/language/edit-word-screen");
           }}
         >

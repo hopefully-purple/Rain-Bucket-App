@@ -102,7 +102,8 @@ export default function EditWordScreen() {
       if (!isDataSaved) {
         console.log("------AAAAA???--------");
       }
-      console.log("#8(handlesave) set selectedItem to empty???");
+      console.log("#8(handlesave) set selectedItem to empty??? ... I think yes?");
+      // TODO - should selectedItem be set to empty here? I think so, because we don't want it highlighted or whatever in langauge?
       setSelectedItem({});
       console.log("#9(handlesave) router back");
       router.back();
@@ -110,7 +111,7 @@ export default function EditWordScreen() {
       console.log(
         "#3b(handlesave)Nothing to change : pronunciation=" + pronunciation
       );
-      // TODO - should this router.back?
+      // TODO - should this router.back? should display message "no changes made"?
     }
   };
 
