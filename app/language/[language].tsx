@@ -13,7 +13,6 @@ import LanguageObjectContext from "@/contexts/LanguageObject";
 import SelectedItemContext from "@/contexts/SelectedItem";
 import { Button, TextInput } from "react-native-paper";
 import { IWord } from "@/interfaces/languageObjectInterface";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import ListOfWords from "@/components/ListOfWords";
 import { organizeIntoAlphabetizedSections } from "@/utilities/utility-strings";
 import { ISectionListData } from "@/interfaces/sectionListInterface";
@@ -35,9 +34,9 @@ export default function LanguageScreen(this: any) {
 
   const handleAddWord = async () => {
     if (word !== "" && definition !== "") {
-      console.log(
-        "(handleaddword) languageObj.words.length=" + languageObj.words.length
-      );
+      // console.log(
+      //   "(handleaddword) languageObj.words.length=" + languageObj.words.length
+      // );
       let newID = languageObj.words.length + 1;
       //Create word object
       const newWordItem: IWord = {
@@ -46,18 +45,18 @@ export default function LanguageScreen(this: any) {
         pronun: "",
         definition,
       };
-      console.log("(handleAddWord) newWordItem.id=" + newWordItem.id);
+      // console.log("(handleAddWord) newWordItem.id=" + newWordItem.id);
       
-      console.log("(handleAddWord) call updateOrAddWordInLanguageObject");
+      // console.log("(handleAddWord) call updateOrAddWordInLanguageObject");
       const newLanguageObject = updateOrAddWordInLanguageObject(languageObj, newWordItem);
-      console.log("(handleAddWord) resulting newLanguageObject: ");
-      console.log(JSON.stringify(newLanguageObject, undefined, 2));
+      // console.log("(handleAddWord) resulting newLanguageObject: ");
+      // console.log(JSON.stringify(newLanguageObject, undefined, 2));
 
-      console.log("(handleAddWord) update languageObject context");
+      // console.log("(handleAddWord) update languageObject context");
       setLanguageObj({...languageObj, words: newLanguageObject.words});
 
-      console.log("(handleAddWord) is languageObj updated with new words?");
-      console.log(JSON.stringify(languageObj.words, undefined, 2));
+      // console.log("(handleAddWord) is languageObj updated with new words?");
+      // console.log(JSON.stringify(languageObj.words, undefined, 2));
 
       //Clear inputs
       // this.wordInput.current.clear();
@@ -66,7 +65,7 @@ export default function LanguageScreen(this: any) {
       setDefinition("");
 
       //Save to async storage
-      console.log("(handleAddWord) call asyncStorageSaveData");
+      // console.log("(handleAddWord) call asyncStorageSaveData");
       const isDataSaved = await asyncStorageSaveData(languageObj);
       if (!isDataSaved) {
         // TODO - handle this better!
@@ -203,9 +202,9 @@ export default function LanguageScreen(this: any) {
           mode="elevated"
           style={styles.detailButton}
           onPress={() => {
-            console.log(
-              "#1(addWDetails) onPress - set selectedItem (should that happen?) and navigate to edit-word"
-            );
+            // console.log(
+              // "#1(addWDetails) onPress - set selectedItem (should that happen?) and navigate to edit-word"
+            // );
             setSelectedItem({ word, definition });
             router.navigate("/language/edit-word-screen");
           }}
