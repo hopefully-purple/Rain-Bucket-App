@@ -1,5 +1,5 @@
 import { router, useFocusEffect, useLocalSearchParams } from "expo-router";
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { createRef, useCallback, useContext, useEffect, useState } from "react";
 import {
   SafeAreaView,
   View,
@@ -28,7 +28,7 @@ export default function LanguageScreen(this: any) {
 
   const { language } = useLocalSearchParams();
 
-  // this.searchInput = React.createRef();
+  this.searchInput = createRef();
   // this.wordInput = React.createRef();
   // this.definitionInput = React.createRef();
 
@@ -82,9 +82,6 @@ export default function LanguageScreen(this: any) {
       console.log(
         "([language].createSectionList) how often is useEffect called?"
       );
-      // const sorted = languageObj.words.sort((a, b) =>
-      //   a.word > b.word ? 1 : -1,
-      // );
       if (searchQuery === "") {
         const newSectionL = organizeIntoAlphabetizedSections(languageObj);
         setSectionList(newSectionL);
@@ -138,7 +135,7 @@ export default function LanguageScreen(this: any) {
     <SafeAreaView
       style={styles.screenContainer}
       onTouchStart={() => {
-        // this.searchInput.current.blur();
+        this.searchInput.current.blur();
         // this.wordInput.current.blur();
         // this.definitionInput.current.blur();
       }}
@@ -154,16 +151,15 @@ export default function LanguageScreen(this: any) {
           label="Search"
           mode="outlined"
           dense={true}
-          // blurOnSubmit="true" // TODO - use "submitBehavior"?
           activeOutlineColor={Colors.TEST_PURPLE}
           value={searchQuery}
           autoCorrect={false}
           autoCapitalize={"sentences"}
           onChangeText={onChangeSearch}
-          onSubmitEditing={onSubmitSearch}
+          // onSubmitEditing={onSubmitSearch}
           style={styles.searchBar}
           left={<TextInput.Icon icon="magnify" color={Colors.TEST_PURPLE} />}
-          // ref={this.searchInput}
+          ref={this.searchInput}
         />
       </View>
       <TextInput
