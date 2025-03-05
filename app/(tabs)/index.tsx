@@ -22,15 +22,15 @@ export default function Index() {
   const readData = async (language: string) => {
     try {
       const value = await AsyncStorage.getItem(language);
-      console.log('(App.readData) value:' + value);
+      // console.log('(App.readData) value:' + value);
       if (value !== null) {
         setLanguageObj({ language: language, words: JSON.parse(value) });
       } else {
-        console.log(
-          "(App.readData).getItem value is null! create a new " +
-            language +
-            " object"
-        );
+        // console.log(
+        //   "(App.readData).getItem value is null! create a new " +
+        //     language +
+        //     " object"
+        // );
         const newLanguage: ILanguageObject = {
           language: language,
           words: [{ id: "0", word: "", pronun: "", definition: "" }],
@@ -46,7 +46,7 @@ export default function Index() {
   };
 
   const handleLanguageSelection = (language: string) => {
-    console.log(language);
+    // console.log(language);
     readData(language);
     router.navigate(`/language/${language}`);
   };

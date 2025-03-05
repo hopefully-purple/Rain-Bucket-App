@@ -28,12 +28,11 @@ export default function WordComponent({item}: WordComponentProps) {
       return i.id !== item.id;
     }
     const words = languageObj.words.filter(excludeItem);
-    // console.log(words);
     setLanguageObj({ ...languageObj, words: words });
     const saveData = async () => {
       try {
         await AsyncStorage.setItem(languageObj.language, JSON.stringify(words));
-        console.log("(saveData) Data successfully saved");
+        // console.log("(saveData) Data successfully saved");
       } catch (e) {
         console.log("(saveData) Failed to save the data to the storage");
         throw e;
@@ -53,7 +52,6 @@ export default function WordComponent({item}: WordComponentProps) {
         text: "Edit",
         onPress: () => {
           setSelectedItem(item);
-          // nav.navigate("EditingScreen");
           router.navigate("/language/edit-word-screen");
         },
       },

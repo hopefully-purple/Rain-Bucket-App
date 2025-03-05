@@ -17,7 +17,6 @@ type ListOfWordsProps = {
 
 export default function ListOfWords({ sectionL }: ListOfWordsProps) {
   const renderSectionItem: SectionListRenderItem<SectionItem> = ({ item }) => {
-    // console.log(item);
     return <WordComponent item={item} />;
   };
   return (

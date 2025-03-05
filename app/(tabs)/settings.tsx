@@ -42,12 +42,12 @@ export default function SettingsScreen() {
         throw e;
       }
 
-      console.log('Done.');
+      // console.log('Done.');
     }
   };
 
   const getCurrentLData = async () => {
-    console.log(languageObj.language);
+    // console.log(languageObj.language);
     try {
       const result = await AsyncStorage.getItem(languageObj.language);
       let itemCount = result != null ? JSON.parse(result).length : "";
@@ -90,7 +90,7 @@ export default function SettingsScreen() {
     const saveData = async () => {
       try {
         await AsyncStorage.setItem(languageObj.language, JSON.stringify(words));
-        console.log('(saveData) Data successfully saved');
+        // console.log('(saveData) Data successfully saved');
       } catch (e) {
         console.log('(saveData) Failed to save the data to the storage');
         throw e;
@@ -100,7 +100,7 @@ export default function SettingsScreen() {
     saveData();
   };
 
-  console.log('Settings screen');
+  // console.log('Settings screen');
   return (
     <SafeAreaView style={styles.screenContainer}>
       <Button
