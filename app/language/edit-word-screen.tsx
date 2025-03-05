@@ -156,6 +156,7 @@ export default function EditWordScreen() {
           onChangeText={(text) => setNotes(text)}
           autoCorrect={false}
           autoCapitalize={"none"}
+          multiline={true}
           // blurOnSubmit="true"
           // onSubmitEditing={something}
           // ref={this.wordInput}

@@ -126,9 +126,9 @@ export default function LanguageScreen(this: any) {
     setSectionList(createSearchSectionList(query));
   };
 
-  const onSubmitSearch = () => {
-    this.searchInput.current.blur();
-  };
+  // const onSubmitSearch = () => {
+  //   this.searchInput.current.blur();
+  // };
 
   const wordInputLabel = "New " + languageObj.language + " word/phrase";
 
