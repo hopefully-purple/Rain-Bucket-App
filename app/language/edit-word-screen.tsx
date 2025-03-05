@@ -145,7 +145,8 @@ export default function EditWordScreen() {
           onContentSizeChange={(event) => {
             setDefHeight(event.nativeEvent.contentSize.height);
           }}
-          style={{ ...styles.dText, height: Math.max(70, defHeight) }}
+          // style={{ ...styles.dText, height: Math.max(70, defHeight) }}
+          style={{...styles.dText}}
           // onSubmitEditing={something}
           // ref={this.wordInput}
         />
@@ -196,14 +197,6 @@ const styles = StyleSheet.create({
     color: Colors.DD_DARK_GRAY,
     fontSize: 20,
     marginHorizontal: 20,
-    textAlignVertical: "top",
-    textAlign: "left",
-    // height: 70,
-    width: 380,
-    flexWrap: "wrap",
-    // inlineSize: 'min-content',
-    // overflowWrap: 'break-word',s
-    // overflow: 'scroll',
   },
   otherText: {
     color: Colors.DD_DARK_GRAY,
