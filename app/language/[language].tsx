@@ -1,6 +1,5 @@
 import { router, useFocusEffect, useLocalSearchParams } from "expo-router";
 import React, {
-  createRef,
   useCallback,
   useContext,
   useEffect,
@@ -35,10 +34,6 @@ export default function LanguageScreen(this: any) {
   const { selectedItem, setSelectedItem } = useContext(SelectedItemContext);
 
   const { language } = useLocalSearchParams();
-
-  // this.searchInput = createRef();
-  // this.wordInput = React.createRef();
-  // this.definitionInput = React.createRef();
 
   const handleAddWord = async () => {
     if (word !== "" && definition !== "") {
@@ -78,8 +73,6 @@ export default function LanguageScreen(this: any) {
       }
 
       //Clear inputs
-      // this.wordInput.current.clear();
-      // this.definitionInput.current.clear();
       setWord("");
       setDefinition("");
     } else {
@@ -126,19 +119,10 @@ export default function LanguageScreen(this: any) {
     setSectionList(createSearchSectionList(query));
   };
 
-  // const onSubmitSearch = () => {
-  //   this.searchInput.current.blur();
-  // };
-
   const wordInputLabel = "New " + languageObj.language + " word/phrase";
 
   useFocusEffect(
     useCallback(() => {
-      // const unsubscribe = API.subscribe(userId, user => setUser(user));
-      // return () => unsubscribe();
-      //Clear inputs
-      // this.wordInput.current.clear();
-      // this.definitionInput.current.clear();
       setWord("");
       setDefinition("");
     }, [])
@@ -146,18 +130,10 @@ export default function LanguageScreen(this: any) {
   return (
     <SafeAreaView
       style={styles.screenContainer}
-      onTouchStart={() => {
-        // this.searchInput.current.blur();
-        // this.wordInput.current.blur();
-        // this.definitionInput.current.blur();
-      }}
     >
       <Pressable onPress={() => Keyboard.dismiss()}>
         <View style={styles.screenTop}>
-          <TouchableOpacity
-            style={styles.titleTouchable}
-            // onPress={() => navigation.navigate("SetOfLanguages")}
-          >
+          <TouchableOpacity>
             <Text style={styles.text}>{language} Screen!</Text>
           </TouchableOpacity>
           <TextInput
@@ -169,10 +145,8 @@ export default function LanguageScreen(this: any) {
             autoCorrect={false}
             autoCapitalize={"sentences"}
             onChangeText={onChangeSearch}
-            // onSubmitEditing={onSubmitSearch}
             style={styles.searchBar}
             left={<TextInput.Icon icon="magnify" color={Colors.TEST_PURPLE} />}
-            // ref={this.searchInput}
           />
         </View>
         <TextInput
@@ -184,8 +158,6 @@ export default function LanguageScreen(this: any) {
           activeOutlineColor={Colors.TEST_PURPLE}
           autoCorrect={false}
           autoCapitalize={"sentences"}
-          // blurOnSubmit="true"
-          // ref={this.wordInput}
         />
         <TextInput
           label="Definition"
@@ -196,8 +168,6 @@ export default function LanguageScreen(this: any) {
           activeOutlineColor={Colors.TEST_PURPLE}
           autoCapitalize={"sentences"}
           autoCorrect={false}
-          // blurOnSubmit="true" // Todo - what is default behavior? use "submitBehavior"
-          // ref={this.definitionInput}
         />
         <View style={styles.buttonLayout}>
           <Button
@@ -235,9 +205,6 @@ const styles = StyleSheet.create({
   },
   input: {
     margin: 10,
-  },
-  titleTouchable: {
-    // margin: 1,
   },
   text: {
     color: Colors.DD_DARK_GRAY,

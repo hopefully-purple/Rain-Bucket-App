@@ -120,9 +120,6 @@ export default function EditWordScreen() {
           onChangeText={(text) => setWord(text)}
           autoCorrect={false}
           autoCapitalize={"none"}
-          // blurOnSubmit="true"
-          // onSubmitEditing={something}
-          // ref={this.wordInput}
         />
         <TextInput
           style={styles.prText}
@@ -131,9 +128,6 @@ export default function EditWordScreen() {
           onChangeText={(text) => setPron(text)}
           autoCorrect={false}
           autoCapitalize={"sentences"}
-          // blurOnSubmit="true"
-          // onSubmitEditing={something}
-          // ref={this.wordInput}
         />
         <TextInput
           value={definition}
@@ -141,14 +135,10 @@ export default function EditWordScreen() {
           onChangeText={(text) => setDefinition(text)}
           autoCorrect={false}
           autoCapitalize={"none"}
-          // blurOnSubmit="true"
           onContentSizeChange={(event) => {
             setDefHeight(event.nativeEvent.contentSize.height);
           }}
-          // style={{ ...styles.dText, height: Math.max(70, defHeight) }}
           style={{...styles.dText}}
-          // onSubmitEditing={something}
-          // ref={this.wordInput}
         />
         <Text style={styles.otherText}>Notes:</Text>
         <TextInput
@@ -158,9 +148,6 @@ export default function EditWordScreen() {
           autoCorrect={false}
           autoCapitalize={"none"}
           multiline={true}
-          // blurOnSubmit="true"
-          // onSubmitEditing={something}
-          // ref={this.wordInput}
         />
         <Text style={styles.otherText}>Tags:</Text>
         <Text style={styles.otherText}>Look up in dictionary?</Text>
