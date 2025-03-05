@@ -1,10 +1,5 @@
 import React, { useState, useContext } from "react";
-import {
-  Text,
-  TextInput,
-  SafeAreaView,
-  StyleSheet,
-} from "react-native";
+import { Text, TextInput, SafeAreaView, StyleSheet, Pressable, Keyboard } from "react-native";
 import { Button } from "react-native-paper";
 import LanguageObjectContext from "@/contexts/LanguageObject";
 import SelectedItemContext from "@/contexts/SelectedItem";
@@ -58,7 +53,7 @@ export default function EditWordScreen() {
     }
     if (pronunciation !== selectedItem.pronun) {
       // console.log(
-        // "Pronun check: " + pronunciation + " !== " + selectedItem.pronun
+      // "Pronun check: " + pronunciation + " !== " + selectedItem.pronun
       // );
       newI = {
         ...newI,
@@ -69,7 +64,7 @@ export default function EditWordScreen() {
     }
     if (definition !== selectedItem.definition) {
       // console.log(
-        // "Definition check: " + definition + " !== " + selectedItem.definition
+      // "Definition check: " + definition + " !== " + selectedItem.definition
       // );
       newI = {
         ...newI,
@@ -85,12 +80,16 @@ export default function EditWordScreen() {
     if (changesMade) {
       // console.log("#3a(handlesave) changesMade = true, call update word in lang obj");
       // Update the language object with new word object
-      const newLanguageObject = updateOrAddWordInLanguageObject(languageObj, newI, selectedItem.id);
+      const newLanguageObject = updateOrAddWordInLanguageObject(
+        languageObj,
+        newI,
+        selectedItem.id
+      );
       // console.log("#4(handlesave) newLanguageObject = ");
       // console.log(JSON.stringify(newLanguageObject, undefined, 2));
 
       // Set language object
-      setLanguageObj({...languageObj, words: newLanguageObject.words});
+      setLanguageObj({ ...languageObj, words: newLanguageObject.words });
 
       //Save to async ( // TODO - need to start thinking about changing structure)
       //^^ when implementing other props changes, need to be smart about when this happens
@@ -114,57 +113,59 @@ export default function EditWordScreen() {
 
   return (
     <SafeAreaView style={styles.screenContainer}>
-      <TextInput
-        style={styles.wText}
-        value={word}
-        onChangeText={(text) => setWord(text)}
-        autoCorrect={false}
-        autoCapitalize={"none"}
-        // blurOnSubmit="true"
-        // onSubmitEditing={something}
-        // ref={this.wordInput}
-      />
-      <TextInput
-        style={styles.prText}
-        placeholder="add pronunciation"
-        value={pronunciation}
-        onChangeText={(text) => setPron(text)}
-        autoCorrect={false}
-        autoCapitalize={"sentences"}
-        // blurOnSubmit="true"
-        // onSubmitEditing={something}
-        // ref={this.wordInput}
-      />
-      <TextInput
-        value={definition}
-        multiline={true}
-        onChangeText={(text) => setDefinition(text)}
-        autoCorrect={false}
-        autoCapitalize={"none"}
-        // blurOnSubmit="true"
-        onContentSizeChange={(event) => {
-          setDefHeight(event.nativeEvent.contentSize.height);
-        }}
-        style={{ ...styles.dText, height: Math.max(70, defHeight) }}
-        // onSubmitEditing={something}
-        // ref={this.wordInput}
-      />
-      <Text style={styles.otherText}>Notes:</Text>
-      <TextInput
-        style={styles.otherText}
-        value={notes}
-        onChangeText={(text) => setNotes(text)}
-        autoCorrect={false}
-        autoCapitalize={"none"}
-        // blurOnSubmit="true"
-        // onSubmitEditing={something}
-        // ref={this.wordInput}
-      />
-      <Text style={styles.otherText}>Tags:</Text>
-      <Text style={styles.otherText}>Look up in dictionary?</Text>
-      <Button mode="elevated" style={styles.saveButton} onPress={handleSave}>
-        Save changes
-      </Button>
+      <Pressable onPress={() => Keyboard.dismiss()}>
+        <TextInput
+          style={styles.wText}
+          value={word}
+          onChangeText={(text) => setWord(text)}
+          autoCorrect={false}
+          autoCapitalize={"none"}
+          // blurOnSubmit="true"
+          // onSubmitEditing={something}
+          // ref={this.wordInput}
+        />
+        <TextInput
+          style={styles.prText}
+          placeholder="add pronunciation"
+          value={pronunciation}
+          onChangeText={(text) => setPron(text)}
+          autoCorrect={false}
+          autoCapitalize={"sentences"}
+          // blurOnSubmit="true"
+          // onSubmitEditing={something}
+          // ref={this.wordInput}
+        />
+        <TextInput
+          value={definition}
+          multiline={true}
+          onChangeText={(text) => setDefinition(text)}
+          autoCorrect={false}
+          autoCapitalize={"none"}
+          // blurOnSubmit="true"
+          onContentSizeChange={(event) => {
+            setDefHeight(event.nativeEvent.contentSize.height);
+          }}
+          style={{ ...styles.dText, height: Math.max(70, defHeight) }}
+          // onSubmitEditing={something}
+          // ref={this.wordInput}
+        />
+        <Text style={styles.otherText}>Notes:</Text>
+        <TextInput
+          style={styles.otherText}
+          value={notes}
+          onChangeText={(text) => setNotes(text)}
+          autoCorrect={false}
+          autoCapitalize={"none"}
+          // blurOnSubmit="true"
+          // onSubmitEditing={something}
+          // ref={this.wordInput}
+        />
+        <Text style={styles.otherText}>Tags:</Text>
+        <Text style={styles.otherText}>Look up in dictionary?</Text>
+        <Button mode="elevated" style={styles.saveButton} onPress={handleSave}>
+          Save changes
+        </Button>
+      </Pressable>
     </SafeAreaView>
   );
 }

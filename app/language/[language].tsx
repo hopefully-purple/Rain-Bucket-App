@@ -1,5 +1,11 @@
 import { router, useFocusEffect, useLocalSearchParams } from "expo-router";
-import React, { createRef, useCallback, useContext, useEffect, useState } from "react";
+import React, {
+  createRef,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import {
   SafeAreaView,
   View,
@@ -8,6 +14,7 @@ import {
   StatusBar,
   StyleSheet,
   Keyboard,
+  Pressable,
 } from "react-native";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import LanguageObjectContext from "@/contexts/LanguageObject";
@@ -47,14 +54,17 @@ export default function LanguageScreen(this: any) {
         definition,
       };
       // console.log("(handleAddWord) newWordItem.id=" + newWordItem.id);
-      
+
       // console.log("(handleAddWord) call updateOrAddWordInLanguageObject");
-      const newLanguageObject = updateOrAddWordInLanguageObject(languageObj, newWordItem);
+      const newLanguageObject = updateOrAddWordInLanguageObject(
+        languageObj,
+        newWordItem
+      );
       // console.log("(handleAddWord) resulting newLanguageObject: ");
       // console.log(JSON.stringify(newLanguageObject, undefined, 2));
 
       // console.log("(handleAddWord) update languageObject context");
-      setLanguageObj({...languageObj, words: newLanguageObject.words});
+      setLanguageObj({ ...languageObj, words: newLanguageObject.words });
 
       // console.log("(handleAddWord) is languageObj updated with new words?");
       // console.log(JSON.stringify(languageObj.words, undefined, 2));
@@ -142,75 +152,77 @@ export default function LanguageScreen(this: any) {
         // this.definitionInput.current.blur();
       }}
     >
-      <View style={styles.screenTop}>
-        <TouchableOpacity
-          style={styles.titleTouchable}
-          // onPress={() => navigation.navigate("SetOfLanguages")}
-        >
-          <Text style={styles.text}>{language} Screen!</Text>
-        </TouchableOpacity>
+      <Pressable onPress={() => Keyboard.dismiss()}>
+        <View style={styles.screenTop}>
+          <TouchableOpacity
+            style={styles.titleTouchable}
+            // onPress={() => navigation.navigate("SetOfLanguages")}
+          >
+            <Text style={styles.text}>{language} Screen!</Text>
+          </TouchableOpacity>
+          <TextInput
+            label="Search"
+            mode="outlined"
+            dense={true}
+            activeOutlineColor={Colors.TEST_PURPLE}
+            value={searchQuery}
+            autoCorrect={false}
+            autoCapitalize={"sentences"}
+            onChangeText={onChangeSearch}
+            // onSubmitEditing={onSubmitSearch}
+            style={styles.searchBar}
+            left={<TextInput.Icon icon="magnify" color={Colors.TEST_PURPLE} />}
+            // ref={this.searchInput}
+          />
+        </View>
         <TextInput
-          label="Search"
+          label={wordInputLabel}
+          value={word}
+          onChangeText={(text) => setWord(text)}
           mode="outlined"
-          dense={true}
+          style={styles.input}
           activeOutlineColor={Colors.TEST_PURPLE}
-          value={searchQuery}
           autoCorrect={false}
           autoCapitalize={"sentences"}
-          onChangeText={onChangeSearch}
-          // onSubmitEditing={onSubmitSearch}
-          style={styles.searchBar}
-          left={<TextInput.Icon icon="magnify" color={Colors.TEST_PURPLE} />}
-          // ref={this.searchInput}
+          // blurOnSubmit="true"
+          // ref={this.wordInput}
         />
-      </View>
-      <TextInput
-        label={wordInputLabel}
-        value={word}
-        onChangeText={(text) => setWord(text)}
-        mode="outlined"
-        style={styles.input}
-        activeOutlineColor={Colors.TEST_PURPLE}
-        autoCorrect={false}
-        autoCapitalize={"sentences"}
-        // blurOnSubmit="true"
-        // ref={this.wordInput}
-      />
-      <TextInput
-        label="Definition"
-        value={definition}
-        onChangeText={(text) => setDefinition(text)}
-        mode="outlined"
-        style={styles.input}
-        activeOutlineColor={Colors.TEST_PURPLE}
-        autoCapitalize={"sentences"}
-        autoCorrect={false}
-        // blurOnSubmit="true" // Todo - what is default behavior? use "submitBehavior"
-        // ref={this.definitionInput}
-      />
-      <View style={styles.buttonLayout}>
-        <Button
-          mode="elevated"
-          style={styles.addButton}
-          onPress={handleAddWord}
-        >
-          Add!
-        </Button>
-        <Button
-          mode="elevated"
-          style={styles.detailButton}
-          onPress={() => {
-            // console.log(
+        <TextInput
+          label="Definition"
+          value={definition}
+          onChangeText={(text) => setDefinition(text)}
+          mode="outlined"
+          style={styles.input}
+          activeOutlineColor={Colors.TEST_PURPLE}
+          autoCapitalize={"sentences"}
+          autoCorrect={false}
+          // blurOnSubmit="true" // Todo - what is default behavior? use "submitBehavior"
+          // ref={this.definitionInput}
+        />
+        <View style={styles.buttonLayout}>
+          <Button
+            mode="elevated"
+            style={styles.addButton}
+            onPress={handleAddWord}
+          >
+            Add!
+          </Button>
+          <Button
+            mode="elevated"
+            style={styles.detailButton}
+            onPress={() => {
+              // console.log(
               // "#1(addWDetails) onPress - set selectedItem (should that happen?) and navigate to edit-word"
-            // );
-            setSelectedItem({ word, definition });
-            Keyboard.dismiss();
-            router.navigate("/language/edit-word-screen");
-          }}
-        >
-          Add with details
-        </Button>
-      </View>
+              // );
+              setSelectedItem({ word, definition });
+              Keyboard.dismiss();
+              router.navigate("/language/edit-word-screen");
+            }}
+          >
+            Add with details
+          </Button>
+        </View>
+      </Pressable>
       <ListOfWords sectionL={sectionList} />
     </SafeAreaView>
   );
