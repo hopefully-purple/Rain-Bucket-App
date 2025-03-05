@@ -7,6 +7,7 @@ import {
   Text,
   StatusBar,
   StyleSheet,
+  Keyboard,
 } from "react-native";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import LanguageObjectContext from "@/contexts/LanguageObject";
@@ -58,12 +59,6 @@ export default function LanguageScreen(this: any) {
       // console.log("(handleAddWord) is languageObj updated with new words?");
       // console.log(JSON.stringify(languageObj.words, undefined, 2));
 
-      //Clear inputs
-      // this.wordInput.current.clear();
-      // this.definitionInput.current.clear();
-      setWord("");
-      setDefinition("");
-
       //Save to async storage
       // console.log("(handleAddWord) call asyncStorageSaveData");
       const isDataSaved = await asyncStorageSaveData(languageObj);
@@ -71,9 +66,16 @@ export default function LanguageScreen(this: any) {
         // TODO - handle this better!
         console.log("------AAAAA???--------");
       }
+
+      //Clear inputs
+      // this.wordInput.current.clear();
+      // this.definitionInput.current.clear();
+      setWord("");
+      setDefinition("");
     } else {
       console.log("Nothing to add");
     }
+    Keyboard.dismiss();
   };
 
   const [sectionList, setSectionList] = useState([] as ISectionListData);
