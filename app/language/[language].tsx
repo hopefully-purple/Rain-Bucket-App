@@ -29,7 +29,7 @@ export default function LanguageScreen(this: any) {
 
   const { language } = useLocalSearchParams();
 
-  this.searchInput = createRef();
+  // this.searchInput = createRef();
   // this.wordInput = React.createRef();
   // this.definitionInput = React.createRef();
 
@@ -137,7 +137,7 @@ export default function LanguageScreen(this: any) {
     <SafeAreaView
       style={styles.screenContainer}
       onTouchStart={() => {
-        this.searchInput.current.blur();
+        // this.searchInput.current.blur();
         // this.wordInput.current.blur();
         // this.definitionInput.current.blur();
       }}
@@ -161,7 +161,7 @@ export default function LanguageScreen(this: any) {
           // onSubmitEditing={onSubmitSearch}
           style={styles.searchBar}
           left={<TextInput.Icon icon="magnify" color={Colors.TEST_PURPLE} />}
-          ref={this.searchInput}
+          // ref={this.searchInput}
         />
       </View>
       <TextInput
@@ -204,6 +204,7 @@ export default function LanguageScreen(this: any) {
               // "#1(addWDetails) onPress - set selectedItem (should that happen?) and navigate to edit-word"
             // );
             setSelectedItem({ word, definition });
+            Keyboard.dismiss();
             router.navigate("/language/edit-word-screen");
           }}
         >
