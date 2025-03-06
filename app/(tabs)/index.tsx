@@ -53,7 +53,7 @@ export default function Index() {
   return (
     <>
       <SafeAreaView style={styles.screenContainer}>
-        <Text style={styles.titleText}>Choose a language!</Text>
+        {/* <Text style={styles.titleText}>Choose a language!</Text> */}
         <TouchableOpacity onPress={() => handleLanguageSelection("Spanish")}>
           <Text style={styles.languageText}>Spanish</Text>
         </TouchableOpacity>

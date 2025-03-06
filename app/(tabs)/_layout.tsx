@@ -1,25 +1,27 @@
 import { Tabs } from "expo-router";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import Colors from "@/assets/colors/colors";
 
 export default function TabLayout() {
   return (
     <Tabs
     screenOptions={{
-        tabBarActiveTintColor: '#ffd33d',
+        tabBarActiveTintColor: Colors.TEST_PURPLE,
+        tabBarInactiveTintColor: Colors.TEST_CREAM,
         headerStyle: {
-          backgroundColor: '#25292e',
+          backgroundColor: Colors.LIGHT_PURPLE,
         },
         headerShadowVisible: false,
-        headerTintColor: '#fff',
+        headerTintColor: Colors.TEST_PURPLE,
         tabBarStyle: {
-        backgroundColor: '#25292e',
+          backgroundColor: Colors.LIGHT_PURPLE,
         },
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",
+          title: "My Languages",
           tabBarIcon: ({ color, focused }) => (
             <Ionicons
               name={focused ? "home-sharp" : "home-outline"}
