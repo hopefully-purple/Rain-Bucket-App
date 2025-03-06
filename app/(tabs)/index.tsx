@@ -12,7 +12,7 @@ import React, { useContext } from "react";
 import LanguageObjectContext from "@/contexts/LanguageObject";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ILanguageObject } from "@/interfaces/languageObjectInterface";
-import { IconButton } from "react-native-paper";
+import { Icon, IconButton } from "react-native-paper";
 
 const RainBucketImage = require("@/assets/images/ORIGpurple_rainbucket_2.jpeg");
 
@@ -54,16 +54,24 @@ export default function Index() {
     <>
       <SafeAreaView style={styles.screenContainer}>
         <TouchableOpacity onPress={() => handleLanguageSelection("Spanish")}>
-          <Text style={styles.languageText}>Spanish</Text>
-          {/* <IconButton
-            icon="camera"
-            iconColor={Colors.main_theme.TEXT_DARK_GRAY}
-            size={20}
-            onPress={() => console.log("Pressed")}
-          /> */}
+          <View style={styles.languageRow}>
+            <Text style={styles.languageText}>Spanish</Text>
+            <Icon
+              source="chevron-right"
+              color={Colors.main_theme.TEXT_DARK_GRAY}
+              size={30}
+            />
+          </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => handleLanguageSelection("Japanese")}>
-          <Text style={styles.languageText}>Japanese</Text>
+          <View style={styles.languageRow}>
+            <Text style={styles.languageText}>Japanese</Text>
+            <Icon
+              source="chevron-right"
+              color={Colors.main_theme.TEXT_DARK_GRAY}
+              size={30}
+            />
+          </View>
         </TouchableOpacity>
         <View style={styles.logoContainer}>
           <ImageViewer imgSource={RainBucketImage} />
@@ -83,7 +91,13 @@ const styles = StyleSheet.create({
     color: Colors.main_theme.TEXT_DARK_GRAY,
     fontSize: 20,
     fontWeight: "bold",
+  },
+  languageRow: {
     margin: 10,
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   logoContainer: {
     display: "flex",
