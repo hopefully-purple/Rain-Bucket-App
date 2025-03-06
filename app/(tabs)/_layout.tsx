@@ -6,15 +6,15 @@ export default function TabLayout() {
   return (
     <Tabs
     screenOptions={{
-        tabBarActiveTintColor: Colors.TEST_PURPLE,
-        tabBarInactiveTintColor: Colors.TEST_CREAM,
+        tabBarActiveTintColor: Colors.main_theme.ACTIVE_ACCENT_COLOR,
+        tabBarInactiveTintColor: Colors.main_theme.INACTIVE_ACCENT_COLOR,
         headerStyle: {
-          backgroundColor: Colors.LIGHT_PURPLE,
+          backgroundColor: Colors.main_theme.BACKGROUND_COLOR,
         },
         headerShadowVisible: false,
-        headerTintColor: Colors.TEST_PURPLE,
+        headerTintColor: Colors.main_theme.ACTIVE_ACCENT_COLOR,
         tabBarStyle: {
-          backgroundColor: Colors.LIGHT_PURPLE,
+          backgroundColor: Colors.main_theme.BACKGROUND_COLOR,
         },
       }}
     >

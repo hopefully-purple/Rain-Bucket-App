@@ -15,7 +15,6 @@ import {
   Keyboard,
   Pressable,
 } from "react-native";
-import { Colors } from "react-native/Libraries/NewAppScreen";
 import LanguageObjectContext from "@/contexts/LanguageObject";
 import SelectedItemContext from "@/contexts/SelectedItem";
 import { Button, TextInput } from "react-native-paper";
@@ -25,6 +24,7 @@ import { organizeIntoAlphabetizedSections } from "@/utilities/utility-strings";
 import { ISectionListData } from "@/interfaces/sectionListInterface";
 import { asyncStorageSaveData } from "@/utilities/utility-async-storage";
 import { updateOrAddWordInLanguageObject } from "@/utilities/utility-context";
+import Colors from "@/assets/colors/colors";
 
 export default function LanguageScreen(this: any) {
   const [word, setWord] = useState("");
@@ -140,13 +140,13 @@ export default function LanguageScreen(this: any) {
             label="Search"
             mode="outlined"
             dense={true}
-            activeOutlineColor={Colors.TEST_PURPLE}
+            activeOutlineColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
             value={searchQuery}
             autoCorrect={false}
             autoCapitalize={"sentences"}
             onChangeText={onChangeSearch}
             style={styles.searchBar}
-            left={<TextInput.Icon icon="magnify" color={Colors.TEST_PURPLE} />}
+            left={<TextInput.Icon icon="magnify" color={Colors.main_theme.ACTIVE_ACCENT_COLOR} />}
           />
         </View>
         <TextInput
@@ -155,7 +155,7 @@ export default function LanguageScreen(this: any) {
           onChangeText={(text) => setWord(text)}
           mode="outlined"
           style={styles.input}
-          activeOutlineColor={Colors.TEST_PURPLE}
+          activeOutlineColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
           autoCorrect={false}
           autoCapitalize={"sentences"}
         />
@@ -165,7 +165,7 @@ export default function LanguageScreen(this: any) {
           onChangeText={(text) => setDefinition(text)}
           mode="outlined"
           style={styles.input}
-          activeOutlineColor={Colors.TEST_PURPLE}
+          activeOutlineColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
           autoCapitalize={"sentences"}
           autoCorrect={false}
         />
@@ -207,10 +207,10 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   text: {
-    color: Colors.DD_DARK_GRAY,
+    color: Colors.main_theme.TEXT_DARK_GRAY,
     fontSize: 20,
     margin: 10,
-    backgroundColor: Colors.LIGHT_PURPLE,
+    // backgroundColor: Colors.main_theme.BACKGROUND_COLOR,
     // padding: 1,
     // paddingBottom: 10,
   },
@@ -220,13 +220,13 @@ const styles = StyleSheet.create({
     marginLeft: 40,
   },
   addButton: {
-    backgroundColor: Colors.LIGHT_PURPLE,
+    backgroundColor: Colors.main_theme.BACKGROUND_COLOR,
     borderRadius: 12,
     width: 100,
     margin: 10,
   },
   detailButton: {
-    backgroundColor: Colors.LIGHT_PURPLE,
+    backgroundColor: Colors.main_theme.BACKGROUND_COLOR,
     borderRadius: 12,
     width: 200,
     margin: 10,

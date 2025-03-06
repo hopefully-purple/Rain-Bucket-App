@@ -1,4 +1,3 @@
-import Button from "@/components/Button";
 import ImageViewer from "@/components/ImageViewer";
 import {
   Text,
@@ -13,6 +12,7 @@ import React, { useContext } from "react";
 import LanguageObjectContext from "@/contexts/LanguageObject";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ILanguageObject } from "@/interfaces/languageObjectInterface";
+import { IconButton } from "react-native-paper";
 
 const RainBucketImage = require("@/assets/images/ORIGpurple_rainbucket_2.jpeg");
 
@@ -53,9 +53,14 @@ export default function Index() {
   return (
     <>
       <SafeAreaView style={styles.screenContainer}>
-        {/* <Text style={styles.titleText}>Choose a language!</Text> */}
         <TouchableOpacity onPress={() => handleLanguageSelection("Spanish")}>
           <Text style={styles.languageText}>Spanish</Text>
+          {/* <IconButton
+            icon="camera"
+            iconColor={Colors.main_theme.TEXT_DARK_GRAY}
+            size={20}
+            onPress={() => console.log("Pressed")}
+          /> */}
         </TouchableOpacity>
         <TouchableOpacity onPress={() => handleLanguageSelection("Japanese")}>
           <Text style={styles.languageText}>Japanese</Text>
@@ -74,29 +79,18 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.WHITE,
   },
-  titleText: {
-    color: Colors.DD_DARK_GRAY,
-    fontSize: 25,
-    margin: 10,
-    padding: 5,
-    backgroundColor: Colors.LIGHT_PURPLE,
-  },
   languageText: {
-    color: Colors.DD_DARK_GRAY,
+    color: Colors.main_theme.TEXT_DARK_GRAY,
     fontSize: 20,
+    fontWeight: "bold",
     margin: 10,
-    // backgroundColor: Colors.LIGHT_PURPLE,
   },
   logoContainer: {
-    // margin: 100,
-  },
-  logo: {
-    height: 300,
-    marginTop: 100,
+    display: "flex",
     alignSelf: "center",
   },
   logoText: {
-    color: Colors.TEST_PURPLE,
+    color: Colors.main_theme.ACTIVE_ACCENT_COLOR,
     fontSize: 25,
     margin: 10,
     padding: 5,

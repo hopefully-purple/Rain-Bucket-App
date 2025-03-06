@@ -1,36 +1,28 @@
-import React, {useState, useContext, createContext, useEffect} from 'react';
-import {
-  Text,
-  SafeAreaView,
-  StyleSheet,
-  Alert,
-  View,
-  SectionList,
-  StatusBar,
-} from 'react-native';
-import {TextInput, Button, Searchbar} from 'react-native-paper';
-import LanguageObjectContext from '@/contexts/LanguageObject';
-import Colors from '@/assets/colors/colors';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {ScrollView} from 'react-native-gesture-handler';
-import { IWord } from '@/interfaces/languageObjectInterface';
+import React, { useState, useContext } from "react";
+import { Text, SafeAreaView, StyleSheet, Alert } from "react-native";
+import { Button } from "react-native-paper";
+import LanguageObjectContext from "@/contexts/LanguageObject";
+import Colors from "@/assets/colors/colors";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { ScrollView } from "react-native-gesture-handler";
+import { IWord } from "@/interfaces/languageObjectInterface";
 
 export default function SettingsScreen() {
-  const {languageObj, setLanguageObj} = useContext(LanguageObjectContext);
-  const [output, setOutput] = useState('');
+  const { languageObj, setLanguageObj } = useContext(LanguageObjectContext);
+  const [output, setOutput] = useState("");
 
   const clearAllData = async () => {
     let didUserConfirm = false;
-    Alert.alert('CLEAR ALL DATA', 'ARE YOU SURE?', [
+    Alert.alert("CLEAR ALL DATA", "ARE YOU SURE?", [
       {
-        text: 'Cancel',
+        text: "Cancel",
         onPress: () => (didUserConfirm = false),
-        style: 'cancel',
+        style: "cancel",
       },
       {
-        text: 'OK',
+        text: "OK",
         onPress: () => (didUserConfirm = true),
-        style: 'destructive',
+        style: "destructive",
       },
     ]);
     if (didUserConfirm) {
@@ -38,7 +30,7 @@ export default function SettingsScreen() {
         await AsyncStorage.clear();
       } catch (e) {
         // clear error
-        console.log('clear storage threw error ' + e);
+        console.log("clear storage threw error " + e);
         throw e;
       }
 
@@ -51,10 +43,10 @@ export default function SettingsScreen() {
     try {
       const result = await AsyncStorage.getItem(languageObj.language);
       let itemCount = result != null ? JSON.parse(result).length : "";
-      setOutput('ITEMCOUNT=' + itemCount + '\n' + result);
+      setOutput("ITEMCOUNT=" + itemCount + "\n" + result);
     } catch (e) {
       // clear error
-      console.log('getCurrentData storage threw error ' + e);
+      console.log("getCurrentData storage threw error " + e);
       throw e;
     }
   };
@@ -65,11 +57,11 @@ export default function SettingsScreen() {
       keys = await AsyncStorage.getAllKeys();
     } catch (e) {
       // read key error
-      console.log('getAllKeys storage threw error ' + e);
+      console.log("getAllKeys storage threw error " + e);
       throw e;
     }
 
-    setOutput(keys[0] + ', ' + keys[1]);
+    setOutput(keys[0] + ", " + keys[1]);
     // return keys;
     // console.log(JSON.stringify(keys));
     // return [];
@@ -78,7 +70,7 @@ export default function SettingsScreen() {
   };
 
   const deleteCertainData = async () => {
-    setOutput('Deleted words from context and storage that are missing an id');
+    setOutput("Deleted words from context and storage that are missing an id");
 
     // Filter condition
     function excludeItems(i: IWord) {
@@ -86,13 +78,13 @@ export default function SettingsScreen() {
     }
     const words = languageObj.words.filter(excludeItems);
     // console.log(words);
-    setLanguageObj({...languageObj, words: words});
+    setLanguageObj({ ...languageObj, words: words });
     const saveData = async () => {
       try {
         await AsyncStorage.setItem(languageObj.language, JSON.stringify(words));
         // console.log('(saveData) Data successfully saved');
       } catch (e) {
-        console.log('(saveData) Failed to save the data to the storage');
+        console.log("(saveData) Failed to save the data to the storage");
         throw e;
       }
     };
@@ -105,26 +97,30 @@ export default function SettingsScreen() {
     <SafeAreaView style={styles.screenContainer}>
       <Button
         style={styles.clearButton}
-        textColor={Colors.TEST_CREAM}
-        onPress={() => clearAllData()}>
+        textColor={Colors.main_theme.INACTIVE_ACCENT_COLOR}
+        onPress={() => clearAllData()}
+      >
         CLEAR STORAGE
       </Button>
       <Button
         style={styles.clearButton}
-        textColor={Colors.TEST_CREAM}
-        onPress={() => getAllKeys()}>
+        textColor={Colors.main_theme.INACTIVE_ACCENT_COLOR}
+        onPress={() => getAllKeys()}
+      >
         GET ALL KEYS STORAGE
       </Button>
       <Button
         style={styles.clearButton}
-        textColor={Colors.TEST_CREAM}
-        onPress={() => getCurrentLData()}>
+        textColor={Colors.main_theme.INACTIVE_ACCENT_COLOR}
+        onPress={() => getCurrentLData()}
+      >
         LIST CURRENT LANGUAGE STORAGE
       </Button>
       <Button
         style={styles.clearButton}
-        textColor={Colors.TEST_CREAM}
-        onPress={() => deleteCertainData()}>
+        textColor={Colors.main_theme.INACTIVE_ACCENT_COLOR}
+        onPress={() => deleteCertainData()}
+      >
         RUN CUSTOM DELETE METHOD
       </Button>
       <ScrollView>
@@ -132,11 +128,7 @@ export default function SettingsScreen() {
       </ScrollView>
     </SafeAreaView>
   );
-};
-
-// RegistrationScreen.defaultProps = {
-//   groupName: "My"
-// }
+}
 
 const styles = StyleSheet.create({
   screenContainer: {
@@ -147,18 +139,15 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   text: {
-    color: Colors.DD_DARK_GRAY,
+    color: Colors.main_theme.TEXT_DARK_GRAY,
     fontSize: 20,
     margin: 10,
-    // backgroundColor: Colors.LIGHT_PURPLE,
-    // padding: 1,
-    // paddingBottom: 10,
   },
   clearButton: {
     backgroundColor: Colors.LIGHT_RED,
     borderRadius: 12,
     width: 300,
-    alignSelf: 'center',
+    alignSelf: "center",
     margin: 10,
   },
 });

@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     // padding: 10,
     fontSize: 18,
     height: 44,
-    // backgroundColor: Colors.LIGHT_PURPLE,
+    // backgroundColor: Colors.main_theme.BACKGROUND_COLOR,
     color: Colors.TEST_PURPLE,
     // borderColor: Colors.BRIGHT_RED,
     // borderWidth: 1,
