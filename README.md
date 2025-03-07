@@ -26,8 +26,11 @@ The Rain Bucket App provides a way for users to make customizable lists of words
 Current Progress:
 
 ### Landing
+Latest from `change-styling` branch
 
-<img src="https://github.com/user-attachments/assets/e2e157cf-9e07-45a0-b506-4b542de05b4a" width="300">
+<img src="https://github.com/user-attachments/assets/2de7c842-92d4-4558-bbe2-22f589dbb8a3" width="300">
+<img src="https://github.com/user-attachments/assets/139fb109-b24c-4740-acee-55e3f8b8bd20" width="300">
+<img src="https://github.com/user-attachments/assets/902fdc96-2cb6-4cef-884b-1f5baf7fb849" width="300">
 
 ### Language Specific Screen
 
