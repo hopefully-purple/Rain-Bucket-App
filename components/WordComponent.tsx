@@ -1,3 +1,4 @@
+import Colors from "@/assets/colors/colors";
 import LanguageObjectContext from "@/contexts/LanguageObject";
 import SelectedItemContext from "@/contexts/SelectedItem";
 import { IWord } from "@/interfaces/languageObjectInterface";
@@ -12,7 +13,6 @@ import {
   Text,
   StyleSheet,
 } from "react-native";
-import { Colors } from "react-native/Libraries/NewAppScreen";
 
 type WordComponentProps = {
   item: IWord
@@ -57,6 +57,7 @@ export default function WordComponent({item}: WordComponentProps) {
       },
       {
         text: "Delete",
+        style: "destructive",
         onPress: () => deleteItemInWords(),
       },
       { text: "Done", onPress: () => console.log("Done Pressed") },
@@ -83,27 +84,19 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
   itemWord: {
-    // padding: 10,
     fontSize: 18,
     height: 44,
-    // backgroundColor: Colors.main_theme.BACKGROUND_COLOR,
-    color: Colors.TEST_PURPLE,
-    // borderColor: Colors.BRIGHT_RED,
-    // borderWidth: 1,
-    // flexWrap: 'wrap', //does nothing
+    color: Colors.main_theme.ACTIVE_ACCENT_COLOR,
   },
   itemDefinition: {
-    // paddingRight: 5,
-    // marginRight: 5,
     fontSize: 18,
     height: 44,
-    // overflow: 'scroll',
-    // overflow: 'hidden',
-    // flexWrap: 'nowrap', //does nothing
   },
   item: {
     flexDirection: "row",
     paddingTop: 10,
-    // marginRight: 10,
   },
+  button: {
+    color: Colors.main_theme.ACTIVE_ACCENT_COLOR,
+  }
 });
