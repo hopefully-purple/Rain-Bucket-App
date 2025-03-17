@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Text, SafeAreaView, StyleSheet, Alert } from "react-native";
+import { Text, SafeAreaView, StyleSheet, Alert, View } from "react-native";
 import { Button } from "react-native-paper";
 import LanguageObjectContext from "@/contexts/LanguageObject";
 import Colors from "@/assets/colors/colors";
@@ -95,30 +95,55 @@ export default function SettingsScreen() {
   // console.log('Settings screen');
   return (
     <SafeAreaView style={styles.screenContainer}>
+      <View>
+        <Text style={styles.text}>Azure Operations:</Text>
+        <Button
+        style={styles.clearButton}
+        mode="outlined"
+        textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
+        onPress={() => console.log("TODO - implement")}
+      >
+        Save to Azure
+      </Button>
       <Button
         style={styles.clearButton}
-        textColor={Colors.main_theme.INACTIVE_ACCENT_COLOR}
+        textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
+        mode="outlined"
+        onPress={() => console.log("TODO - implement")}
+      >
+        Pull from Azure
+      </Button>
+      </View>
+      <View>
+        <Text style={styles.text}>Async Storage Operations:</Text>
+      <Button
+        mode="outlined"
+        style={styles.clearButton}
+        textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
         onPress={() => clearAllData()}
       >
         CLEAR STORAGE
       </Button>
       <Button
         style={styles.clearButton}
-        textColor={Colors.main_theme.INACTIVE_ACCENT_COLOR}
+        mode="outlined"
+        textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
         onPress={() => getAllKeys()}
       >
         GET ALL KEYS STORAGE
       </Button>
       <Button
+        mode="outlined"
         style={styles.clearButton}
-        textColor={Colors.main_theme.INACTIVE_ACCENT_COLOR}
+        textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
         onPress={() => getCurrentLData()}
       >
         LIST CURRENT LANGUAGE STORAGE
       </Button>
       <Button
+        mode="outlined"
         style={styles.clearButton}
-        textColor={Colors.main_theme.INACTIVE_ACCENT_COLOR}
+        textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
         onPress={() => deleteCertainData()}
       >
         RUN CUSTOM DELETE METHOD
@@ -126,6 +151,7 @@ export default function SettingsScreen() {
       <ScrollView>
         <Text style={styles.text}>{output}</Text>
       </ScrollView>
+      </View>
     </SafeAreaView>
   );
 }
@@ -144,7 +170,7 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   clearButton: {
-    backgroundColor: Colors.LIGHT_RED,
+    backgroundColor: Colors.WHITE,
     borderRadius: 12,
     width: 300,
     alignSelf: "center",
