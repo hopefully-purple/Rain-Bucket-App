@@ -22,11 +22,18 @@ Later, in my college years, I started using the Notes app on my phone as my rain
 
 The Rain Bucket App provides a way for users to make customizable lists of words and phrases for the languages they are learning. Users can search for words or definitions that they save, create tags for organization, add notes to definitions for pronunciation reminders or tricks on memorizing. This elevates the Composition notebook experience by placing the rain bucket into your phone, an object everyone already has on hand. 
 
-(demo videos coming soon)
+Demo Videos:
+
+Search Feature
+
+https://github.com/user-attachments/assets/c63b5af2-6471-45bf-9e28-a6e02b18fb25
+
+Add Feature demo coming soon...
+
 Current Progress:
 
 ### Landing
-Latest from `change-styling` branch
+Latest from `main` branch
 
 <img src="https://github.com/user-attachments/assets/2de7c842-92d4-4558-bbe2-22f589dbb8a3" width="300">
 <img src="https://github.com/user-attachments/assets/139fb109-b24c-4740-acee-55e3f8b8bd20" width="300">
@@ -34,15 +41,18 @@ Latest from `change-styling` branch
 
 ### Language Specific Screen
 
-<img src="https://github.com/user-attachments/assets/e1b38f79-676e-49fc-87c6-19b7c9911a79" width="300">
+<img src="https://github.com/user-attachments/assets/c66bc1b2-953a-4037-a224-19456393e3fa" width="300">
+<img src="https://github.com/user-attachments/assets/8c99eeaf-3013-4777-a382-9562f6a96b7d" width="300">
+<img src="https://github.com/user-attachments/assets/940bbeb0-0a47-403b-8b25-ff9a23f6a102" width="300">
 
 ### Edit Word Screen
 
-<img src="https://github.com/user-attachments/assets/32535f7d-dac2-4e70-a801-3a06bfbba000" width="300">
+<img src="https://github.com/user-attachments/assets/62eda29f-3622-47b6-bf9b-86a2f11612d4" width="300">
+<img src="https://github.com/user-attachments/assets/256a6293-7b7d-464a-b935-dc85ccf86daf" width="300">
 
 ### Settings
 
-<img src="https://github.com/user-attachments/assets/3bb54c77-72e5-4e46-a49c-f5f183295e07" width="300">
+<img src="https://github.com/user-attachments/assets/00c89984-70d9-4328-a384-ab3a8f23d893" width="300">
 
 ## Usage
 
