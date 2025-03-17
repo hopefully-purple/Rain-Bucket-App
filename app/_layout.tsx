@@ -1,4 +1,5 @@
 import Colors from "@/assets/colors/colors";
+import SortButton from "@/components/SortButton";
 import LanguageObjectContext from "@/contexts/LanguageObject";
 import SelectedItemContext from "@/contexts/SelectedItem";
 import { ILanguageObject } from "@/interfaces/languageObjectInterface";
@@ -39,7 +40,7 @@ export default function RootLayout() {
                   headerTitleStyle: {
                     fontWeight: "bold",
                   },
-
+                  headerRight: () => <SortButton />,
                 }}
               />
               <Stack.Screen
