@@ -15,7 +15,6 @@ import {
   Keyboard,
   Pressable,
 } from "react-native";
-import { Colors } from "react-native/Libraries/NewAppScreen";
 import LanguageObjectContext from "@/contexts/LanguageObject";
 import SelectedItemContext from "@/contexts/SelectedItem";
 import { Button, TextInput } from "react-native-paper";
@@ -25,6 +24,7 @@ import { organizeIntoAlphabetizedSections } from "@/utilities/utility-strings";
 import { ISectionListData } from "@/interfaces/sectionListInterface";
 import { asyncStorageSaveData } from "@/utilities/utility-async-storage";
 import { updateOrAddWordInLanguageObject } from "@/utilities/utility-context";
+import Colors from "@/assets/colors/colors";
 
 export default function LanguageScreen(this: any) {
   const [word, setWord] = useState("");
@@ -132,30 +132,13 @@ export default function LanguageScreen(this: any) {
       style={styles.screenContainer}
     >
       <Pressable onPress={() => Keyboard.dismiss()}>
-        <View style={styles.screenTop}>
-          <TouchableOpacity>
-            <Text style={styles.text}>{language} Screen!</Text>
-          </TouchableOpacity>
-          <TextInput
-            label="Search"
-            mode="outlined"
-            dense={true}
-            activeOutlineColor={Colors.TEST_PURPLE}
-            value={searchQuery}
-            autoCorrect={false}
-            autoCapitalize={"sentences"}
-            onChangeText={onChangeSearch}
-            style={styles.searchBar}
-            left={<TextInput.Icon icon="magnify" color={Colors.TEST_PURPLE} />}
-          />
-        </View>
         <TextInput
           label={wordInputLabel}
           value={word}
           onChangeText={(text) => setWord(text)}
           mode="outlined"
           style={styles.input}
-          activeOutlineColor={Colors.TEST_PURPLE}
+          activeOutlineColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
           autoCorrect={false}
           autoCapitalize={"sentences"}
         />
@@ -165,7 +148,7 @@ export default function LanguageScreen(this: any) {
           onChangeText={(text) => setDefinition(text)}
           mode="outlined"
           style={styles.input}
-          activeOutlineColor={Colors.TEST_PURPLE}
+          activeOutlineColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
           autoCapitalize={"sentences"}
           autoCorrect={false}
         />
@@ -173,13 +156,15 @@ export default function LanguageScreen(this: any) {
           <Button
             mode="elevated"
             style={styles.addButton}
+            textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
             onPress={handleAddWord}
           >
-            Add!
+            Quick Add
           </Button>
           <Button
             mode="elevated"
             style={styles.detailButton}
+            textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
             onPress={() => {
               // console.log(
               // "#1(addWDetails) onPress - set selectedItem (should that happen?) and navigate to edit-word"
@@ -192,6 +177,18 @@ export default function LanguageScreen(this: any) {
             Add with details
           </Button>
         </View>
+          <TextInput
+            label="Search"
+            mode="outlined"
+            dense={true}
+            activeOutlineColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
+            value={searchQuery}
+            autoCorrect={false}
+            autoCapitalize={"sentences"}
+            onChangeText={onChangeSearch}
+            style={styles.searchBar}
+            left={<TextInput.Icon icon="magnify" color={Colors.main_theme.TEXT_DARK_GRAY} />}
+          />
       </Pressable>
       <ListOfWords sectionL={sectionList} />
     </SafeAreaView>
@@ -206,27 +203,23 @@ const styles = StyleSheet.create({
   input: {
     margin: 10,
   },
+  searchBar: {
+    margin: 10,
+  },
   text: {
-    color: Colors.DD_DARK_GRAY,
+    color: Colors.main_theme.TEXT_DARK_GRAY,
     fontSize: 20,
     margin: 10,
-    backgroundColor: Colors.LIGHT_PURPLE,
-    // padding: 1,
-    // paddingBottom: 10,
   },
   buttonLayout: {
     flexDirection: "row",
-    // alignItems: '',
-    marginLeft: 40,
   },
   addButton: {
-    backgroundColor: Colors.LIGHT_PURPLE,
     borderRadius: 12,
-    width: 100,
+    width: 150,
     margin: 10,
   },
   detailButton: {
-    backgroundColor: Colors.LIGHT_PURPLE,
     borderRadius: 12,
     width: 200,
     margin: 10,
@@ -239,12 +232,5 @@ const styles = StyleSheet.create({
   screenTop: {
     display: "flex",
     flexDirection: "row",
-  },
-  searchBar: {
-    width: 100,
-    // height: 20,
-    flexGrow: 1,
-    // flexShrink: 1,
-    marginRight: 10,
   },
 });

@@ -120,6 +120,7 @@ export default function EditWordScreen() {
           onChangeText={(text) => setWord(text)}
           autoCorrect={false}
           autoCapitalize={"none"}
+          placeholder="Word or Phrase"
         />
         <TextInput
           style={styles.prText}
@@ -139,6 +140,7 @@ export default function EditWordScreen() {
             setDefHeight(event.nativeEvent.contentSize.height);
           }}
           style={{...styles.dText}}
+          placeholder="Definition"
         />
         <Text style={styles.otherText}>Notes:</Text>
         <TextInput
@@ -148,13 +150,15 @@ export default function EditWordScreen() {
           autoCorrect={false}
           autoCapitalize={"none"}
           multiline={true}
+          placeholder="ways to remember, interesting cultural notes, etc..."
         />
         <Text style={styles.otherText}>Tags:</Text>
-        <Text style={styles.otherText}>Look up in dictionary?</Text>
-        <Button mode="elevated" style={styles.saveButton} onPress={handleSave}>
+        <Text style={{...styles.otherText, color: Colors.main_theme.ACTIVE_ACCENT_COLOR}}>Look up in dictionary?</Text>
+        <Button mode="elevated" style={styles.saveButton} textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR} onPress={handleSave}>
           Save changes
         </Button>
-      </Pressable>
+        <Text style={styles.otherText}>Related:</Text>
+        </Pressable>
     </SafeAreaView>
   );
 }
@@ -168,31 +172,31 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   wText: {
-    color: Colors.DD_DARK_GRAY,
+    color: Colors.main_theme.TEXT_DARK_GRAY,
     fontSize: 30,
     fontWeight: "bold",
     marginHorizontal: 20,
     marginTop: 20,
   },
   prText: {
-    color: Colors.DD_DARK_GRAY,
+    color: Colors.main_theme.TEXT_DARK_GRAY,
     fontSize: 15,
     fontStyle: "italic",
     margin: 20,
   },
   dText: {
-    color: Colors.DD_DARK_GRAY,
+    color: Colors.main_theme.TEXT_DARK_GRAY,
     fontSize: 20,
     marginHorizontal: 20,
   },
   otherText: {
-    color: Colors.DD_DARK_GRAY,
+    color: Colors.main_theme.TEXT_DARK_GRAY,
     fontSize: 20,
     marginHorizontal: 20,
     marginTop: 30,
   },
   saveButton: {
-    backgroundColor: Colors.LIGHT_PURPLE,
+    backgroundColor: Colors.main_theme.BACKGROUND_COLOR,
     borderRadius: 12,
     width: 190,
     alignSelf: "center",
