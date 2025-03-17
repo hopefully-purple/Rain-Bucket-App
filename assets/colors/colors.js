@@ -7,8 +7,8 @@ const Colors = {
   // DD_RED_2: '#950741',
   // DD_RED_2_LIGHT: '#B88A9D',
   // DD_RED_3: '#C3083F',
-  // DD_CREAM: '#EDF5E0',
-  // DD_CREAM_LIGHT: '#ECF7DA',
+  DD_CREAM: '#EDF5E0', // greeny cream
+  DD_CREAM_LIGHT: '#ECF7DA', // greeny cream
   // DD_LIGHT_GRAY: '#979797',
   // DD_MEDIUM_GRAY: '#4E4E50',
 
@@ -24,10 +24,10 @@ const Colors = {
   },
 
   main_theme: {
-    BACKGROUND_COLOR: "#D4BFF5",
-    ACTIVE_ACCENT_COLOR: "#790097",
-    INACTIVE_ACCENT_COLOR: "#F4F8ED",
-    TEXT_DARK_GRAY: "#1A1A1C",
+    BACKGROUND_COLOR: "#D4BFF5", // purple
+    ACTIVE_ACCENT_COLOR: "#790097", // dark puple
+    INACTIVE_ACCENT_COLOR: "#F4F8ED", // vanilla cream
+    TEXT_DARK_GRAY: "#1A1A1C", // gray
   },
 };
 

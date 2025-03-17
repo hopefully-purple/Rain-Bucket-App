@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
     paddingBottom: 2,
     fontSize: 14,
     fontWeight: "bold",
-    backgroundColor: "rgba(247,247,247,1.0)",
+    backgroundColor: Colors.main_theme.BACKGROUND_COLOR,
+    color: Colors.main_theme.ACTIVE_ACCENT_COLOR,
   },
 });
