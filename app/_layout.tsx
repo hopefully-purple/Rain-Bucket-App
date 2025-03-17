@@ -24,7 +24,7 @@ export default function RootLayout() {
         <SelectedItemContext.Provider value={{ selectedItem, setSelectedItem }}>
           <PaperProvider>
             <Stack>
-              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+              <Stack.Screen name="(tabs)" options={{ headerShown: false, title: "Home" }} />
               <Stack.Screen name="+not-found" />
             </Stack>
           </PaperProvider>
