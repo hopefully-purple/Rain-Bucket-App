@@ -120,6 +120,7 @@ export default function EditWordScreen() {
           onChangeText={(text) => setWord(text)}
           autoCorrect={false}
           autoCapitalize={"none"}
+          placeholder="Word or Phrase"
         />
         <TextInput
           style={styles.prText}
@@ -139,6 +140,7 @@ export default function EditWordScreen() {
             setDefHeight(event.nativeEvent.contentSize.height);
           }}
           style={{...styles.dText}}
+          placeholder="Definition"
         />
         <Text style={styles.otherText}>Notes:</Text>
         <TextInput
@@ -148,13 +150,15 @@ export default function EditWordScreen() {
           autoCorrect={false}
           autoCapitalize={"none"}
           multiline={true}
+          placeholder="ways to remember, interesting cultural notes, etc..."
         />
         <Text style={styles.otherText}>Tags:</Text>
-        <Text style={styles.otherText}>Look up in dictionary?</Text>
-        <Button mode="elevated" style={styles.saveButton} onPress={handleSave}>
+        <Text style={{...styles.otherText, color: Colors.main_theme.ACTIVE_ACCENT_COLOR}}>Look up in dictionary?</Text>
+        <Button mode="elevated" style={styles.saveButton} textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR} onPress={handleSave}>
           Save changes
         </Button>
-      </Pressable>
+        <Text style={styles.otherText}>Related:</Text>
+        </Pressable>
     </SafeAreaView>
   );
 }
