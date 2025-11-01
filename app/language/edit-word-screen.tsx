@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Text, TextInput, SafeAreaView, StyleSheet, Pressable, Keyboard } from "react-native";
+import { Text, TextInput, StyleSheet, Pressable, Keyboard } from "react-native";
 import { Button } from "react-native-paper";
 import LanguageObjectContext from "@/contexts/LanguageObject";
 import SelectedItemContext from "@/contexts/SelectedItem";
@@ -7,6 +7,7 @@ import Colors from "@/assets/colors/colors";
 import { router } from "expo-router";
 import { asyncStorageSaveData } from "@/utilities/utility-async-storage";
 import { updateOrAddWordInLanguageObject } from "@/utilities/utility-context";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 //Item format as it comes from Add: {id: '0 word', word: '', definition: ''}
 // TODO - rename as [word].tsx for a better route path

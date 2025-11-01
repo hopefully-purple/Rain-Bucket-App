@@ -1,7 +1,6 @@
 import Colors from "@/assets/colors/colors";
 import { IWord } from "@/interfaces/languageObjectInterface";
 import {
-  SafeAreaView,
   SectionList,
   SectionListRenderItem,
   StatusBar,
@@ -10,6 +9,7 @@ import {
 } from "react-native";
 import WordComponent from "@/components/WordComponent";
 import { ISectionListData, SectionItem } from "@/interfaces/sectionListInterface";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 type ListOfWordsProps = {
   sectionL: ISectionListData;

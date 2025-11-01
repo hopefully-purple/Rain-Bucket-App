@@ -4,7 +4,7 @@
     "slug": "RainBucketApp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/1024purple_rainbucket_2.jpeg",
+    "icon": "./assets/images/1024purple_rainbucket_2.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,

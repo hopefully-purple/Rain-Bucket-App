@@ -6,7 +6,6 @@ import React, {
   useState,
 } from "react";
 import {
-  SafeAreaView,
   View,
   TouchableOpacity,
   Text,
@@ -25,6 +24,7 @@ import { ISectionListData } from "@/interfaces/sectionListInterface";
 import { asyncStorageSaveData } from "@/utilities/utility-async-storage";
 import { updateOrAddWordInLanguageObject } from "@/utilities/utility-context";
 import Colors from "@/assets/colors/colors";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function LanguageScreen(this: any) {
   const [word, setWord] = useState("");
