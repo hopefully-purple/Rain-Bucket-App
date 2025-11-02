@@ -1,7 +1,8 @@
+import styles from "@/assets/styles/styleSheet";
 import { IWord } from "@/interfaces/languageObjectInterface";
 import * as React from "react";
-import { View } from "react-native";
-import { Modal, Portal, Text, Button, PaperProvider } from "react-native-paper";
+import { View, StyleSheet } from "react-native";
+import { Modal, Portal, Text } from "react-native-paper";
 
 type WordDetailsModalProps = {
   visible: boolean;
@@ -12,26 +13,36 @@ type WordDetailsModalProps = {
 const WordDetailsModal = (props: WordDetailsModalProps) => {
   const { visible, setVisible, item } = props;
 
-  //   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
-  const containerStyle = { backgroundColor: "white", padding: 20 };
 
   return (
-    <View>
-      <Portal>
-        <Modal
-          visible={visible}
-          onDismiss={hideModal}
-          contentContainerStyle={containerStyle}
-        >
-          <Text>{item.word}</Text>
-        </Modal>
-      </Portal>
-      {/* <Button style={{ marginTop: 30 }} onPress={showModal}>
-        Show
-      </Button> */}
-    </View>
+    // <View >
+    <Portal>
+      <Modal
+        visible={visible}
+        onDismiss={hideModal}
+        contentContainerStyle={localStyles.contentContainer}
+        style={localStyles.container}
+      >
+        <Text>{item.word}</Text>
+        <Text>{item.pronun}</Text>
+        <Text>{item.definition}</Text>
+        <Text>{item.notes}</Text>
+      </Modal>
+    </Portal>
+    // </View>
   );
 };
+
+const localStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    margin: 50,
+  },
+  contentContainer: {
+    backgroundColor: "white",
+    padding: 20,
+  },
+});
 
 export default WordDetailsModal;

@@ -44,27 +44,27 @@ export default function WordComponent({ item }: WordComponentProps) {
     saveData();
   }
 
-  const changeItemAlert = () => {
-    let body = item.definition;
-    if (item.pronun !== undefined && item.pronun !== "") {
-      body = "(" + item.pronun + ")\n" + item.definition;
-    }
-    Alert.alert(item.word, body, [
-      {
-        text: messageMap.edit,
-        onPress: () => {
-          setSelectedItem(item);
-          router.navigate("/language/edit-word-screen");
-        },
-      },
-      {
-        text: messageMap.delete,
-        style: "destructive",
-        onPress: () => deleteItemInWords(),
-      },
-      { text: messageMap.done, onPress: () => console.log("Done Pressed") },
-    ]);
-  };
+  // const changeItemAlert = () => {
+  //   let body = item.definition;
+  //   if (item.pronun !== undefined && item.pronun !== "") {
+  //     body = "(" + item.pronun + ")\n" + item.definition;
+  //   }
+  //   Alert.alert(item.word, body, [
+  //     {
+  //       text: messageMap.edit,
+  //       onPress: () => {
+  //         setSelectedItem(item);
+  //         router.navigate("/language/edit-word-screen");
+  //       },
+  //     },
+  //     {
+  //       text: messageMap.delete,
+  //       style: "destructive",
+  //       onPress: () => deleteItemInWords(),
+  //     },
+  //     { text: messageMap.done, onPress: () => console.log("Done Pressed") },
+  //   ]);
+  // };
 
   return (
     <View>
