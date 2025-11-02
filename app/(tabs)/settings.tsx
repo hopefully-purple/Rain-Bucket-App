@@ -95,7 +95,7 @@ export default function SettingsScreen() {
 
   // console.log('Settings screen');
   return (
-    <SafeAreaView style={styles.screenContainer}>
+    <SafeAreaView style={styles.screenContainer} edges={['right', 'bottom', 'left']}>
       <View>
         <Text style={styles.text}>Azure Operations:</Text>
         <Button

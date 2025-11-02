@@ -149,7 +149,7 @@ export default function LanguageScreen(this: any) {
     }, [])
   );
   return (
-    <SafeAreaView style={styles.screenContainer}>
+    <SafeAreaView style={styles.screenContainer} edges={['right', 'bottom', 'left']}>
       <Pressable onPress={() => Keyboard.dismiss()}>
         <TextInput
           label={wordInputLabel}

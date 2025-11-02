@@ -20,7 +20,7 @@ export default function ListOfWords({ sectionL }: ListOfWordsProps) {
     return <WordComponent item={item} />;
   };
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['right', 'bottom', 'left']}>
       <SectionList
         sections={sectionL}
         renderItem={renderSectionItem}
