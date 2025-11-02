@@ -25,3 +25,15 @@ export function updateOrAddWordInLanguageObject(
 
   return langaugeObject;
 }
+
+export function checkForDuplicates(
+  languageObject: ILanguageObject,
+  newWord: IWord
+): boolean {
+  const result = languageObject.words.find(
+    (i: IWord) =>
+      i.word.toLocaleLowerCase() === newWord.word.toLocaleLowerCase()
+  );
+
+  return result !== undefined;
+}

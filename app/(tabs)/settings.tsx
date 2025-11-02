@@ -1,11 +1,12 @@
 import React, { useState, useContext } from "react";
-import { Text, SafeAreaView, StyleSheet, Alert, View } from "react-native";
+import { Text, StyleSheet, Alert, View } from "react-native";
 import { Button } from "react-native-paper";
 import LanguageObjectContext from "@/contexts/LanguageObject";
 import Colors from "@/assets/colors/colors";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ScrollView } from "react-native-gesture-handler";
 import { IWord } from "@/interfaces/languageObjectInterface";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function SettingsScreen() {
   const { languageObj, setLanguageObj } = useContext(LanguageObjectContext);

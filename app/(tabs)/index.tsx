@@ -3,7 +3,6 @@ import {
   Text,
   View,
   StyleSheet,
-  SafeAreaView,
   TouchableOpacity,
 } from "react-native";
 import Colors from "@/assets/colors/colors";
@@ -13,6 +12,7 @@ import LanguageObjectContext from "@/contexts/LanguageObject";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ILanguageObject } from "@/interfaces/languageObjectInterface";
 import { Icon, IconButton } from "react-native-paper";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const RainBucketImage = require("@/assets/images/ORIGpurple_rainbucket_2.jpeg");
 
