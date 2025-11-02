@@ -4,22 +4,19 @@ import SelectedItemContext from "@/contexts/SelectedItem";
 import { IWord } from "@/interfaces/languageObjectInterface";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
-import { useContext } from "react";
-import {
-  Alert,
-  View,
-  TouchableOpacity,
-  Text,
-  StyleSheet,
-} from "react-native";
+import { useContext, useState } from "react";
+import { Alert, View, TouchableOpacity, Text, StyleSheet } from "react-native";
+import WordDetailsModal from "./WordDetailsModal";
 
 type WordComponentProps = {
-  item: IWord
+  item: IWord;
 };
 
-export default function WordComponent({item}: WordComponentProps) {
+export default function WordComponent({ item }: WordComponentProps) {
   const { languageObj, setLanguageObj } = useContext(LanguageObjectContext);
   const { selectedItem, setSelectedItem } = useContext(SelectedItemContext);
+
+  const [visible, setVisible] = useState(false);
 
   const messageMap = {
     delete: "Delete",
@@ -73,11 +70,12 @@ export default function WordComponent({item}: WordComponentProps) {
     <View>
       <TouchableOpacity
         style={localStyles.item}
-        onLongPress={() => changeItemAlert()}
+        onLongPress={() => setVisible(true)}
       >
         <Text style={localStyles.itemWord}>{item.word}</Text>
         <Text style={localStyles.itemDefinition}> - {item.definition}</Text>
       </TouchableOpacity>
+      <WordDetailsModal visible={visible} setVisible={setVisible} item={item} />
     </View>
   );
 }
