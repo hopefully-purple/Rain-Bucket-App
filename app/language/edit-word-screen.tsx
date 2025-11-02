@@ -74,7 +74,6 @@ export default function EditWordScreen() {
       changesMade = true;
       // console.log("newI:" + JSON.stringify(newI, undefined, 2));
     }
-    //TODO: Implement checking Notes!!
     if (notes !== selectedItem.notes) {
       // console.log(" Notes check: " + notes + " !== " + selectedItem.notes);
       newI = {
