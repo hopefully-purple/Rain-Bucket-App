@@ -24,6 +24,7 @@ import {
 } from "@/utilities/utility-context";
 import Colors from "@/assets/colors/colors";
 import { SafeAreaView } from "react-native-safe-area-context";
+import styles from "@/assets/styles/styleSheet";
 
 export default function LanguageScreen(this: any) {
   const [word, setWord] = useState("");
@@ -157,7 +158,7 @@ export default function LanguageScreen(this: any) {
           value={word}
           onChangeText={(text) => setWord(text)}
           mode="outlined"
-          style={styles.input}
+          style={localStyles.input}
           activeOutlineColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
           autoCorrect={false}
           autoCapitalize={"sentences"}
@@ -167,15 +168,15 @@ export default function LanguageScreen(this: any) {
           value={definition}
           onChangeText={(text) => setDefinition(text)}
           mode="outlined"
-          style={styles.input}
+          style={localStyles.input}
           activeOutlineColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
           autoCapitalize={"sentences"}
           autoCorrect={false}
         />
-        <View style={styles.buttonLayout}>
+        <View style={localStyles.buttonLayout}>
           <Button
             mode="elevated"
-            style={styles.addButton}
+            style={localStyles.addButton}
             textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
             onPress={handleAddWord}
           >
@@ -183,7 +184,7 @@ export default function LanguageScreen(this: any) {
           </Button>
           <Button
             mode="elevated"
-            style={styles.detailButton}
+            style={localStyles.detailButton}
             textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
             onPress={() => {
               // console.log(
@@ -216,7 +217,7 @@ export default function LanguageScreen(this: any) {
           autoCorrect={false}
           autoCapitalize={"sentences"}
           onChangeText={onChangeSearch}
-          style={styles.searchBar}
+          style={localStyles.searchBar}
           left={
             <TextInput.Icon
               icon="magnify"
@@ -230,11 +231,7 @@ export default function LanguageScreen(this: any) {
   );
 }
 
-const styles = StyleSheet.create({
-  screenContainer: {
-    flex: 1,
-    backgroundColor: Colors.WHITE,
-  },
+const localStyles = StyleSheet.create({
   input: {
     margin: 10,
   },

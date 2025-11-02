@@ -13,6 +13,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ILanguageObject } from "@/interfaces/languageObjectInterface";
 import { Icon, IconButton } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
+import styles from "@/assets/styles/styleSheet";
 
 const RainBucketImage = require("@/assets/images/ORIGpurple_rainbucket_2.jpeg");
 
@@ -54,8 +55,8 @@ export default function Index() {
     <>
       <SafeAreaView style={styles.screenContainer} edges={['right', 'bottom', 'left']}>
         <TouchableOpacity onPress={() => handleLanguageSelection("Spanish")}>
-          <View style={styles.languageRow}>
-            <Text style={styles.languageText}>Spanish</Text>
+          <View style={localStyle.languageRow}>
+            <Text style={localStyle.languageText}>Spanish</Text>
             <Icon
               source="chevron-right"
               color={Colors.main_theme.TEXT_DARK_GRAY}
@@ -64,8 +65,8 @@ export default function Index() {
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => handleLanguageSelection("Japanese")}>
-          <View style={styles.languageRow}>
-            <Text style={styles.languageText}>Japanese</Text>
+          <View style={localStyle.languageRow}>
+            <Text style={localStyle.languageText}>Japanese</Text>
             <Icon
               source="chevron-right"
               color={Colors.main_theme.TEXT_DARK_GRAY}
@@ -73,20 +74,16 @@ export default function Index() {
             />
           </View>
         </TouchableOpacity>
-        <View style={styles.logoContainer}>
+        <View style={localStyle.logoContainer}>
           <ImageViewer imgSource={RainBucketImage} />
-          <Text style={styles.logoText}>Rainbucket App</Text>
+          <Text style={localStyle.logoText}>Rainbucket App</Text>
         </View>
       </SafeAreaView>
     </>
   );
 }
 
-const styles = StyleSheet.create({
-  screenContainer: {
-    flex: 1,
-    backgroundColor: Colors.WHITE,
-  },
+const localStyle = StyleSheet.create({
   languageText: {
     color: Colors.main_theme.TEXT_DARK_GRAY,
     fontSize: 20,

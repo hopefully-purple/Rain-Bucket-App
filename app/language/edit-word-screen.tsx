@@ -8,6 +8,7 @@ import { router } from "expo-router";
 import { asyncStorageSaveData } from "@/utilities/utility-async-storage";
 import { updateOrAddWordInLanguageObject } from "@/utilities/utility-context";
 import { SafeAreaView } from "react-native-safe-area-context";
+import styles from "@/assets/styles/styleSheet";
 
 //Item format as it comes from Add: {id: '0 word', word: '', definition: ''}
 // TODO - rename as [word].tsx for a better route path
@@ -123,7 +124,7 @@ export default function EditWordScreen() {
     <SafeAreaView style={styles.screenContainer} edges={['right', 'bottom', 'left']}>
       <Pressable onPress={() => Keyboard.dismiss()}>
         <TextInput
-          style={styles.wText}
+          style={localStyles.wText}
           value={word}
           onChangeText={(text) => setWord(text)}
           autoCorrect={false}
@@ -131,7 +132,7 @@ export default function EditWordScreen() {
           placeholder="Word or Phrase"
         />
         <TextInput
-          style={styles.prText}
+          style={localStyles.prText}
           placeholder="add pronunciation"
           value={pronunciation}
           onChangeText={(text) => setPron(text)}
@@ -147,12 +148,12 @@ export default function EditWordScreen() {
           onContentSizeChange={(event) => {
             setDefHeight(event.nativeEvent.contentSize.height);
           }}
-          style={{...styles.dText}}
+          style={{...localStyles.dText}}
           placeholder="Definition"
         />
-        <Text style={styles.otherText}>Notes:</Text>
+        <Text style={localStyles.otherText}>Notes:</Text>
         <TextInput
-          style={styles.otherText}
+          style={localStyles.otherText}
           value={notes}
           onChangeText={(text) => setNotes(text)}
           autoCorrect={false}
@@ -160,22 +161,18 @@ export default function EditWordScreen() {
           multiline={true}
           placeholder="ways to remember, interesting cultural notes, etc..."
         />
-        <Text style={styles.otherText}>Tags:</Text>
-        <Text style={{...styles.otherText, color: Colors.main_theme.ACTIVE_ACCENT_COLOR}}>Look up in dictionary?</Text>
-        <Button mode="elevated" style={styles.saveButton} textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR} onPress={handleSave}>
+        <Text style={localStyles.otherText}>Tags:</Text>
+        <Text style={{...localStyles.otherText, color: Colors.main_theme.ACTIVE_ACCENT_COLOR}}>Look up in dictionary?</Text>
+        <Button mode="elevated" style={localStyles.saveButton} textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR} onPress={handleSave}>
           Save changes
         </Button>
-        <Text style={styles.otherText}>Related:</Text>
+        <Text style={localStyles.otherText}>Related:</Text>
         </Pressable>
     </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
-  screenContainer: {
-    flex: 1,
-    backgroundColor: Colors.WHITE,
-  },
+const localStyles = StyleSheet.create({
   input: {
     margin: 10,
   },
