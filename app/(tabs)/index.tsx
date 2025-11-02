@@ -1,10 +1,5 @@
 import ImageViewer from "@/components/ImageViewer";
-import {
-  Text,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import Colors from "@/assets/colors/colors";
 import { router } from "expo-router";
 import React, { useContext } from "react";
@@ -53,7 +48,10 @@ export default function Index() {
   };
   return (
     <>
-      <SafeAreaView style={styles.screenContainer} edges={['right', 'bottom', 'left']}>
+      <SafeAreaView
+        style={styles.screenContainer}
+        edges={["right", "bottom", "left"]}
+      >
         <TouchableOpacity onPress={() => handleLanguageSelection("Spanish")}>
           <View style={localStyle.languageRow}>
             <Text style={localStyle.languageText}>Spanish</Text>
@@ -85,9 +83,8 @@ export default function Index() {
 
 const localStyle = StyleSheet.create({
   languageText: {
-    color: Colors.main_theme.TEXT_DARK_GRAY,
+    ...styles.boldText,
     fontSize: 20,
-    fontWeight: "bold",
   },
   languageRow: {
     margin: 10,

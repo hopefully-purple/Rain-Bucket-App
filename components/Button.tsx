@@ -64,8 +64,6 @@ const localStyles = StyleSheet.create({
     height: "100%",
     alignItems: "center",
     ...styles.flexRowJustifyCenter,
-    // justifyContent: "center",
-    // flexDirection: "row",
   },
   buttonLabel: {
     color: "#fff",

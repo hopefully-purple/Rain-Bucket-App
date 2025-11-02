@@ -96,63 +96,66 @@ export default function SettingsScreen() {
 
   // console.log('Settings screen');
   return (
-    <SafeAreaView style={styles.screenContainer} edges={['right', 'bottom', 'left']}>
+    <SafeAreaView
+      style={styles.screenContainer}
+      edges={["right", "bottom", "left"]}
+    >
       <View>
         <Text style={localStyles.text}>Azure Operations:</Text>
         <Button
-        style={localStyles.clearButton}
-        mode="outlined"
-        textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
-        onPress={() => console.log("TODO - implement")}
-      >
-        Save to Azure
-      </Button>
-      <Button
-        style={localStyles.clearButton}
-        textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
-        mode="outlined"
-        onPress={() => console.log("TODO - implement")}
-      >
-        Pull from Azure
-      </Button>
+          style={localStyles.button}
+          mode="outlined"
+          textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
+          onPress={() => console.log("TODO - implement")}
+        >
+          Save to Azure
+        </Button>
+        <Button
+          style={localStyles.button}
+          textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
+          mode="outlined"
+          onPress={() => console.log("TODO - implement")}
+        >
+          Pull from Azure
+        </Button>
       </View>
       <View>
         <Text style={localStyles.text}>Async Storage Operations:</Text>
-      <Button
-        mode="outlined"
-        style={localStyles.clearButton}
-        textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
-        onPress={() => clearAllData()}
-      >
-        CLEAR STORAGE
-      </Button>
-      <Button
-        style={localStyles.clearButton}
-        mode="outlined"
-        textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
-        onPress={() => getAllKeys()}
-      >
-        GET ALL KEYS STORAGE
-      </Button>
-      <Button
-        mode="outlined"
-        style={localStyles.clearButton}
-        textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
-        onPress={() => getCurrentLData()}
-      >
-        LIST CURRENT LANGUAGE STORAGE
-      </Button>
-      <Button
-        mode="outlined"
-        style={localStyles.clearButton}
-        textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
-        onPress={() => deleteCertainData()}
-      >
-        RUN CUSTOM DELETE METHOD
-      </Button>
-      <ScrollView>
-        <Text style={localStyles.text}>{output}</Text>
-      </ScrollView>
+        <Button
+          mode="outlined"
+          style={localStyles.button}
+          textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
+          onPress={() => clearAllData()}
+        >
+          CLEAR STORAGE
+        </Button>
+        <Button
+          style={localStyles.button}
+          mode="outlined"
+          textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
+          onPress={() => getAllKeys()}
+        >
+          GET ALL KEYS STORAGE
+        </Button>
+        <Button
+          mode="outlined"
+          style={localStyles.button}
+          textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
+          onPress={() => getCurrentLData()}
+        >
+          LIST CURRENT LANGUAGE STORAGE
+        </Button>
+        <Button
+          mode="outlined"
+          style={localStyles.button}
+          textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
+          onPress={() => deleteCertainData()}
+        >
+          RUN CUSTOM DELETE METHOD
+        </Button>
+        <ScrollView>
+          <Text style={localStyles.text}>{output}</Text>
+        </ScrollView>
       </View>
     </SafeAreaView>
   );
@@ -160,11 +163,10 @@ export default function SettingsScreen() {
 
 const localStyles = StyleSheet.create({
   text: {
-    color: Colors.main_theme.TEXT_DARK_GRAY,
-    fontSize: 20,
+    ...styles.regularText,
     margin: 10,
   },
-  clearButton: {
+  button: {
     ...styles.buttonRadius12M10,
     backgroundColor: Colors.WHITE,
     width: 300,

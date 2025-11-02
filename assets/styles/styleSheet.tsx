@@ -1,5 +1,7 @@
 import Colors from "@/assets/colors/colors";
-import { StatusBar, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
+
+export const STANDARD_BUTTON_RADIUS = 12;
 
 const styles = StyleSheet.create({
   screenContainer: {
@@ -11,8 +13,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   buttonRadius12M10: {
-    borderRadius: 12,
+    borderRadius: STANDARD_BUTTON_RADIUS,
     margin: 10,
+  },
+  regularText: {
+    color: Colors.main_theme.TEXT_DARK_GRAY,
+    fontSize: 20,
+  },
+  boldText: {
+    color: Colors.main_theme.TEXT_DARK_GRAY,
+    fontWeight: "bold",
   },
 });
 

@@ -9,7 +9,6 @@ import {
   Alert,
   View,
   TouchableOpacity,
-  StatusBar,
   Text,
   StyleSheet,
 } from "react-native";
@@ -21,6 +20,12 @@ type WordComponentProps = {
 export default function WordComponent({item}: WordComponentProps) {
   const { languageObj, setLanguageObj } = useContext(LanguageObjectContext);
   const { selectedItem, setSelectedItem } = useContext(SelectedItemContext);
+
+  const messageMap = {
+    delete: "Delete",
+    done: "Done",
+    edit: "Edit",
+  };
 
   function deleteItemInWords() {
     // Filter condition
@@ -49,18 +54,18 @@ export default function WordComponent({item}: WordComponentProps) {
     }
     Alert.alert(item.word, body, [
       {
-        text: "Edit",
+        text: messageMap.edit,
         onPress: () => {
           setSelectedItem(item);
           router.navigate("/language/edit-word-screen");
         },
       },
       {
-        text: "Delete",
+        text: messageMap.delete,
         style: "destructive",
         onPress: () => deleteItemInWords(),
       },
-      { text: "Done", onPress: () => console.log("Done Pressed") },
+      { text: messageMap.done, onPress: () => console.log("Done Pressed") },
     ]);
   };
 

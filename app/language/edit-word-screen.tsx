@@ -8,7 +8,7 @@ import { router } from "expo-router";
 import { asyncStorageSaveData } from "@/utilities/utility-async-storage";
 import { updateOrAddWordInLanguageObject } from "@/utilities/utility-context";
 import { SafeAreaView } from "react-native-safe-area-context";
-import styles from "@/assets/styles/styleSheet";
+import styles, { STANDARD_BUTTON_RADIUS } from "@/assets/styles/styleSheet";
 
 //Item format as it comes from Add: {id: '0 word', word: '', definition: ''}
 // TODO - rename as [word].tsx for a better route path
@@ -23,6 +23,18 @@ export default function EditWordScreen() {
   const [notes, setNotes] = useState(selectedItem.notes);
 
   const [defHeight, setDefHeight] = useState(0);
+
+  const messageMap = {
+  addPronounciation: "add pronunciation",
+  definition: "Definition",
+  lookUp: "Look up in dictionary?",
+  notes: "Notes:",
+  related: "Related:",
+  saveChanges: "Save changes",
+  tags: "Tags:",
+  waysToRemember: "ways to remember, interesting cultural notes, etc...",
+  wordOrPhrase: "Word or Phrase",
+};
 
   const handleSave = async () => {
     // console.log("#2(handlesave)New stuff:");
@@ -121,7 +133,10 @@ export default function EditWordScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.screenContainer} edges={['right', 'bottom', 'left']}>
+    <SafeAreaView
+      style={styles.screenContainer}
+      edges={["right", "bottom", "left"]}
+    >
       <Pressable onPress={() => Keyboard.dismiss()}>
         <TextInput
           style={localStyles.wText}
@@ -129,11 +144,11 @@ export default function EditWordScreen() {
           onChangeText={(text) => setWord(text)}
           autoCorrect={false}
           autoCapitalize={"none"}
-          placeholder="Word or Phrase"
+          placeholder={messageMap.wordOrPhrase}
         />
         <TextInput
           style={localStyles.prText}
-          placeholder="add pronunciation"
+          placeholder={messageMap.addPronounciation}
           value={pronunciation}
           onChangeText={(text) => setPron(text)}
           autoCorrect={false}
@@ -148,10 +163,10 @@ export default function EditWordScreen() {
           onContentSizeChange={(event) => {
             setDefHeight(event.nativeEvent.contentSize.height);
           }}
-          style={{...localStyles.dText}}
-          placeholder="Definition"
+          style={{ ...localStyles.dText }}
+          placeholder={messageMap.definition}
         />
-        <Text style={localStyles.otherText}>Notes:</Text>
+        <Text style={localStyles.otherText}>{messageMap.notes}</Text>
         <TextInput
           style={localStyles.otherText}
           value={notes}
@@ -159,24 +174,35 @@ export default function EditWordScreen() {
           autoCorrect={false}
           autoCapitalize={"none"}
           multiline={true}
-          placeholder="ways to remember, interesting cultural notes, etc..."
+          placeholder={messageMap.waysToRemember}
         />
-        <Text style={localStyles.otherText}>Tags:</Text>
-        <Text style={{...localStyles.otherText, color: Colors.main_theme.ACTIVE_ACCENT_COLOR}}>Look up in dictionary?</Text>
-        <Button mode="elevated" style={localStyles.saveButton} textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR} onPress={handleSave}>
-          Save changes
+        <Text style={localStyles.otherText}>{messageMap.tags}</Text>
+        <Text
+          style={{
+            ...localStyles.otherText,
+            color: Colors.main_theme.ACTIVE_ACCENT_COLOR,
+          }}
+        >
+          {messageMap.lookUp}
+        </Text>
+        <Button
+          mode="elevated"
+          style={localStyles.saveButton}
+          textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
+          onPress={handleSave}
+        >
+          {messageMap.saveChanges}
         </Button>
-        <Text style={localStyles.otherText}>Related:</Text>
-        </Pressable>
+        <Text style={localStyles.otherText}>{messageMap.related}</Text>
+      </Pressable>
     </SafeAreaView>
   );
 }
 
 const localStyles = StyleSheet.create({
   wText: {
-    color: Colors.main_theme.TEXT_DARK_GRAY,
+    ...styles.boldText,
     fontSize: 30,
-    fontWeight: "bold",
     marginHorizontal: 20,
     marginTop: 20,
   },
@@ -187,19 +213,17 @@ const localStyles = StyleSheet.create({
     margin: 20,
   },
   dText: {
-    color: Colors.main_theme.TEXT_DARK_GRAY,
-    fontSize: 20,
+    ...styles.regularText,
     marginHorizontal: 20,
   },
   otherText: {
-    color: Colors.main_theme.TEXT_DARK_GRAY,
-    fontSize: 20,
+    ...styles.regularText,
     marginHorizontal: 20,
     marginTop: 30,
   },
   saveButton: {
     backgroundColor: Colors.main_theme.BACKGROUND_COLOR,
-    borderRadius: 12,
+    borderRadius: STANDARD_BUTTON_RADIUS,
     width: 190,
     alignSelf: "center",
     margin: 20,

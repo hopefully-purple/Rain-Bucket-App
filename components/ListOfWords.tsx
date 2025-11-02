@@ -1,5 +1,4 @@
 import Colors from "@/assets/colors/colors";
-import { IWord } from "@/interfaces/languageObjectInterface";
 import {
   SectionList,
   SectionListRenderItem,
