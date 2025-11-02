@@ -1,10 +1,5 @@
 import { router, useFocusEffect, useLocalSearchParams } from "expo-router";
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import {
   View,
   TouchableOpacity,
@@ -13,6 +8,7 @@ import {
   StyleSheet,
   Keyboard,
   Pressable,
+  Alert,
 } from "react-native";
 import LanguageObjectContext from "@/contexts/LanguageObject";
 import SelectedItemContext from "@/contexts/SelectedItem";
@@ -22,7 +18,10 @@ import ListOfWords from "@/components/ListOfWords";
 import { organizeIntoAlphabetizedSections } from "@/utilities/utility-strings";
 import { ISectionListData } from "@/interfaces/sectionListInterface";
 import { asyncStorageSaveData } from "@/utilities/utility-async-storage";
-import { updateOrAddWordInLanguageObject } from "@/utilities/utility-context";
+import {
+  checkForDuplicates,
+  updateOrAddWordInLanguageObject,
+} from "@/utilities/utility-context";
 import Colors from "@/assets/colors/colors";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -34,6 +33,22 @@ export default function LanguageScreen(this: any) {
   const { selectedItem, setSelectedItem } = useContext(SelectedItemContext);
 
   const { language } = useLocalSearchParams();
+
+  const duplicateAlert = () => {
+    //Clear inputs
+    setWord("");
+    setDefinition("");
+    Keyboard.dismiss();
+
+    Alert.alert("Word already exists", "", [
+      {
+        text: "Done",
+        onPress: () => {
+          console.log("Done Pressed");
+        },
+      },
+    ]);
+  };
 
   const handleAddWord = async () => {
     if (word !== "" && definition !== "") {
@@ -49,6 +64,12 @@ export default function LanguageScreen(this: any) {
         definition,
       };
       // console.log("(handleAddWord) newWordItem.id=" + newWordItem.id);
+
+      const isDuplicate = checkForDuplicates(languageObj, newWordItem);
+      if (isDuplicate) {
+        duplicateAlert();
+        return;
+      }
 
       // console.log("(handleAddWord) call updateOrAddWordInLanguageObject");
       const newLanguageObject = updateOrAddWordInLanguageObject(
@@ -128,9 +149,7 @@ export default function LanguageScreen(this: any) {
     }, [])
   );
   return (
-    <SafeAreaView
-      style={styles.screenContainer}
-    >
+    <SafeAreaView style={styles.screenContainer}>
       <Pressable onPress={() => Keyboard.dismiss()}>
         <TextInput
           label={wordInputLabel}
@@ -177,18 +196,23 @@ export default function LanguageScreen(this: any) {
             Add with details
           </Button>
         </View>
-          <TextInput
-            label="Search"
-            mode="outlined"
-            dense={true}
-            activeOutlineColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
-            value={searchQuery}
-            autoCorrect={false}
-            autoCapitalize={"sentences"}
-            onChangeText={onChangeSearch}
-            style={styles.searchBar}
-            left={<TextInput.Icon icon="magnify" color={Colors.main_theme.TEXT_DARK_GRAY} />}
-          />
+        <TextInput
+          label="Search"
+          mode="outlined"
+          dense={true}
+          activeOutlineColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
+          value={searchQuery}
+          autoCorrect={false}
+          autoCapitalize={"sentences"}
+          onChangeText={onChangeSearch}
+          style={styles.searchBar}
+          left={
+            <TextInput.Icon
+              icon="magnify"
+              color={Colors.main_theme.TEXT_DARK_GRAY}
+            />
+          }
+        />
       </Pressable>
       <ListOfWords sectionL={sectionList} />
     </SafeAreaView>
