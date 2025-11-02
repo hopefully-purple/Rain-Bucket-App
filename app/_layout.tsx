@@ -14,7 +14,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 const beginningObject: ILanguageObject = {
   // TODO - this is weird, please make it right.
   language: "",
-  words: [{ id: "0", word: "", pronun: "", definition: "" }],
+  words: [{ id: "0", word: "", pronun: "", definition: "", notes: "" }],
 };
 // TODO - Improve how async storage and context is being used. Storing this empty object kinda makes no sense
 const beginningSelected: IWord = {
@@ -22,6 +22,7 @@ const beginningSelected: IWord = {
   word: "",
   pronun: "",
   definition: "",
+  notes: "",
 };
 
 export default function RootLayout() {

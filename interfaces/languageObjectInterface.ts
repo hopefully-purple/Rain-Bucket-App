@@ -8,4 +8,5 @@ export interface IWord {
   word: string;
   definition: string;
   pronun?: string;
+  notes?: string;
 }

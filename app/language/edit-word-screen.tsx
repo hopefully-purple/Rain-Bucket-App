@@ -19,7 +19,7 @@ export default function EditWordScreen() {
   const [word, setWord] = useState(selectedItem.word);
   const [pronunciation, setPron] = useState(selectedItem.pronun);
   const [definition, setDefinition] = useState(selectedItem.definition);
-  const [notes, setNotes] = useState("");
+  const [notes, setNotes] = useState(selectedItem.notes);
 
   const [defHeight, setDefHeight] = useState(0);
 
@@ -75,6 +75,14 @@ export default function EditWordScreen() {
       // console.log("newI:" + JSON.stringify(newI, undefined, 2));
     }
     //TODO: Implement checking Notes!!
+    if (notes !== selectedItem.notes) {
+      // console.log(" Notes check: " + notes + " !== " + selectedItem.notes);
+      newI = {
+        ...newI,
+        notes: notes,
+      };
+      changesMade = true;
+    }
     //TODO: Implement checking Tags! Is tags even a thing yet?
 
     //Get selectedItem from langaugeObj and replace with new selected item
