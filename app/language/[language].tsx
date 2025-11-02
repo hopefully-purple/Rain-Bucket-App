@@ -5,7 +5,7 @@ import LanguageObjectContext from "@/contexts/LanguageObject";
 import SelectedItemContext from "@/contexts/SelectedItem";
 import { Button, TextInput } from "react-native-paper";
 import { IWord } from "@/interfaces/languageObjectInterface";
-import ListOfWords from "@/components/ListOfWords";
+import ListOfWords from "@/components/WordComponents/ListOfWords";
 import { organizeIntoAlphabetizedSections } from "@/utilities/utility-strings";
 import { ISectionListData } from "@/interfaces/sectionListInterface";
 import { asyncStorageSaveData } from "@/utilities/utility-async-storage";

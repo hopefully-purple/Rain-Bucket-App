@@ -6,7 +6,7 @@ import {
   StyleSheet,
   Text,
 } from "react-native";
-import WordComponent from "@/components/WordComponent";
+import WordComponent from "@/components/WordComponents/WordComponent";
 import { ISectionListData, SectionItem } from "@/interfaces/sectionListInterface";
 import { SafeAreaView } from "react-native-safe-area-context";
 
