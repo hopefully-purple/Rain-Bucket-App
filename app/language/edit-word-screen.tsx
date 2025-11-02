@@ -113,7 +113,7 @@ export default function EditWordScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.screenContainer}>
+    <SafeAreaView style={styles.screenContainer} edges={['right', 'bottom', 'left']}>
       <Pressable onPress={() => Keyboard.dismiss()}>
         <TextInput
           style={styles.wText}
