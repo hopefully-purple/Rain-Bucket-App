@@ -188,6 +188,16 @@ export default function LanguageScreen(this: any) {
               // console.log(
               // "#1(addWDetails) onPress - set selectedItem (should that happen?) and navigate to edit-word"
               // );
+              const isDuplicate = checkForDuplicates(languageObj, {
+                id: "",
+                word,
+                definition,
+              });
+              if (isDuplicate) {
+                duplicateAlert();
+                return;
+              }
+
               setSelectedItem({ word, definition });
               Keyboard.dismiss();
               router.navigate("/language/edit-word-screen");
