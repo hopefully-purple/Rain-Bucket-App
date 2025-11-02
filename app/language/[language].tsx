@@ -62,6 +62,7 @@ export default function LanguageScreen(this: any) {
         word,
         pronun: "",
         definition,
+        notes: "",
       };
       // console.log("(handleAddWord) newWordItem.id=" + newWordItem.id);
 
