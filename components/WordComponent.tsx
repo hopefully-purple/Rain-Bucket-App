@@ -67,22 +67,17 @@ export default function WordComponent({item}: WordComponentProps) {
   return (
     <View>
       <TouchableOpacity
-        style={styles.item}
+        style={localStyles.item}
         onLongPress={() => changeItemAlert()}
       >
-        <Text style={styles.itemWord}>{item.word}</Text>
-        <Text style={styles.itemDefinition}> - {item.definition}</Text>
+        <Text style={localStyles.itemWord}>{item.word}</Text>
+        <Text style={localStyles.itemDefinition}> - {item.definition}</Text>
       </TouchableOpacity>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: StatusBar.currentHeight,
-    marginHorizontal: 16,
-  },
+const localStyles = StyleSheet.create({
   itemWord: {
     fontSize: 18,
     height: 44,
@@ -96,7 +91,4 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingTop: 10,
   },
-  button: {
-    color: Colors.main_theme.ACTIVE_ACCENT_COLOR,
-  }
 });

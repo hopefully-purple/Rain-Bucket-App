@@ -1,4 +1,5 @@
 import Colors from "@/assets/colors/colors";
+import styles from "@/assets/styles/styleSheet";
 import * as React from "react";
 import { View } from "react-native";
 import {
@@ -28,10 +29,7 @@ const PaperMenu = () => {
 
   return (
     <View
-      style={{
-        flexDirection: "row",
-        justifyContent: "center",
-      }}
+      style={styles.flexRowJustifyCenter}
     >
       <Menu
         visible={menuVisible}

@@ -6,10 +6,10 @@ type Props = {
 };
 
 export default function ImageViewer({ imgSource }: Props) {
-  return <Image source={imgSource} style={styles.image} />;
+  return <Image source={imgSource} style={localStyles.image} />;
 }
 
-const styles = StyleSheet.create({
+const localStyles = StyleSheet.create({
   image: {
     width: 320,
     height: 440,

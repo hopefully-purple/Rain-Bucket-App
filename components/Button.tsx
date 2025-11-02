@@ -1,5 +1,6 @@
 import { StyleSheet, View, Pressable, Text } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import styles from "@/assets/styles/styleSheet";
 
 type Props = {
   label: string;
@@ -7,26 +8,28 @@ type Props = {
   theme?: "primary";
 };
 
+// TODO - is this still useful? Currently not used anywhere as of 11/2/25
+
 export default function Button({ label, onPress, theme }: Props) {
   if (theme === "primary") {
     return (
       <View
         style={[
-          styles.buttonContainer,
+          localStyles.buttonContainer,
           { borderWidth: 4, borderColor: "#ffd33d", borderRadius: 18 },
         ]}
       >
         <Pressable
-          style={[styles.button, { backgroundColor: "#fff" }]}
+          style={[localStyles.button, { backgroundColor: "#fff" }]}
           onPress={onPress}
         >
           <FontAwesome
             name="picture-o"
             size={18}
             color="#25292e"
-            style={styles.buttonIcon}
+            style={localStyles.buttonIcon}
           />
-          <Text style={[styles.buttonLabel, { color: "#25292e" }]}>
+          <Text style={[localStyles.buttonLabel, { color: "#25292e" }]}>
             {label}
           </Text>
         </Pressable>
@@ -35,18 +38,18 @@ export default function Button({ label, onPress, theme }: Props) {
   }
 
   return (
-    <View style={styles.buttonContainer}>
+    <View style={localStyles.buttonContainer}>
       <Pressable
-        style={styles.button}
+        style={localStyles.button}
         onPress={onPress}
       >
-        <Text style={styles.buttonLabel}>{label}</Text>
+        <Text style={localStyles.buttonLabel}>{label}</Text>
       </Pressable>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
+const localStyles = StyleSheet.create({
   buttonContainer: {
     width: 320,
     height: 68,
@@ -60,8 +63,9 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "row",
+    ...styles.flexRowJustifyCenter,
+    // justifyContent: "center",
+    // flexDirection: "row",
   },
   buttonLabel: {
     color: "#fff",

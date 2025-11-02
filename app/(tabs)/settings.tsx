@@ -159,9 +159,6 @@ export default function SettingsScreen() {
 }
 
 const localStyles = StyleSheet.create({
-  input: {
-    margin: 10,
-  },
   text: {
     color: Colors.main_theme.TEXT_DARK_GRAY,
     fontSize: 20,

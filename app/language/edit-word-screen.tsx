@@ -173,9 +173,6 @@ export default function EditWordScreen() {
 }
 
 const localStyles = StyleSheet.create({
-  input: {
-    margin: 10,
-  },
   wText: {
     color: Colors.main_theme.TEXT_DARK_GRAY,
     fontSize: 30,

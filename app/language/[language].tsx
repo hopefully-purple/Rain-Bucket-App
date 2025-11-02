@@ -151,7 +151,10 @@ export default function LanguageScreen(this: any) {
     }, [])
   );
   return (
-    <SafeAreaView style={styles.screenContainer} edges={['right', 'bottom', 'left']}>
+    <SafeAreaView
+      style={styles.screenContainer}
+      edges={["right", "bottom", "left"]}
+    >
       <Pressable onPress={() => Keyboard.dismiss()}>
         <TextInput
           label={wordInputLabel}
@@ -238,11 +241,6 @@ const localStyles = StyleSheet.create({
   searchBar: {
     margin: 10,
   },
-  text: {
-    color: Colors.main_theme.TEXT_DARK_GRAY,
-    fontSize: 20,
-    margin: 10,
-  },
   buttonLayout: {
     flexDirection: "row",
   },
@@ -255,14 +253,5 @@ const localStyles = StyleSheet.create({
     borderRadius: 12,
     width: 200,
     margin: 10,
-  },
-  container: {
-    flex: 1,
-    paddingTop: StatusBar.currentHeight,
-    marginHorizontal: 16,
-  },
-  screenTop: {
-    display: "flex",
-    flexDirection: "row",
   },
 });
