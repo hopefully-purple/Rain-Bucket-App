@@ -165,10 +165,9 @@ const localStyles = StyleSheet.create({
     margin: 10,
   },
   clearButton: {
+    ...styles.buttonRadius12M10,
     backgroundColor: Colors.WHITE,
-    borderRadius: 12,
     width: 300,
     alignSelf: "center",
-    margin: 10,
   },
 });

@@ -6,16 +6,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.WHITE,
   },
-
-  // from SortButton and paper menu
-  // add if figure out how others can use this, then add on to them as they want.
-  // {
-  //       flexDirection: "row",
-  //       justifyContent: "center",
-  //     }
   flexRowJustifyCenter: {
     flexDirection: "row",
     justifyContent: "center",
+  },
+  buttonRadius12M10: {
+    borderRadius: 12,
+    margin: 10,
   },
 });
 

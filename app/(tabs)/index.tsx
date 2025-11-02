@@ -6,12 +6,12 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Colors from "@/assets/colors/colors";
-import { Link, router } from "expo-router";
+import { router } from "expo-router";
 import React, { useContext } from "react";
 import LanguageObjectContext from "@/contexts/LanguageObject";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ILanguageObject } from "@/interfaces/languageObjectInterface";
-import { Icon, IconButton } from "react-native-paper";
+import { Icon } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styles from "@/assets/styles/styleSheet";
 

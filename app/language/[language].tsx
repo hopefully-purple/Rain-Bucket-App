@@ -2,9 +2,6 @@ import { router, useFocusEffect, useLocalSearchParams } from "expo-router";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import {
   View,
-  TouchableOpacity,
-  Text,
-  StatusBar,
   StyleSheet,
   Keyboard,
   Pressable,
@@ -245,13 +242,11 @@ const localStyles = StyleSheet.create({
     flexDirection: "row",
   },
   addButton: {
-    borderRadius: 12,
+    ...styles.buttonRadius12M10,
     width: 150,
-    margin: 10,
   },
   detailButton: {
-    borderRadius: 12,
+    ...styles.buttonRadius12M10,
     width: 200,
-    margin: 10,
   },
 });

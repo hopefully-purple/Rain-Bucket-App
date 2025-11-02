@@ -1,9 +1,7 @@
 import { Tabs } from "expo-router";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Colors from "@/assets/colors/colors";
-import { Button, IconButton, Menu, PaperProvider } from "react-native-paper";
-import { View } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import PaperMenu from "@/components/PaperMenu";
 
 export default function TabLayout() {
