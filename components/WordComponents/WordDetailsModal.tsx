@@ -36,9 +36,13 @@ const WordDetailsModal = (props: WordDetailsModalProps) => {
         style={localStyles.container}
       >
         <Text style={localStyles.wText}>{item.word}</Text>
-        <Text style={localStyles.prText}>{item.pronun}</Text>
+        {(item.pronun !== "" && item.pronun !== undefined) && (
+          <Text style={localStyles.prText}>{item.pronun}</Text>
+        )}
         <Text style={localStyles.dText}>{item.definition}</Text>
-        <Text style={localStyles.otherText}>{item.notes}</Text>
+        {(item.notes !== "" && item.notes !== undefined) && (
+          <Text style={localStyles.otherText}>{item.notes}</Text>
+        )}
         <Text
           style={{
             ...localStyles.otherText,
@@ -77,7 +81,8 @@ const WordDetailsModal = (props: WordDetailsModalProps) => {
 const localStyles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: 50,
+    margin: 20,
+    borderRadius: 12,
   },
   contentContainer: {
     backgroundColor: "white",
@@ -86,14 +91,16 @@ const localStyles = StyleSheet.create({
   wText: {
     ...styles.boldText,
     fontSize: 30,
-    marginHorizontal: 20,
-    marginTop: 20,
+    // marginHorizontal: 20,
+    // marginTop: 20,
+    margin: 20,
   },
   prText: {
     color: Colors.main_theme.TEXT_DARK_GRAY,
     fontSize: 15,
     fontStyle: "italic",
-    margin: 20,
+    marginHorizontal: 20,
+    marginBottom: 20,
   },
   dText: {
     ...styles.regularText,
