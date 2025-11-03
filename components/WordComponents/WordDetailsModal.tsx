@@ -1,7 +1,9 @@
 import Colors from "@/assets/colors/colors";
 import styles from "@/assets/styles/styleSheet";
+import LanguageObjectContext from "@/contexts/LanguageObject";
 import SelectedItemContext from "@/contexts/SelectedItem";
 import { IWord } from "@/interfaces/languageObjectInterface";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
 import * as React from "react";
 import { useContext } from "react";
@@ -16,6 +18,7 @@ type WordDetailsModalProps = {
 
 const WordDetailsModal = (props: WordDetailsModalProps) => {
   const { visible, setVisible, item } = props;
+  const { languageObj, setLanguageObj } = useContext(LanguageObjectContext);
   const { selectedItem, setSelectedItem } = useContext(SelectedItemContext);
 
   const hideModal = () => setVisible(false);
@@ -26,8 +29,27 @@ const WordDetailsModal = (props: WordDetailsModalProps) => {
     edit: "Edit",
   };
 
+  function deleteItemInWords() {
+    // Filter condition
+    function excludeItem(i: IWord) {
+      return i.id !== item.id;
+    }
+    const words = languageObj.words.filter(excludeItem);
+    setLanguageObj({ ...languageObj, words: words });
+    const saveData = async () => {
+      try {
+        await AsyncStorage.setItem(languageObj.language, JSON.stringify(words));
+        // console.log("(saveData) Data successfully saved");
+      } catch (e) {
+        console.log("(saveData) Failed to save the data to the storage");
+        throw e;
+      }
+    };
+
+    saveData();
+  }
+
   return (
-    // <View >
     <Portal>
       <Modal
         visible={visible}
@@ -61,6 +83,10 @@ const WordDetailsModal = (props: WordDetailsModalProps) => {
             ...localStyles.otherText,
             color: Colors.main_theme.ACTIVE_ACCENT_COLOR,
           }}
+          onPress={() => {
+            deleteItemInWords();
+            hideModal();
+          }}
         >
           {messageMap.delete}
         </Text>
@@ -70,12 +96,12 @@ const WordDetailsModal = (props: WordDetailsModalProps) => {
             color: Colors.main_theme.ACTIVE_ACCENT_COLOR,
             marginBottom: 20,
           }}
+          onPress={hideModal}
         >
           {messageMap.done}
         </Text>
       </Modal>
     </Portal>
-    // </View>
   );
 };
 
@@ -83,7 +109,6 @@ const localStyles = StyleSheet.create({
   container: {
     flex: 1,
     margin: 20,
-    // borderRadius: 12,
   },
   contentContainer: {
     backgroundColor: "white",
@@ -93,8 +118,6 @@ const localStyles = StyleSheet.create({
   wText: {
     ...styles.boldText,
     fontSize: 30,
-    // marginHorizontal: 20,
-    // marginTop: 20,
     margin: 20,
   },
   prText: {

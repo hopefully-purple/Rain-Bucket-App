@@ -24,25 +24,25 @@ export default function WordComponent({ item }: WordComponentProps) {
     edit: "Edit",
   };
 
-  function deleteItemInWords() {
-    // Filter condition
-    function excludeItem(i: IWord) {
-      return i.id !== item.id;
-    }
-    const words = languageObj.words.filter(excludeItem);
-    setLanguageObj({ ...languageObj, words: words });
-    const saveData = async () => {
-      try {
-        await AsyncStorage.setItem(languageObj.language, JSON.stringify(words));
-        // console.log("(saveData) Data successfully saved");
-      } catch (e) {
-        console.log("(saveData) Failed to save the data to the storage");
-        throw e;
-      }
-    };
+  // function deleteItemInWords() {
+  //   // Filter condition
+  //   function excludeItem(i: IWord) {
+  //     return i.id !== item.id;
+  //   }
+  //   const words = languageObj.words.filter(excludeItem);
+  //   setLanguageObj({ ...languageObj, words: words });
+  //   const saveData = async () => {
+  //     try {
+  //       await AsyncStorage.setItem(languageObj.language, JSON.stringify(words));
+  //       // console.log("(saveData) Data successfully saved");
+  //     } catch (e) {
+  //       console.log("(saveData) Failed to save the data to the storage");
+  //       throw e;
+  //     }
+  //   };
 
-    saveData();
-  }
+  //   saveData();
+  // }
 
   // const changeItemAlert = () => {
   //   let body = item.definition;
