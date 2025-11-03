@@ -1,11 +1,7 @@
 import Colors from "@/assets/colors/colors";
-import LanguageObjectContext from "@/contexts/LanguageObject";
-import SelectedItemContext from "@/contexts/SelectedItem";
 import { IWord } from "@/interfaces/languageObjectInterface";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { router } from "expo-router";
-import { useContext, useState } from "react";
-import { Alert, View, TouchableOpacity, Text, StyleSheet } from "react-native";
+import { useState } from "react";
+import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import WordDetailsModal from "./WordDetailsModal";
 
 type WordComponentProps = {
@@ -13,58 +9,7 @@ type WordComponentProps = {
 };
 
 export default function WordComponent({ item }: WordComponentProps) {
-  const { languageObj, setLanguageObj } = useContext(LanguageObjectContext);
-  const { selectedItem, setSelectedItem } = useContext(SelectedItemContext);
-
   const [visible, setVisible] = useState(false);
-
-  const messageMap = {
-    delete: "Delete",
-    done: "Done",
-    edit: "Edit",
-  };
-
-  // function deleteItemInWords() {
-  //   // Filter condition
-  //   function excludeItem(i: IWord) {
-  //     return i.id !== item.id;
-  //   }
-  //   const words = languageObj.words.filter(excludeItem);
-  //   setLanguageObj({ ...languageObj, words: words });
-  //   const saveData = async () => {
-  //     try {
-  //       await AsyncStorage.setItem(languageObj.language, JSON.stringify(words));
-  //       // console.log("(saveData) Data successfully saved");
-  //     } catch (e) {
-  //       console.log("(saveData) Failed to save the data to the storage");
-  //       throw e;
-  //     }
-  //   };
-
-  //   saveData();
-  // }
-
-  // const changeItemAlert = () => {
-  //   let body = item.definition;
-  //   if (item.pronun !== undefined && item.pronun !== "") {
-  //     body = "(" + item.pronun + ")\n" + item.definition;
-  //   }
-  //   Alert.alert(item.word, body, [
-  //     {
-  //       text: messageMap.edit,
-  //       onPress: () => {
-          // setSelectedItem(item);
-          // router.navigate("/language/edit-word-screen");
-  //       },
-  //     },
-  //     {
-  //       text: messageMap.delete,
-  //       style: "destructive",
-  //       onPress: () => deleteItemInWords(),
-  //     },
-  //     { text: messageMap.done, onPress: () => console.log("Done Pressed") },
-  //   ]);
-  // };
 
   return (
     <View>

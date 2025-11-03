@@ -7,7 +7,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
 import * as React from "react";
 import { useContext } from "react";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet, Alert } from "react-native";
 import { Modal, Portal, Text } from "react-native-paper";
 
 type WordDetailsModalProps = {
@@ -24,9 +24,12 @@ const WordDetailsModal = (props: WordDetailsModalProps) => {
   const hideModal = () => setVisible(false);
 
   const messageMap = {
+    areYouSure: `Are you sure you want to delete ${item.word}?`,
+    cancel: "Cancel",
     delete: "Delete",
     done: "Done",
     edit: "Edit",
+    yes: "Yes",
   };
 
   function deleteItemInWords() {
@@ -48,6 +51,21 @@ const WordDetailsModal = (props: WordDetailsModalProps) => {
 
     saveData();
   }
+
+  const deleteAlert = () => {
+    Alert.alert("", messageMap.areYouSure, [
+      {
+        text: messageMap.yes,
+        onPress: () => {
+          deleteItemInWords();
+          hideModal();
+        },
+      },
+      {
+        text: messageMap.cancel,
+      },
+    ]);
+  };
 
   return (
     <Portal>
@@ -83,10 +101,7 @@ const WordDetailsModal = (props: WordDetailsModalProps) => {
             ...localStyles.otherText,
             color: Colors.main_theme.ACTIVE_ACCENT_COLOR,
           }}
-          onPress={() => {
-            deleteItemInWords();
-            hideModal();
-          }}
+          onPress={deleteAlert}
         >
           {messageMap.delete}
         </Text>
