@@ -53,8 +53,8 @@ export default function WordComponent({ item }: WordComponentProps) {
   //     {
   //       text: messageMap.edit,
   //       onPress: () => {
-  //         setSelectedItem(item);
-  //         router.navigate("/language/edit-word-screen");
+          // setSelectedItem(item);
+          // router.navigate("/language/edit-word-screen");
   //       },
   //     },
   //     {
