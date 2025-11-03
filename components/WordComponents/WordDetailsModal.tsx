@@ -36,11 +36,11 @@ const WordDetailsModal = (props: WordDetailsModalProps) => {
         style={localStyles.container}
       >
         <Text style={localStyles.wText}>{item.word}</Text>
-        {(item.pronun !== "" && item.pronun !== undefined) && (
+        {item.pronun !== "" && item.pronun !== undefined && (
           <Text style={localStyles.prText}>{item.pronun}</Text>
         )}
         <Text style={localStyles.dText}>{item.definition}</Text>
-        {(item.notes !== "" && item.notes !== undefined) && (
+        {item.notes !== "" && item.notes !== undefined && (
           <Text style={localStyles.otherText}>{item.notes}</Text>
         )}
         <Text
@@ -68,6 +68,7 @@ const WordDetailsModal = (props: WordDetailsModalProps) => {
           style={{
             ...localStyles.otherText,
             color: Colors.main_theme.ACTIVE_ACCENT_COLOR,
+            marginBottom: 20,
           }}
         >
           {messageMap.done}
@@ -82,11 +83,12 @@ const localStyles = StyleSheet.create({
   container: {
     flex: 1,
     margin: 20,
-    borderRadius: 12,
+    // borderRadius: 12,
   },
   contentContainer: {
     backgroundColor: "white",
     padding: 20,
+    borderRadius: 12,
   },
   wText: {
     ...styles.boldText,
