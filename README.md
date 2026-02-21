@@ -42,7 +42,7 @@ Latest from `main` branch
 ### Language Specific Screen
 
 <img src="https://github.com/user-attachments/assets/c66bc1b2-953a-4037-a224-19456393e3fa" width="300">
-<img src="https://github.com/user-attachments/assets/8c99eeaf-3013-4777-a382-9562f6a96b7d" width="300">
+<img src="https://github.com/user-attachments/assets/6918385e-2453-4276-8b8f-f7a9f86e39ad" width="300">
 <img src="https://github.com/user-attachments/assets/940bbeb0-0a47-403b-8b25-ff9a23f6a102" width="300">
 
 ### Edit Word Screen
