@@ -1,5 +1,4 @@
 import Colors from "@/assets/colors/colors";
-import { IWord } from "@/interfaces/languageObjectInterface";
 import {
   SectionList,
   SectionListRenderItem,
@@ -7,7 +6,7 @@ import {
   StyleSheet,
   Text,
 } from "react-native";
-import WordComponent from "@/components/WordComponent";
+import WordComponent from "@/components/WordComponents/WordComponent";
 import { ISectionListData, SectionItem } from "@/interfaces/sectionListInterface";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -20,12 +19,12 @@ export default function ListOfWords({ sectionL }: ListOfWordsProps) {
     return <WordComponent item={item} />;
   };
   return (
-    <SafeAreaView style={styles.container} edges={['right', 'bottom', 'left']}>
+    <SafeAreaView style={localStyles.container} edges={['right', 'bottom', 'left']}>
       <SectionList
         sections={sectionL}
         renderItem={renderSectionItem}
         renderSectionHeader={({ section }) => (
-          <Text style={styles.sectionHeader}>{section.title}</Text>
+          <Text style={localStyles.sectionHeader}>{section.title}</Text>
         )}
         keyExtractor={(item, index) => `basicListEntry-${item.id}`}
         ListEmptyComponent={<Text>Empty</Text>}
@@ -34,15 +33,11 @@ export default function ListOfWords({ sectionL }: ListOfWordsProps) {
   );
 }
 
-const styles = StyleSheet.create({
+const localStyles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: StatusBar.currentHeight,
     marginHorizontal: 16,
-  },
-  screenContainer: {
-    flex: 1,
-    backgroundColor: Colors.WHITE,
   },
   sectionHeader: {
     paddingTop: 2,

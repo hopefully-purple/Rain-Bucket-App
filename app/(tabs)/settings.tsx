@@ -7,6 +7,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ScrollView } from "react-native-gesture-handler";
 import { IWord } from "@/interfaces/languageObjectInterface";
 import { SafeAreaView } from "react-native-safe-area-context";
+import styles from "@/assets/styles/styleSheet";
 
 export default function SettingsScreen() {
   const { languageObj, setLanguageObj } = useContext(LanguageObjectContext);
@@ -95,86 +96,80 @@ export default function SettingsScreen() {
 
   // console.log('Settings screen');
   return (
-    <SafeAreaView style={styles.screenContainer} edges={['right', 'bottom', 'left']}>
+    <SafeAreaView
+      style={styles.screenContainer}
+      edges={["right", "bottom", "left"]}
+    >
       <View>
-        <Text style={styles.text}>Azure Operations:</Text>
+        <Text style={localStyles.text}>Azure Operations:</Text>
         <Button
-        style={styles.clearButton}
-        mode="outlined"
-        textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
-        onPress={() => console.log("TODO - implement")}
-      >
-        Save to Azure
-      </Button>
-      <Button
-        style={styles.clearButton}
-        textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
-        mode="outlined"
-        onPress={() => console.log("TODO - implement")}
-      >
-        Pull from Azure
-      </Button>
+          style={localStyles.button}
+          mode="outlined"
+          textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
+          onPress={() => console.log("TODO - implement")}
+        >
+          Save to Azure
+        </Button>
+        <Button
+          style={localStyles.button}
+          textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
+          mode="outlined"
+          onPress={() => console.log("TODO - implement")}
+        >
+          Pull from Azure
+        </Button>
       </View>
       <View>
-        <Text style={styles.text}>Async Storage Operations:</Text>
-      <Button
-        mode="outlined"
-        style={styles.clearButton}
-        textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
-        onPress={() => clearAllData()}
-      >
-        CLEAR STORAGE
-      </Button>
-      <Button
-        style={styles.clearButton}
-        mode="outlined"
-        textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
-        onPress={() => getAllKeys()}
-      >
-        GET ALL KEYS STORAGE
-      </Button>
-      <Button
-        mode="outlined"
-        style={styles.clearButton}
-        textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
-        onPress={() => getCurrentLData()}
-      >
-        LIST CURRENT LANGUAGE STORAGE
-      </Button>
-      <Button
-        mode="outlined"
-        style={styles.clearButton}
-        textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
-        onPress={() => deleteCertainData()}
-      >
-        RUN CUSTOM DELETE METHOD
-      </Button>
-      <ScrollView>
-        <Text style={styles.text}>{output}</Text>
-      </ScrollView>
+        <Text style={localStyles.text}>Async Storage Operations:</Text>
+        <Button
+          mode="outlined"
+          style={localStyles.button}
+          textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
+          onPress={() => clearAllData()}
+        >
+          CLEAR STORAGE
+        </Button>
+        <Button
+          style={localStyles.button}
+          mode="outlined"
+          textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
+          onPress={() => getAllKeys()}
+        >
+          GET ALL KEYS STORAGE
+        </Button>
+        <Button
+          mode="outlined"
+          style={localStyles.button}
+          textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
+          onPress={() => getCurrentLData()}
+        >
+          LIST CURRENT LANGUAGE STORAGE
+        </Button>
+        <Button
+          mode="outlined"
+          style={localStyles.button}
+          textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
+          onPress={() => deleteCertainData()}
+        >
+          RUN CUSTOM DELETE METHOD
+        </Button>
+        <ScrollView>
+          <Text style={localStyles.text}>{output}</Text>
+        </ScrollView>
       </View>
     </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
-  screenContainer: {
-    flex: 1,
-    backgroundColor: Colors.WHITE,
-  },
-  input: {
-    margin: 10,
-  },
+const localStyles = StyleSheet.create({
   text: {
-    color: Colors.main_theme.TEXT_DARK_GRAY,
-    fontSize: 20,
+    ...styles.regularText,
     margin: 10,
   },
-  clearButton: {
+  button: {
+    ...styles.buttonRadius12M10,
     backgroundColor: Colors.WHITE,
-    borderRadius: 12,
     width: 300,
     alignSelf: "center",
-    margin: 10,
   },
 });

@@ -1,20 +1,11 @@
-import { router, useFocusEffect, useLocalSearchParams } from "expo-router";
+import { router, useFocusEffect } from "expo-router";
 import React, { useCallback, useContext, useEffect, useState } from "react";
-import {
-  View,
-  TouchableOpacity,
-  Text,
-  StatusBar,
-  StyleSheet,
-  Keyboard,
-  Pressable,
-  Alert,
-} from "react-native";
+import { View, StyleSheet, Keyboard, Pressable, Alert } from "react-native";
 import LanguageObjectContext from "@/contexts/LanguageObject";
 import SelectedItemContext from "@/contexts/SelectedItem";
 import { Button, TextInput } from "react-native-paper";
 import { IWord } from "@/interfaces/languageObjectInterface";
-import ListOfWords from "@/components/ListOfWords";
+import ListOfWords from "@/components/WordComponents/ListOfWords";
 import { organizeIntoAlphabetizedSections } from "@/utilities/utility-strings";
 import { ISectionListData } from "@/interfaces/sectionListInterface";
 import { asyncStorageSaveData } from "@/utilities/utility-async-storage";
@@ -24,6 +15,7 @@ import {
 } from "@/utilities/utility-context";
 import Colors from "@/assets/colors/colors";
 import { SafeAreaView } from "react-native-safe-area-context";
+import styles from "@/assets/styles/styleSheet";
 
 export default function LanguageScreen(this: any) {
   const [word, setWord] = useState("");
@@ -32,7 +24,18 @@ export default function LanguageScreen(this: any) {
   const { languageObj, setLanguageObj } = useContext(LanguageObjectContext);
   const { selectedItem, setSelectedItem } = useContext(SelectedItemContext);
 
-  const { language } = useLocalSearchParams();
+  // const { language } = useLocalSearchParams();
+
+  const messageMap = {
+    addWithDetails: "Add with details",
+    definition: "Definition",
+    done: "Done",
+    quickAdd: "Quick Add",
+    search: "Search",
+    wordAlreadyExists: "Word already exists",
+    wordsIncluding: "Words including ",
+    wordInputLabel: "New " + languageObj.language + " word/phrase",
+  };
 
   const duplicateAlert = () => {
     //Clear inputs
@@ -40,9 +43,9 @@ export default function LanguageScreen(this: any) {
     setDefinition("");
     Keyboard.dismiss();
 
-    Alert.alert("Word already exists", "", [
+    Alert.alert(messageMap.wordAlreadyExists, "", [
       {
-        text: "Done",
+        text: messageMap.done,
         onPress: () => {
           console.log("Done Pressed");
         },
@@ -128,7 +131,7 @@ export default function LanguageScreen(this: any) {
     // console.log(JSON.stringify(searchList, undefined, 2));
     const newS: ISectionListData = [
       {
-        title: "Words including " + query,
+        title: messageMap.wordsIncluding + query,
         data: searchList,
       },
     ];
@@ -141,8 +144,6 @@ export default function LanguageScreen(this: any) {
     setSectionList(createSearchSectionList(query));
   };
 
-  const wordInputLabel = "New " + languageObj.language + " word/phrase";
-
   useFocusEffect(
     useCallback(() => {
       setWord("");
@@ -150,40 +151,43 @@ export default function LanguageScreen(this: any) {
     }, [])
   );
   return (
-    <SafeAreaView style={styles.screenContainer} edges={['right', 'bottom', 'left']}>
+    <SafeAreaView
+      style={styles.screenContainer}
+      edges={["right", "bottom", "left"]}
+    >
       <Pressable onPress={() => Keyboard.dismiss()}>
         <TextInput
-          label={wordInputLabel}
+          label={messageMap.wordInputLabel}
           value={word}
           onChangeText={(text) => setWord(text)}
           mode="outlined"
-          style={styles.input}
+          style={localStyles.input}
           activeOutlineColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
           autoCorrect={false}
           autoCapitalize={"sentences"}
         />
         <TextInput
-          label="Definition"
+          label={messageMap.definition}
           value={definition}
           onChangeText={(text) => setDefinition(text)}
           mode="outlined"
-          style={styles.input}
+          style={localStyles.input}
           activeOutlineColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
           autoCapitalize={"sentences"}
           autoCorrect={false}
         />
-        <View style={styles.buttonLayout}>
+        <View style={localStyles.buttonLayout}>
           <Button
             mode="elevated"
-            style={styles.addButton}
+            style={localStyles.addButton}
             textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
             onPress={handleAddWord}
           >
-            Quick Add
+            {messageMap.quickAdd}
           </Button>
           <Button
             mode="elevated"
-            style={styles.detailButton}
+            style={localStyles.detailButton}
             textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
             onPress={() => {
               // console.log(
@@ -204,11 +208,11 @@ export default function LanguageScreen(this: any) {
               router.navigate("/language/edit-word-screen");
             }}
           >
-            Add with details
+            {messageMap.addWithDetails}
           </Button>
         </View>
         <TextInput
-          label="Search"
+          label={messageMap.search}
           mode="outlined"
           dense={true}
           activeOutlineColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
@@ -216,7 +220,7 @@ export default function LanguageScreen(this: any) {
           autoCorrect={false}
           autoCapitalize={"sentences"}
           onChangeText={onChangeSearch}
-          style={styles.searchBar}
+          style={localStyles.input}
           left={
             <TextInput.Icon
               icon="magnify"
@@ -230,42 +234,19 @@ export default function LanguageScreen(this: any) {
   );
 }
 
-const styles = StyleSheet.create({
-  screenContainer: {
-    flex: 1,
-    backgroundColor: Colors.WHITE,
-  },
+const localStyles = StyleSheet.create({
   input: {
-    margin: 10,
-  },
-  searchBar: {
-    margin: 10,
-  },
-  text: {
-    color: Colors.main_theme.TEXT_DARK_GRAY,
-    fontSize: 20,
     margin: 10,
   },
   buttonLayout: {
     flexDirection: "row",
   },
   addButton: {
-    borderRadius: 12,
+    ...styles.buttonRadius12M10,
     width: 150,
-    margin: 10,
   },
   detailButton: {
-    borderRadius: 12,
+    ...styles.buttonRadius12M10,
     width: 200,
-    margin: 10,
-  },
-  container: {
-    flex: 1,
-    paddingTop: StatusBar.currentHeight,
-    marginHorizontal: 16,
-  },
-  screenTop: {
-    display: "flex",
-    flexDirection: "row",
   },
 });

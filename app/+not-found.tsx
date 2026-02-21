@@ -6,8 +6,8 @@ export default function NotFoundScreen() {
   return (
     <>
       <Stack.Screen options={{ title: 'Oops! Not Found' }} />
-      <View style={styles.container}>
-        <Link href="/(tabs)" style={styles.button}>
+      <View style={localStyles.container}>
+        <Link href="/(tabs)" style={localStyles.button}>
           Go back to Home screen!
         </Link>
       </View>
@@ -15,7 +15,7 @@ export default function NotFoundScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const localStyles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#25292e',

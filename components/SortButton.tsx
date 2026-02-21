@@ -1,8 +1,8 @@
 import Colors from "@/assets/colors/colors";
+import styles from "@/assets/styles/styleSheet";
 import * as React from "react";
 import { View } from "react-native";
 import {
-  Menu,
   IconButton,
   Portal,
   Dialog,
@@ -22,10 +22,7 @@ const SortButton = () => {
 
   return (
     <View
-      style={{
-        flexDirection: "row",
-        justifyContent: "center",
-      }}
+      style={styles.flexRowJustifyCenter}
     >
       <IconButton
         icon="sort"
