@@ -101,14 +101,14 @@ export default function SettingsScreen() {
       edges={["right", "bottom", "left"]}
     >
       <View>
-        <Text style={localStyles.text}>Azure Operations:</Text>
+        <Text style={localStyles.text}>Local File Operations:</Text>
         <Button
           style={localStyles.button}
           mode="outlined"
           textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
           onPress={() => console.log("TODO - implement")}
         >
-          Save to Azure
+          Save to CSV file
         </Button>
         <Button
           style={localStyles.button}
@@ -116,7 +116,7 @@ export default function SettingsScreen() {
           mode="outlined"
           onPress={() => console.log("TODO - implement")}
         >
-          Pull from Azure
+          Pull from CSV file
         </Button>
       </View>
       <View>
