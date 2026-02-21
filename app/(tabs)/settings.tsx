@@ -8,6 +8,8 @@ import { ScrollView } from "react-native-gesture-handler";
 import { IWord } from "@/interfaces/languageObjectInterface";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styles from "@/assets/styles/styleSheet";
+import { saveDataToCSV } from "@/file-management/movingFiles";
+
 
 export default function SettingsScreen() {
   const { languageObj, setLanguageObj } = useContext(LanguageObjectContext);
@@ -106,7 +108,7 @@ export default function SettingsScreen() {
           style={localStyles.button}
           mode="outlined"
           textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
-          onPress={() => console.log("TODO - implement")}
+          onPress={() => saveDataToCSV(languageObj)}
         >
           Save to CSV file
         </Button>
