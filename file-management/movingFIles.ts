@@ -1,3 +1,5 @@
+import { File, Paths } from "expo-file-system";
+import { jsonToCSV } from "react-native-csv";
 
 // Big picture steps:
 // 1. Don't worry about which language, just get the data for one language and write it to a file
@@ -14,29 +16,28 @@
 // from "save" button on settings page, open a file management modal (like word details) that will give buttons as options
 // it will say "All", then for each language, a button for that one specifically.
 
-export const saveDataToCSV = (data: string) => {
-  // step 1: convert json to string
-  const dataAsString = JSON.stringify(data);
-  // step 2: write string to file
-  const fileName = "myData.csv"; // TODO - make this dynamic based on language and date
-  writeCSVFile(fileName, dataAsString);
-  // step 3: file upload?
+export const saveDataToCSV = (languageObj: any) => {
+  // step 1: convert JSON to string using react-native-csv
+  // console.log("languageObj to be saved: " + JSON.stringify(languageObj));
+  const csv = jsonToCSV(languageObj);
+  // console.log("csv content: " + csv);
+  // step 2: call createFile with the file name and content
+  createFile("RainBucketAppFile.csv", csv);
+  // step 4: upload file?
+
 };
 
-export const writeCSVFile = (fileName: string, data: string) => {
-  var RNFS = require("react-native-fs");
-  // create a path you want to write to
-  // :warning: on iOS, you cannot write into `RNFS.MainBundlePath`,
-  // but `RNFS.DocumentDirectoryPath` exists on both platforms and is writable
-  var path = RNFS.DocumentDirectoryPath + "/" + fileName;
-
-  // write the file
-  RNFS.writeFile(path, data, "utf8")
-    .then((success: any) => {
-      console.log("FILE WRITTEN!");
-    })
-    .catch((err: any) => {
-      console.log(err.message);
-      throw err;
-    });
+const createFile = (fileName: string, content: string) => {
+  try {
+    const file = new File(Paths.cache, fileName);
+    console.log("File path:", file.uri);
+    console.log("file.create() will be called");
+    file.create(); // can throw an error if the file already exists or no permission to create it
+    console.log("file.write() will be called");
+    file.write(content);
+    console.log(file.textSync()); // Hello, world!
+  } catch (error) {
+    console.error(error);
+    throw error; // re-throw the error after logging it
+  }
 };
