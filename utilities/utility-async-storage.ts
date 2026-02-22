@@ -30,3 +30,16 @@ export const asyncStorageGetAllKeys = async (): Promise<string[]> => {
   }
 }
 
+export const asyncStorageGetDataFromKey = async (key: string): Promise<string> => {
+  let result: any;
+  try {
+    result = await AsyncStorage.getItem(key);
+    console.log("(getDataFromKey) Result for key " + key + ": " + result);
+    return result != null ? result : "";
+  } catch (e) {
+    // read key error
+    console.log("(getDataFromKey) Failed to get data for key " + key + ": " + e);
+    throw e;
+  }
+}
+

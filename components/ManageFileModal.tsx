@@ -2,8 +2,9 @@ import Colors from "@/assets/colors/colors";
 import styles from "@/assets/styles/styleSheet";
 import LanguageObjectContext from "@/contexts/LanguageObject";
 import SelectedItemContext from "@/contexts/SelectedItem";
+import { saveDataToCSV } from "@/file-management/movingFiles";
 import { ILanguageObject, IWord } from "@/interfaces/languageObjectInterface";
-import { asyncStorageGetAllKeys } from "@/utilities/utility-async-storage";
+import { asyncStorageGetAllKeys, asyncStorageGetDataFromKey } from "@/utilities/utility-async-storage";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
 import * as React from "react";
@@ -69,8 +70,11 @@ const ManageFileModal = (props: ManageFileModalProps) => {
             mode="outlined"
             style={localStyles.button}
             textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
-            onPress={() => {
+            onPress={async () => {
               // handle export for this key
+              const data = await asyncStorageGetDataFromKey(key);
+              console.log("Data for key " + key + ": " + data);
+              await saveDataToCSV(data);
             }}
           >
             Export data for {key}
