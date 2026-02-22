@@ -10,6 +10,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import styles from "@/assets/styles/styleSheet";
 import { saveDataToCSV } from "@/file-management/movingFiles";
 import ManageFileModal from "@/components/ManageFileModal";
+import { asyncStorageGetAllKeys } from "@/utilities/utility-async-storage";
 
 
 export default function SettingsScreen() {
@@ -58,15 +59,7 @@ export default function SettingsScreen() {
   };
 
   const getAllKeys = async () => {
-    let keys: any = [];
-    try {
-      keys = await AsyncStorage.getAllKeys();
-    } catch (e) {
-      // read key error
-      console.log("getAllKeys storage threw error " + e);
-      throw e;
-    }
-
+    const keys = await asyncStorageGetAllKeys();
     setOutput(keys[0] + ", " + keys[1]);
     // return keys;
     // console.log(JSON.stringify(keys));

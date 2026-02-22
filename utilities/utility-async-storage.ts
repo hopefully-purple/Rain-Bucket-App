@@ -17,3 +17,16 @@ export const asyncStorageSaveData = async (data: ILanguageObject): Promise<boole
     throw e;
   }
 }
+
+export const asyncStorageGetAllKeys = async (): Promise<string[]> => {
+  let keys: any = [];
+  try {
+    keys = await AsyncStorage.getAllKeys();
+    return keys;
+  } catch (e) {
+    // read key error
+    console.log("(getAllKeys) Failed to get all keys from storage: " + e);
+    throw e;
+  }
+}
+

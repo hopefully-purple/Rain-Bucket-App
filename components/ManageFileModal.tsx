@@ -3,12 +3,13 @@ import styles from "@/assets/styles/styleSheet";
 import LanguageObjectContext from "@/contexts/LanguageObject";
 import SelectedItemContext from "@/contexts/SelectedItem";
 import { ILanguageObject, IWord } from "@/interfaces/languageObjectInterface";
+import { asyncStorageGetAllKeys } from "@/utilities/utility-async-storage";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
 import * as React from "react";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { StyleSheet, Alert } from "react-native";
-import { Modal, Portal, Text } from "react-native-paper";
+import { Button, Modal, Portal, Text } from "react-native-paper";
 
 type ManageFileModalProps = {
   visible: boolean;
@@ -20,10 +21,25 @@ const ManageFileModal = (props: ManageFileModalProps) => {
   const { visible, setVisible, item } = props;
   const { languageObj, setLanguageObj } = useContext(LanguageObjectContext);
   const { selectedItem, setSelectedItem } = useContext(SelectedItemContext);
+  const [storageKeys, setStorageKeys] = useState<string[]>([]);
 
   const hideModal = () => setVisible(false);
 
-  
+  // load AsyncStorage keys when modal is shown
+  useEffect(() => {
+    let mounted = true;
+    if (!visible) return;
+    console.log("[ManageFileModal] (useEffect) how many times does this run?"); // Just the 1 so far.
+    asyncStorageGetAllKeys()
+      .then((keys: string[]) => {
+        if (mounted) setStorageKeys(keys);
+      })
+      .catch((err) => console.warn("Failed to load storage keys", err));
+    return () => {
+      mounted = false;
+    };
+  }, [visible]);
+
   return (
     <Portal>
       <Modal
@@ -33,6 +49,33 @@ const ManageFileModal = (props: ManageFileModalProps) => {
         style={localStyles.container}
       >
         <Text style={localStyles.wText}>Manage Files</Text>
+        <Text style={localStyles.prText}>
+          Here you can export your data as a CSV file and save it to your
+          device.
+        </Text>
+        <Button
+          mode="outlined"
+          style={localStyles.button}
+          textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
+          onPress={() => {
+            // handle export for all data
+          }}
+        >
+          Export all language data
+        </Button>
+        {storageKeys.map((key: string) => (
+          <Button
+            key={key}
+            mode="outlined"
+            style={localStyles.button}
+            textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
+            onPress={() => {
+              // handle export for this key
+            }}
+          >
+            Export data for {key}
+          </Button>
+        ))}
       </Modal>
     </Portal>
   );
@@ -47,6 +90,12 @@ const localStyles = StyleSheet.create({
     backgroundColor: "white",
     padding: 20,
     borderRadius: 12,
+  },
+  button: {
+    ...styles.buttonRadius12M10,
+    backgroundColor: Colors.WHITE,
+    width: 300,
+    alignSelf: "center",
   },
   wText: {
     ...styles.boldText,
