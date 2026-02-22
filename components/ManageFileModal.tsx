@@ -18,6 +18,8 @@ type ManageFileModalProps = {
   item: ILanguageObject;
 };
 
+// TODO - messageMap, rename
+
 const ManageFileModal = (props: ManageFileModalProps) => {
   const { visible, setVisible, item } = props;
   const { languageObj, setLanguageObj } = useContext(LanguageObjectContext);
@@ -73,7 +75,7 @@ const ManageFileModal = (props: ManageFileModalProps) => {
             onPress={async () => {
               // handle export for this key
               const data = await asyncStorageGetDataFromKey(key);
-              console.log("(manageFileModal onpress) Data for key " + key + ": " + data);
+              // console.log("(manageFileModal onpress) Data for key " + key + ": " + data);
               await saveDataToCSV(data, key);
             }}
           >
