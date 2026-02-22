@@ -73,8 +73,8 @@ const ManageFileModal = (props: ManageFileModalProps) => {
             onPress={async () => {
               // handle export for this key
               const data = await asyncStorageGetDataFromKey(key);
-              console.log("Data for key " + key + ": " + data);
-              await saveDataToCSV(data);
+              console.log("(manageFileModal onpress) Data for key " + key + ": " + data);
+              await saveDataToCSV(data, key);
             }}
           >
             Export data for {key}

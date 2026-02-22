@@ -14,14 +14,16 @@ import * as Sharing from "expo-sharing";
 // from "save" button on settings page, open a file management modal (like word details) that will give buttons as options
 // it will say "All", then for each language, a button for that one specifically.
 
-export const saveDataToCSV = async (languageObj: any) => {
+export const saveDataToCSV = async (languageData: string, languageName: string) => {
   // step 1: convert JSON to string using react-native-csv
   // console.log("languageObj to be saved: " + JSON.stringify(languageObj));
+  // console.log(languageName + "blahhhhhhh");
   // Specifying fields and data explicitly
   const csv = jsonToCSV({
     fields: ["id", "word", "definition", "pronun", "notes"],
-    data: languageObj.words,
+    data: languageData,
   });
+
   // const csv = jsonToCSV({
   //   fields: ["Column 1", "Column 2"],
   //   data: [
@@ -31,10 +33,12 @@ export const saveDataToCSV = async (languageObj: any) => {
   // });
   // console.log("csv content: ");
   // console.log(csv);
+
   // step 2: call createFile with the file name and content
-  const file = createFile("RainBucketAppFile3.csv", csv);
+  const fileName = languageName + "_vocab.csv";
+  const file = createFile(fileName, csv);
   // step 4: upload file?
-  await Sharing.isAvailableAsync().then(isAvailable => {
+  await Sharing.isAvailableAsync().then((isAvailable) => {
     if (isAvailable) {
       Sharing.shareAsync(file.uri);
     } else {
@@ -51,9 +55,13 @@ const createFile = (fileName: string, content: string): File => {
       console.log("file.create() called");
       file.create(); // can throw an error if the file already exists or no permission to create it
     }
+    // } else { // Not sure if I should do this
+    //   console.log("File already exists, overwriting...");
+    //   file.rename(fileName); // overwrite existing file
+    // }
     console.log("file.write() called");
     file.write(content);
-    console.log(file.textSync()); // Hello, world!
+    // console.log(file.textSync()); // Hello, world!
 
     return file;
   } catch (error) {
