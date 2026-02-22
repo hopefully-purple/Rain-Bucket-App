@@ -9,11 +9,13 @@ import { IWord } from "@/interfaces/languageObjectInterface";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styles from "@/assets/styles/styleSheet";
 import { saveDataToCSV } from "@/file-management/movingFiles";
+import ManageFileModal from "@/components/ManageFileModal";
 
 
 export default function SettingsScreen() {
   const { languageObj, setLanguageObj } = useContext(LanguageObjectContext);
   const [output, setOutput] = useState("");
+  const [visible, setVisible] = useState(false);
 
   const clearAllData = async () => {
     let didUserConfirm = false;
@@ -108,7 +110,8 @@ export default function SettingsScreen() {
           style={localStyles.button}
           mode="outlined"
           textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
-          onPress={() => saveDataToCSV(languageObj)}
+          // onPress={() => saveDataToCSV(languageObj)}
+          onPress={() => setVisible(true)}
         >
           Save to CSV file
         </Button>
@@ -158,6 +161,7 @@ export default function SettingsScreen() {
         <ScrollView>
           <Text style={localStyles.text}>{output}</Text>
         </ScrollView>
+        <ManageFileModal visible={visible} setVisible={setVisible} item={languageObj} />
       </View>
     </SafeAreaView>
   );

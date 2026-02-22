@@ -1,14 +1,9 @@
 import { File, Paths } from "expo-file-system";
 import { jsonToCSV } from "react-native-csv";
-import * as MediaLibrary from "expo-media-library";
-import * as FileSystem from "expo-file-system";
 import * as Sharing from "expo-sharing";
 
 // Big picture steps:
-// 1. Don't worry about which language, just get the data for one language and write it to a file
-// 2. Then worry about sharing the file
 // 3. Then worry about which language, and writing multiple files if necessary
-// 4. then let the user decide the file paths
 
 // next phase: the reverse
 // 1. open a file management modal that will let the user select a file
