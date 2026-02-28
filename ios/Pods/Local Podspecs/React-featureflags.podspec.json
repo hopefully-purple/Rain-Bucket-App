@@ -20,11 +20,7 @@
     "DEFINES_MODULE": "YES"
   },
   "dependencies": {
-    "ReactNativeDependencies": [
-
-    ],
-    "React-Core-prebuilt": [
-
-    ]
+    "ReactNativeDependencies": [],
+    "React-Core-prebuilt": []
   }
 }

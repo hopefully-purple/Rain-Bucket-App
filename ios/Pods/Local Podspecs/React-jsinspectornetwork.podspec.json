@@ -20,23 +20,11 @@
     "DEFINES_MODULE": "YES"
   },
   "dependencies": {
-    "React-jsinspectorcdp": [
-
-    ],
-    "React-featureflags": [
-
-    ],
-    "React-performancetimeline": [
-
-    ],
-    "React-timing": [
-
-    ],
-    "ReactNativeDependencies": [
-
-    ],
-    "React-Core-prebuilt": [
-
-    ]
+    "React-jsinspectorcdp": [],
+    "React-featureflags": [],
+    "React-performancetimeline": [],
+    "React-timing": [],
+    "ReactNativeDependencies": [],
+    "React-Core-prebuilt": []
   }
 }

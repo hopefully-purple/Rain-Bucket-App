@@ -30,32 +30,14 @@
     "QuartzCore"
   ],
   "dependencies": {
-    "RCTTypeSafety": [
-
-    ],
-    "React-jsi": [
-
-    ],
-    "React-Core/RCTAnimationHeaders": [
-
-    ],
-    "React-RCTFBReactNativeSpec": [
-
-    ],
-    "ReactCommon": [
-
-    ],
-    "React-NativeModulesApple": [
-
-    ],
-    "React-featureflags": [
-
-    ],
-    "ReactNativeDependencies": [
-
-    ],
-    "React-Core-prebuilt": [
-
-    ]
+    "RCTTypeSafety": [],
+    "React-jsi": [],
+    "React-Core/RCTAnimationHeaders": [],
+    "React-RCTFBReactNativeSpec": [],
+    "ReactCommon": [],
+    "React-NativeModulesApple": [],
+    "React-featureflags": [],
+    "ReactNativeDependencies": [],
+    "React-Core-prebuilt": []
   }
 }

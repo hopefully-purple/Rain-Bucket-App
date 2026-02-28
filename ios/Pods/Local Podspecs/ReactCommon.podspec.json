@@ -22,12 +22,8 @@
     "GCC_WARN_PEDANTIC": "YES"
   },
   "dependencies": {
-    "ReactNativeDependencies": [
-
-    ],
-    "React-Core-prebuilt": [
-
-    ]
+    "ReactNativeDependencies": [],
+    "React-Core-prebuilt": []
   },
   "subspecs": [
     {
@@ -48,9 +44,7 @@
         "React-logger": [
           "0.81.5"
         ],
-        "hermes-engine": [
-
-        ]
+        "hermes-engine": []
       },
       "subspecs": [
         {
@@ -59,9 +53,7 @@
             "React-jsi": [
               "0.81.5"
             ],
-            "hermes-engine": [
-
-            ]
+            "hermes-engine": []
           },
           "source_files": "react/bridging/**/*.h",
           "exclude_files": "react/bridging/tests",

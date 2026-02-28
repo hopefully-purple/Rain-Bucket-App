@@ -22,15 +22,9 @@
   },
   "source_files": "**/*.h",
   "dependencies": {
-    "hermes-engine": [
-
-    ],
-    "ReactNativeDependencies": [
-
-    ],
-    "React-Core-prebuilt": [
-
-    ]
+    "hermes-engine": [],
+    "ReactNativeDependencies": [],
+    "React-Core-prebuilt": []
   },
   "exclude_files": [
     "jsi/jsilib-posix.cpp",

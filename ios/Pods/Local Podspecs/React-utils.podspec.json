@@ -28,17 +28,9 @@
     "React-jsi": [
       "0.81.5"
     ],
-    "hermes-engine": [
-
-    ],
-    "ReactNativeDependencies": [
-
-    ],
-    "React-Core-prebuilt": [
-
-    ],
-    "React-debug": [
-
-    ]
+    "hermes-engine": [],
+    "ReactNativeDependencies": [],
+    "React-Core-prebuilt": [],
+    "React-debug": []
   }
 }

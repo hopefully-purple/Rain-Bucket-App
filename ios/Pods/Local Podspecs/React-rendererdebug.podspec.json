@@ -21,14 +21,8 @@
     "DEFINES_MODULE": "YES"
   },
   "dependencies": {
-    "React-debug": [
-
-    ],
-    "ReactNativeDependencies": [
-
-    ],
-    "React-Core-prebuilt": [
-
-    ]
+    "React-debug": [],
+    "ReactNativeDependencies": [],
+    "React-Core-prebuilt": []
   }
 }

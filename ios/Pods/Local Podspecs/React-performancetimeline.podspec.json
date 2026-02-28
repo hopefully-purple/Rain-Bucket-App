@@ -20,23 +20,11 @@
     "HEADER_SEARCH_PATHS": "\"${PODS_ROOT}/React-jsinspectortracing\""
   },
   "dependencies": {
-    "React-featureflags": [
-
-    ],
-    "React-jsinspectortracing": [
-
-    ],
-    "React-timing": [
-
-    ],
-    "React-perflogger": [
-
-    ],
-    "ReactNativeDependencies": [
-
-    ],
-    "React-Core-prebuilt": [
-
-    ]
+    "React-featureflags": [],
+    "React-jsinspectortracing": [],
+    "React-timing": [],
+    "React-perflogger": [],
+    "ReactNativeDependencies": [],
+    "React-Core-prebuilt": []
   }
 }

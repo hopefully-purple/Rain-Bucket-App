@@ -28,26 +28,12 @@
   },
   "frameworks": "AudioToolbox",
   "dependencies": {
-    "React-jsi": [
-
-    ],
-    "React-Core/RCTVibrationHeaders": [
-
-    ],
-    "React-RCTFBReactNativeSpec": [
-
-    ],
-    "ReactCommon": [
-
-    ],
-    "React-NativeModulesApple": [
-
-    ],
-    "ReactNativeDependencies": [
-
-    ],
-    "React-Core-prebuilt": [
-
-    ]
+    "React-jsi": [],
+    "React-Core/RCTVibrationHeaders": [],
+    "React-RCTFBReactNativeSpec": [],
+    "ReactCommon": [],
+    "React-NativeModulesApple": [],
+    "ReactNativeDependencies": [],
+    "React-Core-prebuilt": []
   }
 }

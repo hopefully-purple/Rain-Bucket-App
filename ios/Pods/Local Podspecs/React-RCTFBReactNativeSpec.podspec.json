@@ -25,33 +25,15 @@
     "HEADER_SEARCH_PATHS": "\"$(PODS_TARGET_SRCROOT)/FBReactNativeSpec\" \"$(PODS_ROOT)/Headers/Private/Yoga\" \"${PODS_ROOT}/ReactCommon\" \"${PODS_ROOT}/ReactCommon/react/nativemodule/core\" \"${PODS_ROOT}/ReactCommon\" \"${PODS_ROOT}/ReactCommon/react/nativemodule/bridging\""
   },
   "dependencies": {
-    "React-jsi": [
-
-    ],
-    "RCTRequired": [
-
-    ],
-    "RCTTypeSafety": [
-
-    ],
-    "React-Core": [
-
-    ],
-    "React-NativeModulesApple": [
-
-    ],
-    "ReactCommon": [
-
-    ],
-    "hermes-engine": [
-
-    ],
-    "ReactNativeDependencies": [
-
-    ],
-    "React-Core-prebuilt": [
-
-    ]
+    "React-jsi": [],
+    "RCTRequired": [],
+    "RCTTypeSafety": [],
+    "React-Core": [],
+    "React-NativeModulesApple": [],
+    "ReactCommon": [],
+    "hermes-engine": [],
+    "ReactNativeDependencies": [],
+    "React-Core-prebuilt": []
   },
   "script_phases": [
     {
@@ -70,27 +52,13 @@
         "HEADER_SEARCH_PATHS": "\"${PODS_ROOT}/React-featureflags\" \"${PODS_ROOT}/React-debug\" \"${PODS_ROOT}/React-rendererdebug\" \"${PODS_ROOT}/React-utils\" \"${PODS_ROOT}/React-graphics\" \"${PODS_ROOT}/React-graphics/react/renderer/graphics/platform/ios\" \"${PODS_ROOT}/React-Fabric\" \"${PODS_ROOT}/React-Fabric/react/renderer/components/view/platform/cxx\""
       },
       "dependencies": {
-        "React-featureflags": [
-
-        ],
-        "React-debug": [
-
-        ],
-        "React-rendererdebug": [
-
-        ],
-        "React-utils": [
-
-        ],
-        "React-graphics": [
-
-        ],
-        "React-Fabric": [
-
-        ],
-        "Yoga": [
-
-        ]
+        "React-featureflags": [],
+        "React-debug": [],
+        "React-rendererdebug": [],
+        "React-utils": [],
+        "React-graphics": [],
+        "React-Fabric": [],
+        "Yoga": []
       }
     }
   ]

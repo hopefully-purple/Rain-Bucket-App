@@ -23,45 +23,19 @@
     "HEADER_SEARCH_PATHS": "\"${PODS_ROOT}/React-runtimeexecutor\" \"${PODS_ROOT}/React-runtimeexecutor/platform/ios\" \"${PODS_ROOT}/React-jsitooling\" \"${PODS_ROOT}/React-jsinspector\" \"${PODS_ROOT}/React-jsinspectorcdp\" \"${PODS_ROOT}/React-jsinspectortracing\" \"${PODS_ROOT}/React-RuntimeCore\" \"${PODS_ROOT}/React-RuntimeApple\" \"${PODS_ROOT}/React-RuntimeHermes\""
   },
   "dependencies": {
-    "React-Core": [
-
-    ],
-    "React-jsi": [
-
-    ],
-    "React-runtimeexecutor": [
-
-    ],
-    "React-jsitooling": [
-
-    ],
-    "React-jsinspector": [
-
-    ],
-    "React-jsinspectorcdp": [
-
-    ],
-    "React-jsinspectortracing": [
-
-    ],
-    "React-RuntimeCore": [
-
-    ],
-    "React-RuntimeApple": [
-
-    ],
-    "hermes-engine": [
-
-    ],
-    "React-RuntimeHermes": [
-
-    ],
-    "ReactNativeDependencies": [
-
-    ],
-    "React-Core-prebuilt": [
-
-    ]
+    "React-Core": [],
+    "React-jsi": [],
+    "React-runtimeexecutor": [],
+    "React-jsitooling": [],
+    "React-jsinspector": [],
+    "React-jsinspectorcdp": [],
+    "React-jsinspectortracing": [],
+    "React-RuntimeCore": [],
+    "React-RuntimeApple": [],
+    "hermes-engine": [],
+    "React-RuntimeHermes": [],
+    "ReactNativeDependencies": [],
+    "React-Core-prebuilt": []
   },
   "exclude_files": "RCTJscInstanceFactory.{h,mm}"
 }

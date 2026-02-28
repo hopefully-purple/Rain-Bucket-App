@@ -35,32 +35,14 @@
     "CoreGraphics"
   ],
   "dependencies": {
-    "RCTTypeSafety": [
-
-    ],
-    "React-jsi": [
-
-    ],
-    "React-Core/RCTImageHeaders": [
-
-    ],
-    "React-RCTNetwork": [
-
-    ],
-    "React-RCTFBReactNativeSpec": [
-
-    ],
-    "ReactCommon": [
-
-    ],
-    "React-NativeModulesApple": [
-
-    ],
-    "ReactNativeDependencies": [
-
-    ],
-    "React-Core-prebuilt": [
-
-    ]
+    "RCTTypeSafety": [],
+    "React-jsi": [],
+    "React-Core/RCTImageHeaders": [],
+    "React-RCTNetwork": [],
+    "React-RCTFBReactNativeSpec": [],
+    "ReactCommon": [],
+    "React-NativeModulesApple": [],
+    "ReactNativeDependencies": [],
+    "React-Core-prebuilt": []
   }
 }

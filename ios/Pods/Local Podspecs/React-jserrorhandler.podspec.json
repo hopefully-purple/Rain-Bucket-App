@@ -23,29 +23,13 @@
     "HEADER_SEARCH_PATHS": "\"${PODS_ROOT}/React-featureflags\" \"${PODS_ROOT}/React-debug\""
   },
   "dependencies": {
-    "React-jsi": [
-
-    ],
-    "React-cxxreact": [
-
-    ],
-    "ReactCommon/turbomodule/bridging": [
-
-    ],
-    "React-featureflags": [
-
-    ],
-    "React-debug": [
-
-    ],
-    "hermes-engine": [
-
-    ],
-    "ReactNativeDependencies": [
-
-    ],
-    "React-Core-prebuilt": [
-
-    ]
+    "React-jsi": [],
+    "React-cxxreact": [],
+    "ReactCommon/turbomodule/bridging": [],
+    "React-featureflags": [],
+    "React-debug": [],
+    "hermes-engine": [],
+    "ReactNativeDependencies": [],
+    "React-Core-prebuilt": []
   }
 }

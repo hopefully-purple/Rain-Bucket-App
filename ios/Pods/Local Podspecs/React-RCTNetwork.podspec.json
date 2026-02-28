@@ -27,38 +27,16 @@
   },
   "frameworks": "MobileCoreServices",
   "dependencies": {
-    "RCTTypeSafety": [
-
-    ],
-    "React-jsi": [
-
-    ],
-    "React-Core/RCTNetworkHeaders": [
-
-    ],
-    "React-RCTFBReactNativeSpec": [
-
-    ],
-    "ReactCommon": [
-
-    ],
-    "React-featureflags": [
-
-    ],
-    "React-jsinspectorcdp": [
-
-    ],
-    "React-jsinspectornetwork": [
-
-    ],
-    "React-NativeModulesApple": [
-
-    ],
-    "ReactNativeDependencies": [
-
-    ],
-    "React-Core-prebuilt": [
-
-    ]
+    "RCTTypeSafety": [],
+    "React-jsi": [],
+    "React-Core/RCTNetworkHeaders": [],
+    "React-RCTFBReactNativeSpec": [],
+    "ReactCommon": [],
+    "React-featureflags": [],
+    "React-jsinspectorcdp": [],
+    "React-jsinspectornetwork": [],
+    "React-NativeModulesApple": [],
+    "ReactNativeDependencies": [],
+    "React-Core-prebuilt": []
   }
 }

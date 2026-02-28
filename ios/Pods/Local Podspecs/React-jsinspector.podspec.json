@@ -20,38 +20,18 @@
     "DEFINES_MODULE": "YES"
   },
   "dependencies": {
-    "React-oscompat": [
-
-    ],
-    "React-featureflags": [
-
-    ],
-    "React-runtimeexecutor": [
-
-    ],
-    "React-jsi": [
-
-    ],
-    "React-jsinspectorcdp": [
-
-    ],
-    "React-jsinspectornetwork": [
-
-    ],
-    "React-jsinspectortracing": [
-
-    ],
+    "React-oscompat": [],
+    "React-featureflags": [],
+    "React-runtimeexecutor": [],
+    "React-jsi": [],
+    "React-jsinspectorcdp": [],
+    "React-jsinspectornetwork": [],
+    "React-jsinspectortracing": [],
     "React-perflogger": [
       "0.81.5"
     ],
-    "hermes-engine": [
-
-    ],
-    "ReactNativeDependencies": [
-
-    ],
-    "React-Core-prebuilt": [
-
-    ]
+    "hermes-engine": [],
+    "ReactNativeDependencies": [],
+    "React-Core-prebuilt": []
   }
 }

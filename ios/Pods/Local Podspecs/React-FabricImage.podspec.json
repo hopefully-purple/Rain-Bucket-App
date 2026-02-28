@@ -30,44 +30,18 @@
     "RCTTypeSafety": [
       "0.81.5"
     ],
-    "React-jsi": [
-
-    ],
-    "React-logger": [
-
-    ],
-    "React-featureflags": [
-
-    ],
-    "React-utils": [
-
-    ],
-    "Yoga": [
-
-    ],
-    "React-ImageManager": [
-
-    ],
-    "ReactCommon": [
-
-    ],
-    "React-graphics": [
-
-    ],
-    "React-Fabric": [
-
-    ],
-    "React-rendererdebug": [
-
-    ],
-    "hermes-engine": [
-
-    ],
-    "ReactNativeDependencies": [
-
-    ],
-    "React-Core-prebuilt": [
-
-    ]
+    "React-jsi": [],
+    "React-logger": [],
+    "React-featureflags": [],
+    "React-utils": [],
+    "Yoga": [],
+    "React-ImageManager": [],
+    "ReactCommon": [],
+    "React-graphics": [],
+    "React-Fabric": [],
+    "React-rendererdebug": [],
+    "hermes-engine": [],
+    "ReactNativeDependencies": [],
+    "React-Core-prebuilt": []
   }
 }

@@ -21,26 +21,12 @@
     "DEFINES_MODULE": "YES"
   },
   "dependencies": {
-    "React-jsi": [
-
-    ],
-    "React-jsiexecutor": [
-
-    ],
-    "hermes-engine": [
-
-    ],
-    "ReactNativeDependencies": [
-
-    ],
-    "React-Core-prebuilt": [
-
-    ],
-    "ReactCommon/turbomodule/core": [
-
-    ],
-    "React-RCTFBReactNativeSpec": [
-
-    ]
+    "React-jsi": [],
+    "React-jsiexecutor": [],
+    "hermes-engine": [],
+    "ReactNativeDependencies": [],
+    "React-Core-prebuilt": [],
+    "ReactCommon/turbomodule/core": [],
+    "React-RCTFBReactNativeSpec": []
   }
 }

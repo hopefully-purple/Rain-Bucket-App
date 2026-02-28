@@ -26,23 +26,11 @@
     "React-jsi": [
       "0.81.5"
     ],
-    "React-runtimeexecutor": [
-
-    ],
-    "React-jsinspector": [
-
-    ],
-    "React-jsinspectorcdp": [
-
-    ],
-    "React-jsinspectortracing": [
-
-    ],
-    "ReactNativeDependencies": [
-
-    ],
-    "React-Core-prebuilt": [
-
-    ]
+    "React-runtimeexecutor": [],
+    "React-jsinspector": [],
+    "React-jsinspectorcdp": [],
+    "React-jsinspectortracing": [],
+    "ReactNativeDependencies": [],
+    "React-Core-prebuilt": []
   }
 }

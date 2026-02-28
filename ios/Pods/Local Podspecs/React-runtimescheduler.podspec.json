@@ -20,50 +20,20 @@
     "HEADER_SEARCH_PATHS": "\"${PODS_ROOT}/React-runtimeexecutor\" \"${PODS_ROOT}/React-runtimeexecutor/platform/ios\" \"${PODS_ROOT}/React-debug\" \"${PODS_ROOT}/React-jsinspectortracing\""
   },
   "dependencies": {
-    "React-runtimeexecutor": [
-
-    ],
-    "React-callinvoker": [
-
-    ],
-    "React-cxxreact": [
-
-    ],
-    "React-rendererdebug": [
-
-    ],
-    "React-utils": [
-
-    ],
-    "React-featureflags": [
-
-    ],
-    "React-timing": [
-
-    ],
-    "React-jsi": [
-
-    ],
-    "React-performancetimeline": [
-
-    ],
-    "React-rendererconsistency": [
-
-    ],
-    "React-debug": [
-
-    ],
-    "React-jsinspectortracing": [
-
-    ],
-    "hermes-engine": [
-
-    ],
-    "ReactNativeDependencies": [
-
-    ],
-    "React-Core-prebuilt": [
-
-    ]
+    "React-runtimeexecutor": [],
+    "React-callinvoker": [],
+    "React-cxxreact": [],
+    "React-rendererdebug": [],
+    "React-utils": [],
+    "React-featureflags": [],
+    "React-timing": [],
+    "React-jsi": [],
+    "React-performancetimeline": [],
+    "React-rendererconsistency": [],
+    "React-debug": [],
+    "React-jsinspectortracing": [],
+    "hermes-engine": [],
+    "ReactNativeDependencies": [],
+    "React-Core-prebuilt": []
   }
 }

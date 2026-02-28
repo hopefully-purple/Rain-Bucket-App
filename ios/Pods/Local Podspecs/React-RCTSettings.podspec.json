@@ -27,29 +27,13 @@
     "HEADER_SEARCH_PATHS": "\"${PODS_ROOT}/Headers/Public/ReactCodegen/react/renderer/components\" \"${PODS_ROOT}/React-RCTFBReactNativeSpec\" \"${PODS_ROOT}/ReactCommon\" \"${PODS_ROOT}/ReactCommon/react/nativemodule/core\" \"${PODS_ROOT}/React-NativeModulesApple\" \"${PODS_ROOT}/React-NativeModulesApple/build/generated/ios\""
   },
   "dependencies": {
-    "RCTTypeSafety": [
-
-    ],
-    "React-jsi": [
-
-    ],
-    "React-Core/RCTSettingsHeaders": [
-
-    ],
-    "React-RCTFBReactNativeSpec": [
-
-    ],
-    "ReactCommon": [
-
-    ],
-    "React-NativeModulesApple": [
-
-    ],
-    "ReactNativeDependencies": [
-
-    ],
-    "React-Core-prebuilt": [
-
-    ]
+    "RCTTypeSafety": [],
+    "React-jsi": [],
+    "React-Core/RCTSettingsHeaders": [],
+    "React-RCTFBReactNativeSpec": [],
+    "ReactCommon": [],
+    "React-NativeModulesApple": [],
+    "ReactNativeDependencies": [],
+    "React-Core-prebuilt": []
   }
 }

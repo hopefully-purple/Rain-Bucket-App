@@ -26,41 +26,17 @@
     "HEADER_SEARCH_PATHS": "\"${PODS_ROOT}/Headers/Public/ReactCodegen/react/renderer/components\" \"${PODS_ROOT}/React-RCTFBReactNativeSpec\" \"${PODS_ROOT}/React-NativeModulesApple\" \"${PODS_ROOT}/React-jsinspector\" \"${PODS_ROOT}/React-jsinspectorcdp\" \"${PODS_ROOT}/ReactCommon\" \"${PODS_ROOT}/ReactCommon/react/nativemodule/core\""
   },
   "dependencies": {
-    "React-jsi": [
-
-    ],
-    "React-Core/RCTBlobHeaders": [
-
-    ],
-    "React-Core/RCTWebSocket": [
-
-    ],
-    "React-RCTNetwork": [
-
-    ],
-    "React-RCTFBReactNativeSpec": [
-
-    ],
-    "React-NativeModulesApple": [
-
-    ],
-    "React-jsinspector": [
-
-    ],
-    "React-jsinspectorcdp": [
-
-    ],
-    "ReactCommon": [
-
-    ],
-    "hermes-engine": [
-
-    ],
-    "ReactNativeDependencies": [
-
-    ],
-    "React-Core-prebuilt": [
-
-    ]
+    "React-jsi": [],
+    "React-Core/RCTBlobHeaders": [],
+    "React-Core/RCTWebSocket": [],
+    "React-RCTNetwork": [],
+    "React-RCTFBReactNativeSpec": [],
+    "React-NativeModulesApple": [],
+    "React-jsinspector": [],
+    "React-jsinspectorcdp": [],
+    "ReactCommon": [],
+    "hermes-engine": [],
+    "ReactNativeDependencies": [],
+    "React-Core-prebuilt": []
   }
 }

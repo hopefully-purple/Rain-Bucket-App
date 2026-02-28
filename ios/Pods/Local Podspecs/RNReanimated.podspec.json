@@ -19,75 +19,29 @@
     "tag": "4.1.6"
   },
   "dependencies": {
-    "RNWorklets": [
-
-    ],
-    "React-Core": [
-
-    ],
-    "React-RCTFabric": [
-
-    ],
-    "ReactCodegen": [
-
-    ],
-    "RCTRequired": [
-
-    ],
-    "RCTTypeSafety": [
-
-    ],
-    "ReactCommon/turbomodule/bridging": [
-
-    ],
-    "ReactCommon/turbomodule/core": [
-
-    ],
-    "React-NativeModulesApple": [
-
-    ],
-    "Yoga": [
-
-    ],
-    "React-Fabric": [
-
-    ],
-    "React-graphics": [
-
-    ],
-    "React-utils": [
-
-    ],
-    "React-featureflags": [
-
-    ],
-    "React-debug": [
-
-    ],
-    "React-ImageManager": [
-
-    ],
-    "React-rendererdebug": [
-
-    ],
-    "React-jsi": [
-
-    ],
-    "React-renderercss": [
-
-    ],
-    "hermes-engine": [
-
-    ],
-    "ReactNativeDependencies": [
-
-    ],
-    "React-Core-prebuilt": [
-
-    ],
-    "React-hermes": [
-
-    ]
+    "RNWorklets": [],
+    "React-Core": [],
+    "React-RCTFabric": [],
+    "ReactCodegen": [],
+    "RCTRequired": [],
+    "RCTTypeSafety": [],
+    "ReactCommon/turbomodule/bridging": [],
+    "ReactCommon/turbomodule/core": [],
+    "React-NativeModulesApple": [],
+    "Yoga": [],
+    "React-Fabric": [],
+    "React-graphics": [],
+    "React-utils": [],
+    "React-featureflags": [],
+    "React-debug": [],
+    "React-ImageManager": [],
+    "React-rendererdebug": [],
+    "React-jsi": [],
+    "React-renderercss": [],
+    "hermes-engine": [],
+    "ReactNativeDependencies": [],
+    "React-Core-prebuilt": [],
+    "React-hermes": []
   },
   "pod_target_xcconfig": {
     "USE_HEADERMAP": "YES",

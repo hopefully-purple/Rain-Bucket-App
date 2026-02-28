@@ -30,32 +30,16 @@
     "React-jsiexecutor": [
       "0.81.5"
     ],
-    "React-jsinspector": [
-
-    ],
-    "React-jsinspectorcdp": [
-
-    ],
-    "React-jsinspectortracing": [
-
-    ],
+    "React-jsinspector": [],
+    "React-jsinspectorcdp": [],
+    "React-jsinspectortracing": [],
     "React-perflogger": [
       "0.81.5"
     ],
-    "hermes-engine": [
-
-    ],
-    "React-jsi": [
-
-    ],
-    "React-runtimeexecutor": [
-
-    ],
-    "ReactNativeDependencies": [
-
-    ],
-    "React-Core-prebuilt": [
-
-    ]
+    "hermes-engine": [],
+    "React-jsi": [],
+    "React-runtimeexecutor": [],
+    "ReactNativeDependencies": [],
+    "React-Core-prebuilt": []
   }
 }

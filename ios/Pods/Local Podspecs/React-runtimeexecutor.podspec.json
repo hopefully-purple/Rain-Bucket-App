@@ -25,23 +25,13 @@
     "DEFINES_MODULE": "YES"
   },
   "dependencies": {
-    "ReactNativeDependencies": [
-
-    ],
-    "React-Core-prebuilt": [
-
-    ],
+    "ReactNativeDependencies": [],
+    "React-Core-prebuilt": [],
     "React-jsi": [
       "0.81.5"
     ],
-    "React-featureflags": [
-
-    ],
-    "React-debug": [
-
-    ],
-    "React-utils": [
-
-    ]
+    "React-featureflags": [],
+    "React-debug": [],
+    "React-utils": []
   }
 }

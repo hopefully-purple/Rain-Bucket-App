@@ -28,50 +28,20 @@
     "GCC_WARN_PEDANTIC": "YES"
   },
   "dependencies": {
-    "React-jsiexecutor": [
-
-    ],
-    "React-cxxreact": [
-
-    ],
-    "React-runtimeexecutor": [
-
-    ],
-    "React-jsi": [
-
-    ],
-    "React-jserrorhandler": [
-
-    ],
-    "React-performancetimeline": [
-
-    ],
-    "React-runtimescheduler": [
-
-    ],
-    "React-utils": [
-
-    ],
-    "React-featureflags": [
-
-    ],
-    "React-Fabric": [
-
-    ],
-    "hermes-engine": [
-
-    ],
-    "ReactNativeDependencies": [
-
-    ],
-    "React-Core-prebuilt": [
-
-    ],
-    "React-jsinspector": [
-
-    ],
-    "React-jsitooling": [
-
-    ]
+    "React-jsiexecutor": [],
+    "React-cxxreact": [],
+    "React-runtimeexecutor": [],
+    "React-jsi": [],
+    "React-jserrorhandler": [],
+    "React-performancetimeline": [],
+    "React-runtimescheduler": [],
+    "React-utils": [],
+    "React-featureflags": [],
+    "React-Fabric": [],
+    "hermes-engine": [],
+    "ReactNativeDependencies": [],
+    "React-Core-prebuilt": [],
+    "React-jsinspector": [],
+    "React-jsitooling": []
   }
 }

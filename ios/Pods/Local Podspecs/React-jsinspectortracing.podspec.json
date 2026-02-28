@@ -20,17 +20,9 @@
     "DEFINES_MODULE": "YES"
   },
   "dependencies": {
-    "React-oscompat": [
-
-    ],
-    "React-timing": [
-
-    ],
-    "ReactNativeDependencies": [
-
-    ],
-    "React-Core-prebuilt": [
-
-    ]
+    "React-oscompat": [],
+    "React-timing": [],
+    "ReactNativeDependencies": [],
+    "React-Core-prebuilt": []
   }
 }

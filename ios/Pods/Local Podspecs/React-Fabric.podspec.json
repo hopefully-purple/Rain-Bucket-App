@@ -20,60 +20,24 @@
     "HEADER_SEARCH_PATHS": "\"${PODS_ROOT}/React-runtimeexecutor\" \"${PODS_ROOT}/React-runtimeexecutor/platform/ios\" \"${PODS_ROOT}/React-rendererdebug\" \"${PODS_ROOT}/React-graphics\" \"${PODS_ROOT}/React-graphics/react/renderer/graphics/platform/ios\" \"${PODS_ROOT}/React-utils\" \"${PODS_ROOT}/React-utils/react/utils/platform/ios\""
   },
   "dependencies": {
-    "React-jsiexecutor": [
-
-    ],
-    "RCTRequired": [
-
-    ],
-    "RCTTypeSafety": [
-
-    ],
-    "ReactCommon/turbomodule/core": [
-
-    ],
-    "React-jsi": [
-
-    ],
-    "React-logger": [
-
-    ],
-    "React-Core": [
-
-    ],
-    "React-debug": [
-
-    ],
-    "React-featureflags": [
-
-    ],
-    "React-runtimescheduler": [
-
-    ],
-    "React-cxxreact": [
-
-    ],
-    "React-runtimeexecutor": [
-
-    ],
-    "React-rendererdebug": [
-
-    ],
-    "React-graphics": [
-
-    ],
-    "React-utils": [
-
-    ],
-    "hermes-engine": [
-
-    ],
-    "ReactNativeDependencies": [
-
-    ],
-    "React-Core-prebuilt": [
-
-    ]
+    "React-jsiexecutor": [],
+    "RCTRequired": [],
+    "RCTTypeSafety": [],
+    "ReactCommon/turbomodule/core": [],
+    "React-jsi": [],
+    "React-logger": [],
+    "React-Core": [],
+    "React-debug": [],
+    "React-featureflags": [],
+    "React-runtimescheduler": [],
+    "React-cxxreact": [],
+    "React-runtimeexecutor": [],
+    "React-rendererdebug": [],
+    "React-graphics": [],
+    "React-utils": [],
+    "hermes-engine": [],
+    "ReactNativeDependencies": [],
+    "React-Core-prebuilt": []
   },
   "subspecs": [
     {
@@ -125,12 +89,8 @@
         {
           "name": "view",
           "dependencies": {
-            "React-renderercss": [
-
-            ],
-            "Yoga": [
-
-            ]
+            "React-renderercss": [],
+            "Yoga": []
           },
           "source_files": [
             "react/renderer/components/view/*.{h}",
@@ -158,9 +118,7 @@
     {
       "name": "dom",
       "dependencies": {
-        "React-graphics": [
-
-        ]
+        "React-graphics": []
       },
       "source_files": "react/renderer/dom/**/*.{h}",
       "exclude_files": "react/renderer/dom/tests",
@@ -171,12 +129,8 @@
       "source_files": "react/renderer/scheduler/**/*.h",
       "header_dir": "react/renderer/scheduler",
       "dependencies": {
-        "React-performancetimeline": [
-
-        ],
-        "React-Fabric/observers/events": [
-
-        ]
+        "React-performancetimeline": [],
+        "React-Fabric/observers/events": []
       }
     },
     {
@@ -221,9 +175,7 @@
     {
       "name": "uimanager",
       "dependencies": {
-        "React-rendererconsistency": [
-
-        ]
+        "React-rendererconsistency": []
       },
       "source_files": "react/renderer/uimanager/*.h",
       "header_dir": "react/renderer/uimanager",

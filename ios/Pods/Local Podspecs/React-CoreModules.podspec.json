@@ -52,35 +52,15 @@
     "React-jsi": [
       "0.81.5"
     ],
-    "React-RCTBlob": [
-
-    ],
-    "React-runtimeexecutor": [
-
-    ],
-    "React-jsinspector": [
-
-    ],
-    "React-jsinspectorcdp": [
-
-    ],
-    "React-jsinspectortracing": [
-
-    ],
-    "React-RCTFBReactNativeSpec": [
-
-    ],
-    "ReactCommon": [
-
-    ],
-    "React-NativeModulesApple": [
-
-    ],
-    "ReactNativeDependencies": [
-
-    ],
-    "React-Core-prebuilt": [
-
-    ]
+    "React-RCTBlob": [],
+    "React-runtimeexecutor": [],
+    "React-jsinspector": [],
+    "React-jsinspectorcdp": [],
+    "React-jsinspectortracing": [],
+    "React-RCTFBReactNativeSpec": [],
+    "ReactCommon": [],
+    "React-NativeModulesApple": [],
+    "ReactNativeDependencies": [],
+    "React-Core-prebuilt": []
   }
 }

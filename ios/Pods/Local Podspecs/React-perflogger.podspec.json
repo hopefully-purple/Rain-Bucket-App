@@ -22,11 +22,7 @@
     "HEADER_SEARCH_PATHS": "\"$(PODS_TARGET_SRCROOT)/..\""
   },
   "dependencies": {
-    "ReactNativeDependencies": [
-
-    ],
-    "React-Core-prebuilt": [
-
-    ]
+    "ReactNativeDependencies": [],
+    "React-Core-prebuilt": []
   }
 }

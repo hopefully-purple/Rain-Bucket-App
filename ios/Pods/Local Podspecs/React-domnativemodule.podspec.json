@@ -21,44 +21,18 @@
     "DEFINES_MODULE": "YES"
   },
   "dependencies": {
-    "React-jsi": [
-
-    ],
-    "React-jsiexecutor": [
-
-    ],
-    "hermes-engine": [
-
-    ],
-    "ReactNativeDependencies": [
-
-    ],
-    "React-Core-prebuilt": [
-
-    ],
-    "Yoga": [
-
-    ],
-    "ReactCommon/turbomodule/core": [
-
-    ],
-    "React-Fabric": [
-
-    ],
-    "React-Fabric/bridging": [
-
-    ],
-    "React-FabricComponents": [
-
-    ],
-    "React-runtimeexecutor": [
-
-    ],
-    "React-graphics": [
-
-    ],
-    "React-RCTFBReactNativeSpec": [
-
-    ]
+    "React-jsi": [],
+    "React-jsiexecutor": [],
+    "hermes-engine": [],
+    "ReactNativeDependencies": [],
+    "React-Core-prebuilt": [],
+    "Yoga": [],
+    "ReactCommon/turbomodule/core": [],
+    "React-Fabric": [],
+    "React-Fabric/bridging": [],
+    "React-FabricComponents": [],
+    "React-runtimeexecutor": [],
+    "React-graphics": [],
+    "React-RCTFBReactNativeSpec": []
   }
 }

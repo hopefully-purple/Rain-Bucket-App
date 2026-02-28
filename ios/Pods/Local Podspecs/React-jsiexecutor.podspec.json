@@ -28,26 +28,12 @@
     "React-perflogger": [
       "0.81.5"
     ],
-    "React-runtimeexecutor": [
-
-    ],
-    "React-jsinspector": [
-
-    ],
-    "React-jsinspectorcdp": [
-
-    ],
-    "React-jsinspectortracing": [
-
-    ],
-    "hermes-engine": [
-
-    ],
-    "ReactNativeDependencies": [
-
-    ],
-    "React-Core-prebuilt": [
-
-    ]
+    "React-runtimeexecutor": [],
+    "React-jsinspector": [],
+    "React-jsinspectorcdp": [],
+    "React-jsinspectortracing": [],
+    "hermes-engine": [],
+    "ReactNativeDependencies": [],
+    "React-Core-prebuilt": []
   }
 }

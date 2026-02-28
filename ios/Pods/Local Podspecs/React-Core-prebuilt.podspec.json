@@ -19,9 +19,7 @@
   "module_map": "React.xcframework/Modules/module.modulemap",
   "public_header_files": "React.xcframework/Headers/**/*.h",
   "dependencies": {
-    "ReactNativeDependencies": [
-
-    ]
+    "ReactNativeDependencies": []
   },
   "pod_target_xcconfig": {
     "HEADER_SEARCH_PATHS": [

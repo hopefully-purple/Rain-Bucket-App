@@ -16,9 +16,7 @@
   },
   "static_framework": true,
   "dependencies": {
-    "ExpoModulesCore": [
-
-    ],
+    "ExpoModulesCore": [],
     "SDWebImage": [
       "~> 5.21.0"
     ],
@@ -31,9 +29,7 @@
     "SDWebImageWebPCoder": [
       "~> 0.14.6"
     ],
-    "libavif/libdav1d": [
-
-    ]
+    "libavif/libdav1d": []
   },
   "pod_target_xcconfig": {
     "DEFINES_MODULE": "YES"
@@ -45,9 +41,7 @@
       "name": "Tests",
       "test_type": "unit",
       "dependencies": {
-        "ExpoModulesTestCore": [
-
-        ]
+        "ExpoModulesTestCore": []
       },
       "source_files": "Tests/**/*.{m,swift}"
     }

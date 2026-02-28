@@ -21,47 +21,19 @@
     "GCC_WARN_PEDANTIC": "YES"
   },
   "dependencies": {
-    "React-jsitracing": [
-
-    ],
-    "React-jsi": [
-
-    ],
-    "React-utils": [
-
-    ],
-    "React-RuntimeCore": [
-
-    ],
-    "React-featureflags": [
-
-    ],
-    "React-jsinspector": [
-
-    ],
-    "React-jsinspectorcdp": [
-
-    ],
-    "React-jsinspectortracing": [
-
-    ],
-    "React-hermes": [
-
-    ],
-    "hermes-engine": [
-
-    ],
-    "React-runtimeexecutor": [
-
-    ],
-    "React-jsitooling": [
-
-    ],
-    "ReactNativeDependencies": [
-
-    ],
-    "React-Core-prebuilt": [
-
-    ]
+    "React-jsitracing": [],
+    "React-jsi": [],
+    "React-utils": [],
+    "React-RuntimeCore": [],
+    "React-featureflags": [],
+    "React-jsinspector": [],
+    "React-jsinspectorcdp": [],
+    "React-jsinspectortracing": [],
+    "React-hermes": [],
+    "hermes-engine": [],
+    "React-runtimeexecutor": [],
+    "React-jsitooling": [],
+    "ReactNativeDependencies": [],
+    "React-Core-prebuilt": []
   }
 }

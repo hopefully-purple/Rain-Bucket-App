@@ -19,66 +19,26 @@
     "HEADER_SEARCH_PATHS": "\"$(PODS_TARGET_SRCROOT)/ReactCommon\" \"$(PODS_ROOT)/Headers/Private/Yoga\" \"$(PODS_TARGET_SRCROOT)\" \"${PODS_ROOT}/React-RCTFBReactNativeSpec\" \"${PODS_ROOT}/React-rendererdebug\" \"${PODS_ROOT}/React-graphics\" \"${PODS_ROOT}/React-graphics/react/renderer/graphics/platform/ios\" \"${PODS_ROOT}/React-Fabric\" \"${PODS_ROOT}/React-Fabric/react/renderer/components/scrollview/platform/cxx\" \"${PODS_ROOT}/React-Fabric/react/renderer/components/view/platform/cxx\" \"${PODS_ROOT}/React-Fabric/react/renderer/imagemanager/platform/ios\""
   },
   "dependencies": {
-    "React-jsiexecutor": [
-
-    ],
-    "RCTRequired": [
-
-    ],
-    "RCTTypeSafety": [
-
-    ],
-    "ReactCommon/turbomodule/core": [
-
-    ],
-    "React-jsi": [
-
-    ],
-    "React-logger": [
-
-    ],
-    "React-Core": [
-
-    ],
-    "React-debug": [
-
-    ],
-    "React-featureflags": [
-
-    ],
-    "React-utils": [
-
-    ],
-    "React-runtimescheduler": [
-
-    ],
-    "React-cxxreact": [
-
-    ],
-    "Yoga": [
-
-    ],
-    "React-RCTFBReactNativeSpec": [
-
-    ],
-    "React-rendererdebug": [
-
-    ],
-    "React-graphics": [
-
-    ],
-    "React-Fabric": [
-
-    ],
-    "hermes-engine": [
-
-    ],
-    "ReactNativeDependencies": [
-
-    ],
-    "React-Core-prebuilt": [
-
-    ]
+    "React-jsiexecutor": [],
+    "RCTRequired": [],
+    "RCTTypeSafety": [],
+    "ReactCommon/turbomodule/core": [],
+    "React-jsi": [],
+    "React-logger": [],
+    "React-Core": [],
+    "React-debug": [],
+    "React-featureflags": [],
+    "React-utils": [],
+    "React-runtimescheduler": [],
+    "React-cxxreact": [],
+    "Yoga": [],
+    "React-RCTFBReactNativeSpec": [],
+    "React-rendererdebug": [],
+    "React-graphics": [],
+    "React-Fabric": [],
+    "hermes-engine": [],
+    "ReactNativeDependencies": [],
+    "React-Core-prebuilt": []
   },
   "subspecs": [
     {
@@ -162,9 +122,7 @@
     {
       "name": "textlayoutmanager",
       "dependencies": {
-        "React-Fabric": [
-
-        ]
+        "React-Fabric": []
       },
       "source_files": [
         "react/renderer/textlayoutmanager/platform/ios/**/*.h",

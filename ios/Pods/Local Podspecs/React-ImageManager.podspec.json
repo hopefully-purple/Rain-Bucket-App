@@ -21,29 +21,13 @@
     "DEFINES_MODULE": "YES"
   },
   "dependencies": {
-    "React-Core/Default": [
-
-    ],
-    "React-Fabric": [
-
-    ],
-    "React-graphics": [
-
-    ],
-    "React-debug": [
-
-    ],
-    "React-utils": [
-
-    ],
-    "React-rendererdebug": [
-
-    ],
-    "ReactNativeDependencies": [
-
-    ],
-    "React-Core-prebuilt": [
-
-    ]
+    "React-Core/Default": [],
+    "React-Fabric": [],
+    "React-graphics": [],
+    "React-debug": [],
+    "React-utils": [],
+    "React-rendererdebug": [],
+    "ReactNativeDependencies": [],
+    "React-Core-prebuilt": []
   }
 }

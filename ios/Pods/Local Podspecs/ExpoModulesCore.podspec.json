@@ -34,72 +34,28 @@
     ]
   },
   "dependencies": {
-    "hermes-engine": [
-
-    ],
-    "React-jsinspector": [
-
-    ],
-    "React-Core": [
-
-    ],
-    "ReactCommon/turbomodule/core": [
-
-    ],
-    "React-NativeModulesApple": [
-
-    ],
-    "React-RCTFabric": [
-
-    ],
-    "ReactCodegen": [
-
-    ],
-    "RCTRequired": [
-
-    ],
-    "RCTTypeSafety": [
-
-    ],
-    "ReactCommon/turbomodule/bridging": [
-
-    ],
-    "Yoga": [
-
-    ],
-    "React-Fabric": [
-
-    ],
-    "React-graphics": [
-
-    ],
-    "React-utils": [
-
-    ],
-    "React-featureflags": [
-
-    ],
-    "React-debug": [
-
-    ],
-    "React-ImageManager": [
-
-    ],
-    "React-rendererdebug": [
-
-    ],
-    "React-jsi": [
-
-    ],
-    "React-renderercss": [
-
-    ],
-    "ReactNativeDependencies": [
-
-    ],
-    "React-Core-prebuilt": [
-
-    ]
+    "hermes-engine": [],
+    "React-jsinspector": [],
+    "React-Core": [],
+    "ReactCommon/turbomodule/core": [],
+    "React-NativeModulesApple": [],
+    "React-RCTFabric": [],
+    "ReactCodegen": [],
+    "RCTRequired": [],
+    "RCTTypeSafety": [],
+    "ReactCommon/turbomodule/bridging": [],
+    "Yoga": [],
+    "React-Fabric": [],
+    "React-graphics": [],
+    "React-utils": [],
+    "React-featureflags": [],
+    "React-debug": [],
+    "React-ImageManager": [],
+    "React-rendererdebug": [],
+    "React-jsi": [],
+    "React-renderercss": [],
+    "ReactNativeDependencies": [],
+    "React-Core-prebuilt": []
   },
   "compiler_flags": "-DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -DFOLLY_CFG_NO_COROUTINES=1 -DFOLLY_HAVE_CLOCK_GETTIME=1 -Wno-comma -Wno-shorten-64-to-32 -DREACT_NATIVE_TARGET_VERSION=81 -DUSE_HERMES -DRCT_NEW_ARCH_ENABLED",
   "source_files": [
@@ -118,9 +74,7 @@
       "name": "Tests",
       "test_type": "unit",
       "dependencies": {
-        "ExpoModulesTestCore": [
-
-        ]
+        "ExpoModulesTestCore": []
       },
       "source_files": "ios/Tests/**/*.{m,swift}"
     }
