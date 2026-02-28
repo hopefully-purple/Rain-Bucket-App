@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08425328EB940FC5C000241C /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C2F306E544DED77B068E56 /* ExpoModulesProvider.swift */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
-		34ADB0E99E1D3C493C9FE0F7 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 243CB3EE5892279795A9EAAD /* PrivacyInfo.xcprivacy */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
-		B3714D5EDDB881495FCB8832 /* libPods-RainBucketApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D958E3B60483F7CE48395C84 /* libPods-RainBucketApp.a */; };
+		4E6CEDA6C3A7F6D3F1E7F2FF /* libPods-RainBucketApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DF1DAC6D057923FCF700CD6 /* libPods-RainBucketApp.a */; };
+		575E07AAA8912317475D84F8 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 4C177DA2B822F2AE14C7976C /* PrivacyInfo.xcprivacy */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
-		EE7F5692798C87B0E5BEEE9C /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE469880460DAD7B93662530 /* ExpoModulesProvider.swift */; };
 		F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11748412D0307B40044C1D9 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
@@ -20,16 +20,16 @@
 		13B07F961A680F5B00A75B9A /* RainBucketApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RainBucketApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = RainBucketApp/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = RainBucketApp/Info.plist; sourceTree = "<group>"; };
-		243CB3EE5892279795A9EAAD /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = RainBucketApp/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		6F156F17D2B1E39819EBB18C /* Pods-RainBucketApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RainBucketApp.debug.xcconfig"; path = "Target Support Files/Pods-RainBucketApp/Pods-RainBucketApp.debug.xcconfig"; sourceTree = "<group>"; };
+		2B6113D20301C8385F0DDD09 /* Pods-RainBucketApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RainBucketApp.debug.xcconfig"; path = "Target Support Files/Pods-RainBucketApp/Pods-RainBucketApp.debug.xcconfig"; sourceTree = "<group>"; };
+		38031DB42D99D6E8729B6D5D /* Pods-RainBucketApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RainBucketApp.release.xcconfig"; path = "Target Support Files/Pods-RainBucketApp/Pods-RainBucketApp.release.xcconfig"; sourceTree = "<group>"; };
+		4C177DA2B822F2AE14C7976C /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = RainBucketApp/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		7DF1DAC6D057923FCF700CD6 /* libPods-RainBucketApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RainBucketApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = RainBucketApp/SplashScreen.storyboard; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
-		BE469880460DAD7B93662530 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-RainBucketApp/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
-		D958E3B60483F7CE48395C84 /* libPods-RainBucketApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RainBucketApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5C2F306E544DED77B068E56 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-RainBucketApp/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F11748412D0307B40044C1D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = RainBucketApp/AppDelegate.swift; sourceTree = "<group>"; };
 		F11748442D0722820044C1D9 /* RainBucketApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "RainBucketApp-Bridging-Header.h"; path = "RainBucketApp/RainBucketApp-Bridging-Header.h"; sourceTree = "<group>"; };
-		FC3C1BFCF1332A1A2C55D7A7 /* Pods-RainBucketApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RainBucketApp.release.xcconfig"; path = "Target Support Files/Pods-RainBucketApp/Pods-RainBucketApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,7 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3714D5EDDB881495FCB8832 /* libPods-RainBucketApp.a in Frameworks */,
+				4E6CEDA6C3A7F6D3F1E7F2FF /* libPods-RainBucketApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,26 +53,44 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */,
-				243CB3EE5892279795A9EAAD /* PrivacyInfo.xcprivacy */,
+				4C177DA2B822F2AE14C7976C /* PrivacyInfo.xcprivacy */,
 			);
 			name = RainBucketApp;
 			sourceTree = "<group>";
 		};
-		1E42C74B4EFA98E9B701BF3B /* ExpoModulesProviders */ = {
+		1AA912A69206F49C99121B98 /* ExpoModulesProviders */ = {
 			isa = PBXGroup;
 			children = (
-				CF4162915D02F2DE027FAC18 /* RainBucketApp */,
+				5AE3BDAEDC0CB6068D8FE4F4 /* RainBucketApp */,
 			);
 			name = ExpoModulesProviders;
+			sourceTree = "<group>";
+		};
+		1ACCDAF6B12E29285046F690 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2B6113D20301C8385F0DDD09 /* Pods-RainBucketApp.debug.xcconfig */,
+				38031DB42D99D6E8729B6D5D /* Pods-RainBucketApp.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				D958E3B60483F7CE48395C84 /* libPods-RainBucketApp.a */,
+				7DF1DAC6D057923FCF700CD6 /* libPods-RainBucketApp.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5AE3BDAEDC0CB6068D8FE4F4 /* RainBucketApp */ = {
+			isa = PBXGroup;
+			children = (
+				C5C2F306E544DED77B068E56 /* ExpoModulesProvider.swift */,
+			);
+			name = RainBucketApp;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -89,8 +107,8 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				B82DF18F75FB034618E8E78E /* Pods */,
-				1E42C74B4EFA98E9B701BF3B /* ExpoModulesProviders */,
+				1ACCDAF6B12E29285046F690 /* Pods */,
+				1AA912A69206F49C99121B98 /* ExpoModulesProviders */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -105,16 +123,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B82DF18F75FB034618E8E78E /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				6F156F17D2B1E39819EBB18C /* Pods-RainBucketApp.debug.xcconfig */,
-				FC3C1BFCF1332A1A2C55D7A7 /* Pods-RainBucketApp.release.xcconfig */,
-			);
-			name = Pods;
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		BB2F792B24A3F905000567C9 /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
@@ -122,14 +130,6 @@
 			);
 			name = Supporting;
 			path = RainBucketApp/Supporting;
-			sourceTree = "<group>";
-		};
-		CF4162915D02F2DE027FAC18 /* RainBucketApp */ = {
-			isa = PBXGroup;
-			children = (
-				BE469880460DAD7B93662530 /* ExpoModulesProvider.swift */,
-			);
-			name = RainBucketApp;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,13 +140,13 @@
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "RainBucketApp" */;
 			buildPhases = (
 				08A4A3CD28434E44B6B9DE2E /* [CP] Check Pods Manifest.lock */,
-				17884B56473888AA11B38A92 /* [Expo] Configure project */,
+				86AC8D45A4B0A6C8A91E237B /* [Expo] Configure project */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */,
-				E64AFF440CD89B5978AC3140 /* [CP] Embed Pods Frameworks */,
+				D73D3638B601452CCEDEB7E3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -196,7 +196,7 @@
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
-				34ADB0E99E1D3C493C9FE0F7 /* PrivacyInfo.xcprivacy in Resources */,
+				575E07AAA8912317475D84F8 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,30 +242,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		17884B56473888AA11B38A92 /* [Expo] Configure project */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/.xcode.env",
-				"$(SRCROOT)/.xcode.env.local",
-				"$(SRCROOT)/RainBucketApp/RainBucketApp.entitlements",
-				"$(SRCROOT)/Pods/Target Support Files/Pods-RainBucketApp/expo-configure-project.sh",
-			);
-			name = "[Expo] Configure project";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(SRCROOT)/Pods/Target Support Files/Pods-RainBucketApp/ExpoModulesProvider.swift",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# This script configures Expo modules and generates the modules provider file.\nbash -l -c \"./Pods/Target\\ Support\\ Files/Pods-RainBucketApp/expo-configure-project.sh\"\n";
-		};
 		800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -300,7 +276,31 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RainBucketApp/Pods-RainBucketApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E64AFF440CD89B5978AC3140 /* [CP] Embed Pods Frameworks */ = {
+		86AC8D45A4B0A6C8A91E237B /* [Expo] Configure project */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/.xcode.env",
+				"$(SRCROOT)/.xcode.env.local",
+				"$(SRCROOT)/RainBucketApp/RainBucketApp.entitlements",
+				"$(SRCROOT)/Pods/Target Support Files/Pods-RainBucketApp/expo-configure-project.sh",
+			);
+			name = "[Expo] Configure project";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(SRCROOT)/Pods/Target Support Files/Pods-RainBucketApp/ExpoModulesProvider.swift",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# This script configures Expo modules and generates the modules provider file.\nbash -l -c \"./Pods/Target\\ Support\\ Files/Pods-RainBucketApp/expo-configure-project.sh\"\n";
+		};
+		D73D3638B601452CCEDEB7E3 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -330,7 +330,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */,
-				EE7F5692798C87B0E5BEEE9C /* ExpoModulesProvider.swift in Sources */,
+				08425328EB940FC5C000241C /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,7 +339,7 @@
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F156F17D2B1E39819EBB18C /* Pods-RainBucketApp.debug.xcconfig */;
+			baseConfigurationReference = 2B6113D20301C8385F0DDD09 /* Pods-RainBucketApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -375,7 +375,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FC3C1BFCF1332A1A2C55D7A7 /* Pods-RainBucketApp.release.xcconfig */;
+			baseConfigurationReference = 38031DB42D99D6E8729B6D5D /* Pods-RainBucketApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
