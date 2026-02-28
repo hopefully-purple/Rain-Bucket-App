@@ -4,6 +4,7 @@ List of Changes:
 Checklist:
 - [ ] Clean up commented code (if something needs to be preserved, make note of it in google doc)
 - [ ] Make sure names make sense
+- [ ] Add any new TODO comments to the google doc
 - [ ] Happy Paths
   - [ ] Add Word
   - [ ] Delete Word

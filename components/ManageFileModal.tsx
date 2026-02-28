@@ -20,6 +20,7 @@ type ManageFileModalProps = {
   title: string;
   descriptionText: string;
   button1Text: string;
+  button1Action?: () => void;
   isExportMode: boolean;
 };
 
@@ -33,6 +34,7 @@ const ManageFileModal = (props: ManageFileModalProps) => {
     title,
     descriptionText,
     button1Text,
+    button1Action,
     isExportMode,
   } = props;
   const { languageObj, setLanguageObj } = useContext(LanguageObjectContext);
@@ -72,7 +74,9 @@ const ManageFileModal = (props: ManageFileModalProps) => {
           style={localStyles.button}
           textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
           onPress={() => {
-            // handle export for all data
+            if (button1Action) {
+              button1Action();
+            }
           }}
         >
           {button1Text}

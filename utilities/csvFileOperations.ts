@@ -10,6 +10,12 @@ import * as Sharing from "expo-sharing";
 // 2. read the file and convert it back to json
 // 3. add the data to the context and storage, making sure not to overwrite existing data (maybe add a "date added" field to each word, and only overwrite if the new word is newer than the existing word? or just add all new words and let the user delete duplicates later?)
 
+export const importDataFromCSV = async (fileUri: string) => {
+
+};
+
+
+
 
 export const saveDataToCSV = async (languageData: string, languageName: string) => {
   // step 1: convert JSON to string using react-native-csv

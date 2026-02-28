@@ -160,6 +160,7 @@ export default function SettingsScreen() {
           descriptionText="Here you can export your data as a CSV file and save it to your device."
           button1Text="Export All Data"
           isExportMode={true}
+          button1Action={() => console.log("TODO - implement export all data")}
         />
         <ManageFileModal
           visible={importModalVisible}
@@ -169,6 +170,7 @@ export default function SettingsScreen() {
           descriptionText="Here you can import your data from a CSV file."
           button1Text="Import Data"
           isExportMode={false}
+          button1Action={() => console.log("TODO - implement import data")}
         />
       </View>
     </SafeAreaView>
