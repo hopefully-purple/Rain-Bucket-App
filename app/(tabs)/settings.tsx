@@ -11,11 +11,11 @@ import styles from "@/assets/styles/styleSheet";
 import ManageFileModal from "@/components/ManageFileModal";
 import { asyncStorageGetAllKeys } from "@/utilities/utility-async-storage";
 
-
 export default function SettingsScreen() {
   const { languageObj, setLanguageObj } = useContext(LanguageObjectContext);
   const [output, setOutput] = useState("");
-  const [visible, setVisible] = useState(false);
+  const [exportModalVisible, setExportModalVisible] = useState(false);
+  const [importModalVisible, setImportModalVisible] = useState(false);
 
   const clearAllData = async () => {
     let didUserConfirm = false;
@@ -102,18 +102,17 @@ export default function SettingsScreen() {
           style={localStyles.button}
           mode="outlined"
           textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
-          // onPress={() => saveDataToCSV(languageObj)}
-          onPress={() => setVisible(true)}
+          onPress={() => setExportModalVisible(true)}
         >
-          Save to CSV file
+          Export Data
         </Button>
         <Button
           style={localStyles.button}
           textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
           mode="outlined"
-          onPress={() => console.log("TODO - implement")}
+          onPress={() => setImportModalVisible(true)}
         >
-          Pull from CSV file
+          Import Data
         </Button>
       </View>
       <View>
@@ -153,7 +152,24 @@ export default function SettingsScreen() {
         <ScrollView>
           <Text style={localStyles.text}>{output}</Text>
         </ScrollView>
-        <ManageFileModal visible={visible} setVisible={setVisible} item={languageObj} />
+        <ManageFileModal
+          visible={exportModalVisible}
+          setVisible={setExportModalVisible}
+          item={languageObj}
+          title="Export Data"
+          descriptionText="Here you can export your data as a CSV file and save it to your device."
+          button1Text="Export All Data"
+          isExportMode={true}
+        />
+        <ManageFileModal
+          visible={importModalVisible}
+          setVisible={setImportModalVisible}
+          item={languageObj}
+          title="Import Data"
+          descriptionText="Here you can import your data from a CSV file."
+          button1Text="Import Data"
+          isExportMode={false}
+        />
       </View>
     </SafeAreaView>
   );

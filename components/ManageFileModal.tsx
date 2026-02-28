@@ -3,7 +3,10 @@ import styles from "@/assets/styles/styleSheet";
 import LanguageObjectContext from "@/contexts/LanguageObject";
 import SelectedItemContext from "@/contexts/SelectedItem";
 import { ILanguageObject } from "@/interfaces/languageObjectInterface";
-import { asyncStorageGetAllKeys, asyncStorageGetDataFromKey } from "@/utilities/utility-async-storage";
+import {
+  asyncStorageGetAllKeys,
+  asyncStorageGetDataFromKey,
+} from "@/utilities/utility-async-storage";
 import * as React from "react";
 import { useContext, useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
@@ -14,12 +17,24 @@ type ManageFileModalProps = {
   visible: boolean;
   setVisible: (value: boolean) => void;
   item: ILanguageObject;
+  title: string;
+  descriptionText: string;
+  button1Text: string;
+  isExportMode: boolean;
 };
 
 // TODO - messageMap, rename
 
 const ManageFileModal = (props: ManageFileModalProps) => {
-  const { visible, setVisible, item } = props;
+  const {
+    visible,
+    setVisible,
+    item,
+    title,
+    descriptionText,
+    button1Text,
+    isExportMode,
+  } = props;
   const { languageObj, setLanguageObj } = useContext(LanguageObjectContext);
   const { selectedItem, setSelectedItem } = useContext(SelectedItemContext);
   const [storageKeys, setStorageKeys] = useState<string[]>([]);
@@ -30,6 +45,7 @@ const ManageFileModal = (props: ManageFileModalProps) => {
   useEffect(() => {
     let mounted = true;
     if (!visible) return;
+    if (!isExportMode) return; // only load keys if we're in export mode
     console.log("[ManageFileModal] (useEffect) how many times does this run?"); // Just the 1 so far.
     asyncStorageGetAllKeys()
       .then((keys: string[]) => {
@@ -49,11 +65,8 @@ const ManageFileModal = (props: ManageFileModalProps) => {
         contentContainerStyle={localStyles.contentContainer}
         style={localStyles.container}
       >
-        <Text style={localStyles.wText}>Manage Files</Text>
-        <Text style={localStyles.prText}>
-          Here you can export your data as a CSV file and save it to your
-          device.
-        </Text>
+        <Text style={localStyles.wText}>{title}</Text>
+        <Text style={localStyles.prText}>{descriptionText}</Text>
         <Button
           mode="outlined"
           style={localStyles.button}
@@ -62,7 +75,7 @@ const ManageFileModal = (props: ManageFileModalProps) => {
             // handle export for all data
           }}
         >
-          Export all language data
+          {button1Text}
         </Button>
         {storageKeys.map((key: string) => (
           <Button
