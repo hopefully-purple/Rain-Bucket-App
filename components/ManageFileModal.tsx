@@ -2,15 +2,13 @@ import Colors from "@/assets/colors/colors";
 import styles from "@/assets/styles/styleSheet";
 import LanguageObjectContext from "@/contexts/LanguageObject";
 import SelectedItemContext from "@/contexts/SelectedItem";
-import { saveDataToCSV } from "@/file-management/movingFiles";
-import { ILanguageObject, IWord } from "@/interfaces/languageObjectInterface";
+import { ILanguageObject } from "@/interfaces/languageObjectInterface";
 import { asyncStorageGetAllKeys, asyncStorageGetDataFromKey } from "@/utilities/utility-async-storage";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { router } from "expo-router";
 import * as React from "react";
 import { useContext, useEffect, useState } from "react";
-import { StyleSheet, Alert } from "react-native";
+import { StyleSheet } from "react-native";
 import { Button, Modal, Portal, Text } from "react-native-paper";
+import { saveDataToCSV } from "@/utilities/csvFileOperations";
 
 type ManageFileModalProps = {
   visible: boolean;
