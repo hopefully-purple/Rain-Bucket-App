@@ -10,6 +10,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import styles from "@/assets/styles/styleSheet";
 import ManageFileModal from "@/components/ManageFileModal";
 import { asyncStorageGetAllKeys } from "@/utilities/utility-async-storage";
+import { importDataFromCSV } from "@/utilities/csvFileOperations";
 
 export default function SettingsScreen() {
   const { languageObj, setLanguageObj } = useContext(LanguageObjectContext);
@@ -170,7 +171,9 @@ export default function SettingsScreen() {
           descriptionText="Here you can import your data from a CSV file."
           button1Text="Import Data"
           isExportMode={false}
-          button1Action={() => console.log("TODO - implement import data")}
+          button1Action={() => {
+            importDataFromCSV();
+          }}
         />
       </View>
     </SafeAreaView>
