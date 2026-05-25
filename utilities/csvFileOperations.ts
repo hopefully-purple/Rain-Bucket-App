@@ -43,11 +43,16 @@ export const importDataFromCSV = async () => {
       const fileContent = await pickedFile.text();
       console.log("File Content:", fileContent);
 
+      const json = readString(fileContent, { header: true });
+      console.log("JSON Data:", json);
+
       // return pickedFile;
     } else {
+      // TODO: Notify user
       console.log("Operation cancelled.");
     }
   } catch (error) {
+    // TODO: Notify user
     console.error(error);
   }
 };
