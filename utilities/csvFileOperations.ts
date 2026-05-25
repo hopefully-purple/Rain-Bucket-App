@@ -1,8 +1,8 @@
 import { File, Paths } from "expo-file-system";
-import { jsonToCSV } from "react-native-csv";
+import { jsonToCSV, readString } from "react-native-csv";
 import * as Sharing from "expo-sharing";
 import * as DocumentPicker from "expo-document-picker";
-// import { pick } from '@react-native-documents/picker'
+// TODO - uninstall @react-native-documents/picker
 // return (
 //   <Button
 //     title="single file import"
@@ -21,42 +21,34 @@ import * as DocumentPicker from "expo-document-picker";
 // 3. Then worry about writing multiple files if necessary
 
 // next phase: the reverse
-// 1. open a file management modal that will let the user select a file
 // 2. read the file and convert it back to json
 // 3. add the data to the context and storage, making sure not to overwrite existing data (maybe add a "date added" field to each word, and only overwrite if the new word is newer than the existing word? or just add all new words and let the user delete duplicates later?)
 
 export const importDataFromCSV = async () => {
-  // const [pickResult] = await pick();
-  // console.log(pickResult.name);
   console.log("Importing data from CSV...");
 
   try {
     const result = await DocumentPicker.getDocumentAsync({
-      multiple: true, // Allows the user to select any file TODO: not sure if I want multiple. ALSO want to limit to .csv only
-      copyToCacheDirectory: true, // to let the file be immmediately readable
+      copyToCacheDirectory: true,
+      type: "text/csv",
     });
-
     if (!result.canceled) {
-      const successResult =
-        result as DocumentPicker.DocumentPickerSuccessResult;
-      
-        console.log("Selected files:", successResult.assets); // an array of DocumentPickerAssets
+      // 1. Get the URI of the picked file
+      const fileUri = result.assets[0].uri;
 
+      // 2. Initialize the modern Expo File class
+      const pickedFile = new File(fileUri);
 
-      // To limit the amount of documents that is added to the array "selectedDocuments"
-      // if (selectedDocuments.length + successResult.assets.length <= 5) {
-      //   setSelectedDocuments((prevSelectedDocuments) => [
-      //     ...prevSelectedDocuments,
-      //     ...successResult.assets,
-      //   ]);
-      // } else {
-      //   console.log("Maximum of 5 documents allowed.");
-      // }
+      // 3. Perform actions (e.g., read file contents as text)
+      const fileContent = await pickedFile.text();
+      console.log("File Content:", fileContent);
+
+      // return pickedFile;
     } else {
-      console.log("Document selection cancelled.");
+      console.log("Operation cancelled.");
     }
   } catch (error) {
-    console.log("Error picking documents:", error);
+    console.error(error);
   }
 };
 
