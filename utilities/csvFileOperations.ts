@@ -1,6 +1,7 @@
 import { File, Paths } from "expo-file-system";
 import { jsonToCSV } from "react-native-csv";
 import * as Sharing from "expo-sharing";
+import * as DocumentPicker from "expo-document-picker";
 // import { pick } from '@react-native-documents/picker'
 // return (
 //   <Button
@@ -28,12 +29,41 @@ export const importDataFromCSV = async () => {
   // const [pickResult] = await pick();
   // console.log(pickResult.name);
   console.log("Importing data from CSV...");
+
+  try {
+    const result = await DocumentPicker.getDocumentAsync({
+      multiple: true, // Allows the user to select any file TODO: not sure if I want multiple. ALSO want to limit to .csv only
+      copyToCacheDirectory: true, // to let the file be immmediately readable
+    });
+
+    if (!result.canceled) {
+      const successResult =
+        result as DocumentPicker.DocumentPickerSuccessResult;
+      
+        console.log("Selected files:", successResult.assets); // an array of DocumentPickerAssets
+
+
+      // To limit the amount of documents that is added to the array "selectedDocuments"
+      // if (selectedDocuments.length + successResult.assets.length <= 5) {
+      //   setSelectedDocuments((prevSelectedDocuments) => [
+      //     ...prevSelectedDocuments,
+      //     ...successResult.assets,
+      //   ]);
+      // } else {
+      //   console.log("Maximum of 5 documents allowed.");
+      // }
+    } else {
+      console.log("Document selection cancelled.");
+    }
+  } catch (error) {
+    console.log("Error picking documents:", error);
+  }
 };
 
-
-
-
-export const saveDataToCSV = async (languageData: string, languageName: string) => {
+export const saveDataToCSV = async (
+  languageData: string,
+  languageName: string,
+) => {
   // step 1: convert JSON to string using react-native-csv
   // console.log("languageObj to be saved: " + JSON.stringify(languageObj));
   // console.log(languageName + "blahhhhhhh");
