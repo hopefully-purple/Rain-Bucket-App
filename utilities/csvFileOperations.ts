@@ -1,7 +1,7 @@
 import { File, Paths } from "expo-file-system";
 import { jsonToCSV } from "react-native-csv";
 import * as Sharing from "expo-sharing";
-import { pick } from '@react-native-documents/picker'
+// import { pick } from '@react-native-documents/picker'
 // return (
 //   <Button
 //     title="single file import"
@@ -25,8 +25,9 @@ import { pick } from '@react-native-documents/picker'
 // 3. add the data to the context and storage, making sure not to overwrite existing data (maybe add a "date added" field to each word, and only overwrite if the new word is newer than the existing word? or just add all new words and let the user delete duplicates later?)
 
 export const importDataFromCSV = async () => {
-  const [pickResult] = await pick();
-  console.log(pickResult.name);
+  // const [pickResult] = await pick();
+  // console.log(pickResult.name);
+  console.log("Importing data from CSV...");
 };
 
 

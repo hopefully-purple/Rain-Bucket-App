@@ -8,10 +8,15 @@ import { ScrollView } from "react-native-gesture-handler";
 import { IWord } from "@/interfaces/languageObjectInterface";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styles from "@/assets/styles/styleSheet";
+import ManageFileModal from "@/components/ManageFileModal";
+import { asyncStorageGetAllKeys } from "@/utilities/utility-async-storage";
+import { importDataFromCSV } from "@/utilities/csvFileOperations";
 
 export default function SettingsScreen() {
   const { languageObj, setLanguageObj } = useContext(LanguageObjectContext);
   const [output, setOutput] = useState("");
+  const [exportModalVisible, setExportModalVisible] = useState(false);
+  const [importModalVisible, setImportModalVisible] = useState(false);
 
   const clearAllData = async () => {
     let didUserConfirm = false;
@@ -54,15 +59,7 @@ export default function SettingsScreen() {
   };
 
   const getAllKeys = async () => {
-    let keys: any = [];
-    try {
-      keys = await AsyncStorage.getAllKeys();
-    } catch (e) {
-      // read key error
-      console.log("getAllKeys storage threw error " + e);
-      throw e;
-    }
-
+    const keys = await asyncStorageGetAllKeys();
     setOutput(keys[0] + ", " + keys[1]);
     // return keys;
     // console.log(JSON.stringify(keys));
@@ -101,22 +98,22 @@ export default function SettingsScreen() {
       edges={["right", "bottom", "left"]}
     >
       <View>
-        <Text style={localStyles.text}>Azure Operations:</Text>
+        <Text style={localStyles.text}>Local File Operations:</Text>
         <Button
           style={localStyles.button}
           mode="outlined"
           textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
-          onPress={() => console.log("TODO - implement")}
+          onPress={() => setExportModalVisible(true)}
         >
-          Save to Azure
+          Export Data
         </Button>
         <Button
           style={localStyles.button}
           textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
           mode="outlined"
-          onPress={() => console.log("TODO - implement")}
+          onPress={() => setImportModalVisible(true)}
         >
-          Pull from Azure
+          Import Data
         </Button>
       </View>
       <View>
@@ -156,6 +153,28 @@ export default function SettingsScreen() {
         <ScrollView>
           <Text style={localStyles.text}>{output}</Text>
         </ScrollView>
+        <ManageFileModal
+          visible={exportModalVisible}
+          setVisible={setExportModalVisible}
+          item={languageObj}
+          title="Export Data"
+          descriptionText="Here you can export your data as a CSV file and save it to your device."
+          button1Text="Export All Data"
+          isExportMode={true}
+          button1Action={() => console.log("TODO - implement export all data")}
+        />
+        <ManageFileModal
+          visible={importModalVisible}
+          setVisible={setImportModalVisible}
+          item={languageObj}
+          title="Import Data"
+          descriptionText="Here you can import your data from a CSV file."
+          button1Text="Import Data"
+          isExportMode={false}
+          button1Action={() => {
+            importDataFromCSV();
+          }}
+        />
       </View>
     </SafeAreaView>
   );
