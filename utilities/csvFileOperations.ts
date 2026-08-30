@@ -23,11 +23,9 @@ import * as DocumentPicker from "expo-document-picker";
 // next phase: the reverse
 // 3. add the data to the context and storage, assume existing language and overwriting all data.
 // 3.1 account for imported language to not already exist
-// 3.2 give user the option to choose between overwriting and only adding new words (but if there's an existing word, and the import has additional information, that info will be lost.)
-// this should only appear if the language already exists.
 
 
-export const importDataFromCSV = async () => {
+export const importDataFromCSV = async (languageKey: string) => {
   console.log("Importing data from CSV...");
 
   try {
@@ -49,7 +47,12 @@ export const importDataFromCSV = async () => {
       const fileContentAsJson = readString(fileContent, { header: true });
       console.log("JSON Data:", fileContentAsJson);
 
-      return fileContentAsJson;
+      // TO DO: make use of fileContentAsJson.errors https://react-native-csv.js.org/docs#errors
+
+      const saveResult = saveCSVJSONToAsyncStorage(fileContentAsJson.data, fileContentAsJson.meta);
+
+      // TODO: If saveResult, notify user of success?
+
     } else {
       // TODO: Notify user
       console.log("Operation cancelled.");
@@ -58,6 +61,14 @@ export const importDataFromCSV = async () => {
     // TODO: Notify user
     console.error(error);
   }
+};
+
+const saveCSVJSONToAsyncStorage = async (csvJson: any[], parseResultMeta: any): Promise<boolean> => {
+  // Implementation for saving CSV JSON to AsyncStorage
+  console.log("Saving CSV JSON to AsyncStorage...");
+  console.log(csvJson);
+  console.log(parseResultMeta);
+  return false;
 };
 
 export const saveDataToCSV = async (
