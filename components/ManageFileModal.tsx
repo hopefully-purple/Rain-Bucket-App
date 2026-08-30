@@ -24,7 +24,7 @@ type ManageFileModalProps = {
   isExportMode: boolean;
 };
 
-// TODO - messageMap, rename some variables?
+// TODO - rename some variables?
 
 const ManageFileModal = (props: ManageFileModalProps) => {
   const {
@@ -53,7 +53,6 @@ const ManageFileModal = (props: ManageFileModalProps) => {
   useEffect(() => {
     let mounted = true;
     if (!visible) return;
-    // if (!isExportMode) return; // only load keys if we're in export mode
     console.log("[ManageFileModal] (useEffect) how many times does this run?"); // Just the 1 so far.
     asyncStorageGetAllKeys()
       .then((keys: string[]) => {

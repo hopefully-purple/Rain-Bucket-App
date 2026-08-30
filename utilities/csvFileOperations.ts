@@ -11,7 +11,6 @@ import { asyncStorageSaveData } from "./utility-async-storage";
 // 3. Then worry about writing multiple files if necessary
 
 // next phase: the reverse
-// 3. add the data to the context and storage, assume existing language and overwriting all data.
 // 3.1 account for imported language to not already exist
 
 
