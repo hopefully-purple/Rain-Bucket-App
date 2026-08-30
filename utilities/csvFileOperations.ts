@@ -1,7 +1,8 @@
 import { File, Paths } from "expo-file-system";
-import { jsonToCSV } from "react-native-csv";
+import { jsonToCSV, readString } from "react-native-csv";
 import * as Sharing from "expo-sharing";
-// import { pick } from '@react-native-documents/picker'
+import * as DocumentPicker from "expo-document-picker";
+// TODO - uninstall @react-native-documents/picker
 // return (
 //   <Button
 //     title="single file import"
@@ -20,20 +21,45 @@ import * as Sharing from "expo-sharing";
 // 3. Then worry about writing multiple files if necessary
 
 // next phase: the reverse
-// 1. open a file management modal that will let the user select a file
-// 2. read the file and convert it back to json
 // 3. add the data to the context and storage, making sure not to overwrite existing data (maybe add a "date added" field to each word, and only overwrite if the new word is newer than the existing word? or just add all new words and let the user delete duplicates later?)
 
 export const importDataFromCSV = async () => {
-  // const [pickResult] = await pick();
-  // console.log(pickResult.name);
   console.log("Importing data from CSV...");
+
+  try {
+    const result = await DocumentPicker.getDocumentAsync({
+      copyToCacheDirectory: true,
+      type: "text/csv",
+    });
+    if (!result.canceled) {
+      // 1. Get the URI of the picked file
+      const fileUri = result.assets[0].uri;
+
+      // 2. Initialize the modern Expo File class
+      const pickedFile = new File(fileUri);
+
+      // 3. Perform actions (e.g., read file contents as text)
+      const fileContent = await pickedFile.text();
+      console.log("File Content:", fileContent);
+
+      const json = readString(fileContent, { header: true });
+      console.log("JSON Data:", json);
+
+      // return pickedFile;
+    } else {
+      // TODO: Notify user
+      console.log("Operation cancelled.");
+    }
+  } catch (error) {
+    // TODO: Notify user
+    console.error(error);
+  }
 };
 
-
-
-
-export const saveDataToCSV = async (languageData: string, languageName: string) => {
+export const saveDataToCSV = async (
+  languageData: string,
+  languageName: string,
+) => {
   // step 1: convert JSON to string using react-native-csv
   // console.log("languageObj to be saved: " + JSON.stringify(languageObj));
   // console.log(languageName + "blahhhhhhh");
