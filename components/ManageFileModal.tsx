@@ -11,7 +11,7 @@ import * as React from "react";
 import { useContext, useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import { Button, Modal, Portal, Text } from "react-native-paper";
-import { saveDataToCSV } from "@/utilities/csvFileOperations";
+import { importDataFromCSV, saveDataToCSV } from "@/utilities/csvFileOperations";
 
 type ManageFileModalProps = {
   visible: boolean;
@@ -24,7 +24,7 @@ type ManageFileModalProps = {
   isExportMode: boolean;
 };
 
-// TODO - messageMap, rename
+// TODO - rename some variables?
 
 const ManageFileModal = (props: ManageFileModalProps) => {
   const {
@@ -43,11 +43,16 @@ const ManageFileModal = (props: ManageFileModalProps) => {
 
   const hideModal = () => setVisible(false);
 
+  // TODO: make messageMap dynamic
+  const messageMap = {
+    exportDataFor: "Export data for {key}",
+    importDataFor: "Import data for {key}",
+  };
+
   // load AsyncStorage keys when modal is shown
   useEffect(() => {
     let mounted = true;
     if (!visible) return;
-    if (!isExportMode) return; // only load keys if we're in export mode
     console.log("[ManageFileModal] (useEffect) how many times does this run?"); // Just the 1 so far.
     asyncStorageGetAllKeys()
       .then((keys: string[]) => {
@@ -88,13 +93,20 @@ const ManageFileModal = (props: ManageFileModalProps) => {
             style={localStyles.button}
             textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
             onPress={async () => {
-              // handle export for this key
-              const data = await asyncStorageGetDataFromKey(key);
-              // console.log("(manageFileModal onpress) Data for key " + key + ": " + data);
-              await saveDataToCSV(data, key);
+              if (isExportMode) {
+                // handle export for this key
+                const data = await asyncStorageGetDataFromKey(key);
+                // console.log("(manageFileModal onpress) Data for key " + key + ": " + data);
+                await saveDataToCSV(data, key);
+              } else {
+                // handle import for this key
+                await importDataFromCSV(key);
+              }
             }}
           >
-            Export data for {key}
+            {isExportMode
+              ? messageMap.exportDataFor.replace("{key}", key)
+              : messageMap.importDataFor.replace("{key}", key)}
           </Button>
         ))}
       </Modal>

@@ -12,6 +12,8 @@ import ManageFileModal from "@/components/ManageFileModal";
 import { asyncStorageGetAllKeys } from "@/utilities/utility-async-storage";
 import { importDataFromCSV } from "@/utilities/csvFileOperations";
 
+// to do: messagemap
+
 export default function SettingsScreen() {
   const { languageObj, setLanguageObj } = useContext(LanguageObjectContext);
   const [output, setOutput] = useState("");
@@ -58,6 +60,7 @@ export default function SettingsScreen() {
     }
   };
 
+  // TODO: remove and use the utility function instead
   const getAllKeys = async () => {
     const keys = await asyncStorageGetAllKeys();
     setOutput(keys[0] + ", " + keys[1]);
@@ -168,12 +171,10 @@ export default function SettingsScreen() {
           setVisible={setImportModalVisible}
           item={languageObj}
           title="Import Data"
-          descriptionText="Here you can import your data from a CSV file."
+          descriptionText="Here you can import your data from a CSV file. Warning: this will overwrite any existing data for an existing language."
           button1Text="Import Data"
           isExportMode={false}
-          button1Action={() => {
-            importDataFromCSV();
-          }}
+          button1Action={() => console.log("TODO - implement import NEW language")}
         />
       </View>
     </SafeAreaView>

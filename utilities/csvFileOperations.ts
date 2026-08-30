@@ -2,29 +2,20 @@ import { File, Paths } from "expo-file-system";
 import { jsonToCSV, readString } from "react-native-csv";
 import * as Sharing from "expo-sharing";
 import * as DocumentPicker from "expo-document-picker";
+import LanguageObject from "@/contexts/LanguageObject";
+import { ILanguageObject, IWord } from "@/interfaces/languageObjectInterface";
+import { asyncStorageSaveData } from "./utility-async-storage";
 // TODO - uninstall @react-native-documents/picker
-// return (
-//   <Button
-//     title="single file import"
-//     onPress={async () => {
-//       try {
-//         const [pickResult] = await pick()
-//         // const [pickResult] = await pick({mode:'import'}) // equivalent
-//         // do something with the picked file
-//       } catch (err: unknown) {
-//         // see error handling
-//       }
-//     }}
-//   />
-// )
+
 // Big picture steps:
 // 3. Then worry about writing multiple files if necessary
 
 // next phase: the reverse
-// 3. add the data to the context and storage, making sure not to overwrite existing data (maybe add a "date added" field to each word, and only overwrite if the new word is newer than the existing word? or just add all new words and let the user delete duplicates later?)
+// 3.1 account for imported language to not already exist
 
-export const importDataFromCSV = async () => {
-  console.log("Importing data from CSV...");
+
+export const importDataFromCSV = async (languageKey: string) => {
+  console.log("Importing data from CSV... = ", languageKey);
 
   try {
     const result = await DocumentPicker.getDocumentAsync({
@@ -42,10 +33,18 @@ export const importDataFromCSV = async () => {
       const fileContent = await pickedFile.text();
       console.log("File Content:", fileContent);
 
-      const json = readString(fileContent, { header: true });
-      console.log("JSON Data:", json);
+      const fileContentAsJson = readString(fileContent, { header: true });
+      console.log("JSON Data:", fileContentAsJson);
 
-      // return pickedFile;
+      // TO DO: make use of fileContentAsJson.errors https://react-native-csv.js.org/docs#errors
+
+      const saveResult = await saveCSVJSONToAsyncStorage(fileContentAsJson.data, fileContentAsJson.meta, languageKey);
+
+      // TODO: If saveResult, notify user of success!
+      if (saveResult) {
+        console.log("NOTIFY USER OF SUCCESS");
+      }
+
     } else {
       // TODO: Notify user
       console.log("Operation cancelled.");
@@ -54,6 +53,25 @@ export const importDataFromCSV = async () => {
     // TODO: Notify user
     console.error(error);
   }
+};
+
+const saveCSVJSONToAsyncStorage = async (csvJson: any[], parseResultMeta: any, languageKey: string): Promise<boolean> => {
+  console.log("Saving CSV JSON to AsyncStorage...");
+  // console.log(csvJson);
+  console.log(parseResultMeta); // TO Do: evaluate if having the "meta" data is necessary in this function
+
+  let newWordsList: IWord[] = [];
+  csvJson.forEach((row: any) => {
+    console.log(`Processing row: ${JSON.stringify(row)}`);
+    newWordsList.push(row);
+  });
+
+  const newLanguageObject: ILanguageObject = {
+    language: languageKey,
+    words: newWordsList
+  };
+
+  return asyncStorageSaveData(newLanguageObject);
 };
 
 export const saveDataToCSV = async (
