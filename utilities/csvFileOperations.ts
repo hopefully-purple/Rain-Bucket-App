@@ -2,21 +2,11 @@ import { File, Paths } from "expo-file-system";
 import { jsonToCSV, readString } from "react-native-csv";
 import * as Sharing from "expo-sharing";
 import * as DocumentPicker from "expo-document-picker";
+import LanguageObject from "@/contexts/LanguageObject";
+import { ILanguageObject, IWord } from "@/interfaces/languageObjectInterface";
+import { asyncStorageSaveData } from "./utility-async-storage";
 // TODO - uninstall @react-native-documents/picker
-// return (
-//   <Button
-//     title="single file import"
-//     onPress={async () => {
-//       try {
-//         const [pickResult] = await pick()
-//         // const [pickResult] = await pick({mode:'import'}) // equivalent
-//         // do something with the picked file
-//       } catch (err: unknown) {
-//         // see error handling
-//       }
-//     }}
-//   />
-// )
+
 // Big picture steps:
 // 3. Then worry about writing multiple files if necessary
 
@@ -26,7 +16,7 @@ import * as DocumentPicker from "expo-document-picker";
 
 
 export const importDataFromCSV = async (languageKey: string) => {
-  console.log("Importing data from CSV...");
+  console.log("Importing data from CSV... = ", languageKey);
 
   try {
     const result = await DocumentPicker.getDocumentAsync({
@@ -49,9 +39,12 @@ export const importDataFromCSV = async (languageKey: string) => {
 
       // TO DO: make use of fileContentAsJson.errors https://react-native-csv.js.org/docs#errors
 
-      const saveResult = saveCSVJSONToAsyncStorage(fileContentAsJson.data, fileContentAsJson.meta);
+      const saveResult = await saveCSVJSONToAsyncStorage(fileContentAsJson.data, fileContentAsJson.meta, languageKey);
 
-      // TODO: If saveResult, notify user of success?
+      // TODO: If saveResult, notify user of success!
+      if (saveResult) {
+        console.log("NOTIFY USER OF SUCCESS");
+      }
 
     } else {
       // TODO: Notify user
@@ -63,12 +56,23 @@ export const importDataFromCSV = async (languageKey: string) => {
   }
 };
 
-const saveCSVJSONToAsyncStorage = async (csvJson: any[], parseResultMeta: any): Promise<boolean> => {
-  // Implementation for saving CSV JSON to AsyncStorage
+const saveCSVJSONToAsyncStorage = async (csvJson: any[], parseResultMeta: any, languageKey: string): Promise<boolean> => {
   console.log("Saving CSV JSON to AsyncStorage...");
-  console.log(csvJson);
-  console.log(parseResultMeta);
-  return false;
+  // console.log(csvJson);
+  console.log(parseResultMeta); // TO Do: evaluate if having the "meta" data is necessary in this function
+
+  let newWordsList: IWord[] = [];
+  csvJson.forEach((row: any) => {
+    console.log(`Processing row: ${JSON.stringify(row)}`);
+    newWordsList.push(row);
+  });
+
+  const newLanguageObject: ILanguageObject = {
+    language: languageKey,
+    words: newWordsList
+  };
+
+  return asyncStorageSaveData(newLanguageObject);
 };
 
 export const saveDataToCSV = async (
