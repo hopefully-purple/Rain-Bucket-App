@@ -21,7 +21,11 @@ import * as DocumentPicker from "expo-document-picker";
 // 3. Then worry about writing multiple files if necessary
 
 // next phase: the reverse
-// 3. add the data to the context and storage, making sure not to overwrite existing data (maybe add a "date added" field to each word, and only overwrite if the new word is newer than the existing word? or just add all new words and let the user delete duplicates later?)
+// 3. add the data to the context and storage, assume existing language and overwriting all data.
+// 3.1 account for imported language to not already exist
+// 3.2 give user the option to choose between overwriting and only adding new words (but if there's an existing word, and the import has additional information, that info will be lost.)
+// this should only appear if the language already exists.
+
 
 export const importDataFromCSV = async () => {
   console.log("Importing data from CSV...");
@@ -42,10 +46,10 @@ export const importDataFromCSV = async () => {
       const fileContent = await pickedFile.text();
       console.log("File Content:", fileContent);
 
-      const json = readString(fileContent, { header: true });
-      console.log("JSON Data:", json);
+      const fileContentAsJson = readString(fileContent, { header: true });
+      console.log("JSON Data:", fileContentAsJson);
 
-      // return pickedFile;
+      return fileContentAsJson;
     } else {
       // TODO: Notify user
       console.log("Operation cancelled.");

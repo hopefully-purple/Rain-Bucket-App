@@ -24,7 +24,7 @@ type ManageFileModalProps = {
   isExportMode: boolean;
 };
 
-// TODO - messageMap, rename
+// TODO - messageMap, rename some variables?
 
 const ManageFileModal = (props: ManageFileModalProps) => {
   const {
