@@ -16,7 +16,7 @@ import { importDataFromCSV } from "@/utilities/csvFileOperations";
 
 export default function SettingsScreen() {
   const { languageObj, setLanguageObj } = useContext(LanguageObjectContext);
-  const [output, setOutput] = useState("");
+  const [outputForUser, setOutputForUser] = useState("");
   const [exportModalVisible, setExportModalVisible] = useState(false);
   const [importModalVisible, setImportModalVisible] = useState(false);
 
@@ -52,7 +52,7 @@ export default function SettingsScreen() {
     try {
       const result = await AsyncStorage.getItem(languageObj.language);
       let itemCount = result != null ? JSON.parse(result).length : "";
-      setOutput("ITEMCOUNT=" + itemCount + "\n" + result);
+      setOutputForUser("ITEMCOUNT=" + itemCount + "\n" + result);
     } catch (e) {
       // clear error
       console.log("getCurrentData storage threw error " + e);
@@ -60,10 +60,9 @@ export default function SettingsScreen() {
     }
   };
 
-  // TODO: remove and use the utility function instead
   const getAllKeys = async () => {
     const keys = await asyncStorageGetAllKeys();
-    setOutput(keys[0] + ", " + keys[1]);
+    setOutputForUser(keys.map((key) => key + ", ").join(""));
     // return keys;
     // console.log(JSON.stringify(keys));
     // return [];
@@ -73,6 +72,7 @@ export default function SettingsScreen() {
 
   const deleteCertainData = async () => {
     console.log("Delete English language object");
+    setOutputForUser("Deleting English language object");
 
     try {
       await AsyncStorage.removeItem("English");
@@ -86,6 +86,8 @@ export default function SettingsScreen() {
     console.log(
       "Deleting words from context and storage that are missing an id",
     );
+    setOutputForUser("Deleting words from context and storage that are missing an id");
+
     // Filter condition
     function excludeItems(i: IWord) {
       return i.id !== undefined;
@@ -166,7 +168,7 @@ export default function SettingsScreen() {
           RUN CUSTOM DELETE METHOD
         </Button>
         <ScrollView>
-          <Text style={localStyles.text}>{output}</Text>
+          <Text style={localStyles.text}>{outputForUser}</Text>
         </ScrollView>
         <ManageFileModal
           visible={exportModalVisible}
