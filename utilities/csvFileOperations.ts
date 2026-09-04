@@ -45,7 +45,7 @@ export const importDataFromCSV = async (languageKey: string) => {
 
       const languageName = languageKey === "NEW_LANGUAGE" ? fileName.replace(".csv", "") : languageKey;
       console.log("Proceeding to save data to AsyncStorage for language: ", languageName);
-      
+
       const saveResult = await saveCSVJSONToAsyncStorage(
         fileContentAsJson.data,
         fileContentAsJson.meta,
@@ -86,6 +86,7 @@ const saveCSVJSONToAsyncStorage = async (
     words: newWordsList,
   };
 
+  console.log("New Language Object to be saved:", newLanguageObject);
   return asyncStorageSaveData(newLanguageObject);
 };
 

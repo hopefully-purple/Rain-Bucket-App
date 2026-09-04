@@ -72,8 +72,20 @@ export default function SettingsScreen() {
   };
 
   const deleteCertainData = async () => {
-    setOutput("Deleted words from context and storage that are missing an id");
+    console.log("Delete English language object");
 
+    try {
+      await AsyncStorage.removeItem("English");
+    } catch (e) {
+      console.log("deleteCertainData storage threw error " + e);
+      throw e;
+    }
+  };
+  
+  const deleteCertainDataInLanguage = async () => {
+    console.log(
+      "Deleting words from context and storage that are missing an id",
+    );
     // Filter condition
     function excludeItems(i: IWord) {
       return i.id !== undefined;
