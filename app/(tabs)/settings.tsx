@@ -172,9 +172,9 @@ export default function SettingsScreen() {
           item={languageObj}
           title="Import Data"
           descriptionText="Here you can import your data from a CSV file. Warning: this will overwrite any existing data for an existing language."
-          button1Text="Import Data"
+          button1Text="Import Data for a new language"
           isExportMode={false}
-          button1Action={() => console.log("TODO - implement import NEW language")}
+          button1Action={() => importDataFromCSV("NEW_LANGUAGE")}
         />
       </View>
     </SafeAreaView>

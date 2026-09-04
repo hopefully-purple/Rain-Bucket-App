@@ -17,6 +17,11 @@ import { asyncStorageSaveData } from "./utility-async-storage";
 export const importDataFromCSV = async (languageKey: string) => {
   console.log("Importing data from CSV... = ", languageKey);
 
+  if (languageKey === "NEW_LANGUAGE") {
+    console.log("Importing data for a new language...");
+    return;
+  }
+  
   try {
     const result = await DocumentPicker.getDocumentAsync({
       copyToCacheDirectory: true,

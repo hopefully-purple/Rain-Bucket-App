@@ -37,8 +37,8 @@ const ManageFileModal = (props: ManageFileModalProps) => {
     button1Action,
     isExportMode,
   } = props;
-  const { languageObj, setLanguageObj } = useContext(LanguageObjectContext);
-  const { selectedItem, setSelectedItem } = useContext(SelectedItemContext);
+  // const { languageObj, setLanguageObj } = useContext(LanguageObjectContext);
+  // const { selectedItem, setSelectedItem } = useContext(SelectedItemContext);
   const [storageKeys, setStorageKeys] = useState<string[]>([]);
 
   const hideModal = () => setVisible(false);
