@@ -8,7 +8,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { IWord } from "@/interfaces/languageObjectInterface";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styles from "@/assets/styles/styleSheet";
-import ManageFileModal from "@/components/ManageFileModal";
+import ManageFileModal from "@/components/Modals/ManageFileModal";
 import { asyncStorageGetAllKeys } from "@/utilities/utility-async-storage";
 import { exportAllDataToCSV, importDataFromCSV } from "@/utilities/csvFileOperations";
 
