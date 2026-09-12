@@ -170,7 +170,7 @@ export default function SettingsScreen() {
         <ScrollView>
           <Text style={localStyles.text}>{outputForUser}</Text>
         </ScrollView>
-        <ManageFileModal
+        {/* <ManageFileModal
           visible={exportModalVisible}
           setVisible={setExportModalVisible}
           item={languageObj}
@@ -178,8 +178,8 @@ export default function SettingsScreen() {
           descriptionText="Here you can export your data as a CSV file and save it to your device."
           button1Text="Export All Data"
           isExportMode={true}
-          button1Action={exportAllDataToCSV}
-        />
+          button1Action={() => exportAllDataToCSV()}
+        /> */}
         <ManageFileModal
           visible={importModalVisible}
           setVisible={setImportModalVisible}

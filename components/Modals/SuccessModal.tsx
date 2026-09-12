@@ -19,7 +19,7 @@ const SuccessModal = (props: SuccessModalProps) => {
     if (!visible) return;
     const timer = setTimeout(() => {
       hideModal();
-    }, 2000); // 2 seconds
+    }, 1000); // 1 second
 
     return () => clearTimeout(timer); // Cleanup the timer on unmount or when visible changes
   }, [visible]);

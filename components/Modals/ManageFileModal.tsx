@@ -21,7 +21,7 @@ type ManageFileModalProps = {
   title: string;
   descriptionText: string;
   button1Text: string;
-  button1Action?: () => void;
+  button1Action?: () => Promise<boolean>;
   isExportMode: boolean;
 };
 
@@ -79,9 +79,12 @@ const ManageFileModal = (props: ManageFileModalProps) => {
             mode="outlined"
             style={localStyles.button}
             textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
-            onPress={() => {
+            onPress={async () => {
               if (button1Action) {
-                button1Action();
+                const result = await button1Action();
+                console.log("(manageFileModal onpress) Result for button1Action: " + result);
+                hideModal();
+                setShowSuccessModal(result);
               }
             }}
           >
