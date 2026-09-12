@@ -11,7 +11,10 @@ import * as React from "react";
 import { useContext, useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import { Button, Modal, Portal, Text } from "react-native-paper";
-import { importDataFromCSV, saveDataToCSV } from "@/utilities/csvFileOperations";
+import {
+  importDataFromCSV,
+  saveDataToCSV,
+} from "@/utilities/csvFileOperations";
 
 type ManageFileModalProps = {
   visible: boolean;
@@ -40,6 +43,7 @@ const ManageFileModal = (props: ManageFileModalProps) => {
   // const { languageObj, setLanguageObj } = useContext(LanguageObjectContext);
   // const { selectedItem, setSelectedItem } = useContext(SelectedItemContext);
   const [storageKeys, setStorageKeys] = useState<string[]>([]);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const hideModal = () => setVisible(false);
 
@@ -100,7 +104,17 @@ const ManageFileModal = (props: ManageFileModalProps) => {
                 await saveDataToCSV(data, key);
               } else {
                 // handle import for this key
-                await importDataFromCSV(key);
+                const result = await importDataFromCSV(key);
+                console.log(
+                  "(manageFileModal onpress) Import result for key " +
+                    key +
+                    ": " +
+                    result,
+                );
+                if (result) {
+                  hideModal();
+                }
+                // setShowSuccessModal(result);
               }
             }}
           >

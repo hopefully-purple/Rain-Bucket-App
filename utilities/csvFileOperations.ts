@@ -13,7 +13,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
  * 
  * @param languageKey async storage key for language to import
  */
-export const importDataFromCSV = async (languageKey: string) => {
+export const importDataFromCSV = async (languageKey: string): Promise<boolean> => {
   console.log("Importing data from CSV... = ", languageKey);
 
   try {
@@ -50,15 +50,18 @@ export const importDataFromCSV = async (languageKey: string) => {
       // TODO: If saveResult, notify user of success!
       if (saveResult) {
         console.log("NOTIFY USER OF SUCCESS");
+        return true;
       }
     } else {
       // TODO: Notify user
       console.log("Operation cancelled.");
+      return false;
     }
   } catch (error) {
     // TODO: Notify user
     console.error(error);
   }
+  return Promise.resolve(false);
 };
 
 /**
