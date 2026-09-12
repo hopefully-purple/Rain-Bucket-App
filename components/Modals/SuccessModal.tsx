@@ -1,5 +1,6 @@
 import Colors from "@/assets/colors/colors";
 import styles from "@/assets/styles/styleSheet";
+import { useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { Button, Modal, Portal, Text } from "react-native-paper";
 
@@ -13,6 +14,15 @@ const SuccessModal = (props: SuccessModalProps) => {
 
   const hideModal = () => setVisible(false);
 
+  useEffect(() => {
+    if (!visible) return;
+    const timer = setTimeout(() => {
+      hideModal();
+    }, 2000); // 2 seconds
+
+    return () => clearTimeout(timer); // Cleanup the timer on unmount or when visible changes
+  }, [visible]);
+
   return (
     <Portal>
       <Modal
@@ -21,7 +31,7 @@ const SuccessModal = (props: SuccessModalProps) => {
         contentContainerStyle={localStyles.contentContainer}
         style={localStyles.container}
       >
-       Success!
+        <Text style={localStyles.wText}>Success!</Text>
       </Modal>
     </Portal>
   );

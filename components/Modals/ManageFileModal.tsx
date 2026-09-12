@@ -15,6 +15,7 @@ import {
   importDataFromCSV,
   saveDataToCSV,
 } from "@/utilities/csvFileOperations";
+import SuccessModal from "./SuccessModal";
 
 type ManageFileModalProps = {
   visible: boolean;
@@ -69,62 +70,63 @@ const ManageFileModal = (props: ManageFileModalProps) => {
   }, [visible]);
 
   return (
-    <Portal>
-      <Modal
-        visible={visible}
-        onDismiss={hideModal}
-        contentContainerStyle={localStyles.contentContainer}
-        style={localStyles.container}
-      >
-        <Text style={localStyles.wText}>{title}</Text>
-        <Text style={localStyles.prText}>{descriptionText}</Text>
-        <Button
-          mode="outlined"
-          style={localStyles.button}
-          textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
-          onPress={() => {
-            if (button1Action) {
-              button1Action();
-            }
-          }}
+    <>
+      <Portal>
+        <Modal
+          visible={visible}
+          onDismiss={hideModal}
+          contentContainerStyle={localStyles.contentContainer}
+          style={localStyles.container}
         >
-          {button1Text}
-        </Button>
-        {storageKeys.map((key: string) => (
+          <Text style={localStyles.wText}>{title}</Text>
+          <Text style={localStyles.prText}>{descriptionText}</Text>
           <Button
-            key={key}
             mode="outlined"
             style={localStyles.button}
             textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
-            onPress={async () => {
-              if (isExportMode) {
-                // handle export for this key
-                const data = await asyncStorageGetDataFromKey(key);
-                // console.log("(manageFileModal onpress) Data for key " + key + ": " + data);
-                await saveDataToCSV(data, key);
-              } else {
-                // handle import for this key
-                const result = await importDataFromCSV(key);
-                console.log(
-                  "(manageFileModal onpress) Import result for key " +
-                    key +
-                    ": " +
-                    result,
-                );
-                if (result) {
-                  hideModal();
-                }
-                // setShowSuccessModal(result);
+            onPress={() => {
+              if (button1Action) {
+                button1Action();
               }
             }}
           >
-            {isExportMode
-              ? messageMap.exportDataFor.replace("{key}", key)
-              : messageMap.importDataFor.replace("{key}", key)}
+            {button1Text}
           </Button>
-        ))}
-      </Modal>
-    </Portal>
+          {storageKeys.map((key: string) => (
+            <Button
+              key={key}
+              mode="outlined"
+              style={localStyles.button}
+              textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
+              onPress={async () => {
+                if (isExportMode) {
+                  // handle export for this key
+                  const data = await asyncStorageGetDataFromKey(key);
+                  // console.log("(manageFileModal onpress) Data for key " + key + ": " + data);
+                  await saveDataToCSV(data, key);
+                } else {
+                  // handle import for this key
+                  const result = await importDataFromCSV(key);
+                  console.log(
+                    "(manageFileModal onpress) Import result for key " +
+                      key +
+                      ": " +
+                      result,
+                  );
+                  hideModal();
+                  setShowSuccessModal(result);
+                }
+              }}
+            >
+              {isExportMode
+                ? messageMap.exportDataFor.replace("{key}", key)
+                : messageMap.importDataFor.replace("{key}", key)}
+            </Button>
+          ))}
+        </Modal>
+      </Portal>
+      <SuccessModal visible={showSuccessModal} setVisible={setShowSuccessModal} />
+    </>
   );
 };
 
