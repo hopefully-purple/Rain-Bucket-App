@@ -6,6 +6,13 @@ import { ILanguageObject, IWord } from "@/interfaces/languageObjectInterface";
 import { asyncStorageGetAllKeys, asyncStorageSaveData } from "./utility-async-storage";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+/**
+ * Imports data from a CSV file and saves it to AsyncStorage
+ * If languageKey is "NEW_LANGUAGE", the file name (without .csv) will be used as the new language key
+ * Otherwise, the provided languageKey will be used to save the data
+ * 
+ * @param languageKey async storage key for language to import
+ */
 export const importDataFromCSV = async (languageKey: string) => {
   console.log("Importing data from CSV... = ", languageKey);
 
@@ -54,6 +61,15 @@ export const importDataFromCSV = async (languageKey: string) => {
   }
 };
 
+/**
+ * Helper for importDataFromCSV
+ * Saves the parsed CSV JSON data to AsyncStorage under the specified language key.
+ * 
+ * @param csvJson array of data converted from CSV to JSON
+ * @param parseResultMeta metadata from file parsing object
+ * @param languageKey async storage key for language to save
+ * @returns true if the data was saved successfully, false otherwise
+ */
 const saveCSVJSONToAsyncStorage = async (
   csvJson: any[],
   parseResultMeta: any,
