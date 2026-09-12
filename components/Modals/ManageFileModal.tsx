@@ -12,7 +12,7 @@ import {
   importDataFromCSV,
   exportDataToCSV,
 } from "@/utilities/csvFileOperations";
-import SuccessModal from "./SuccessModal";
+import NotificationModal from "./NotificationModal";
 
 type ManageFileModalProps = {
   visible: boolean;
@@ -39,7 +39,7 @@ const ManageFileModal = (props: ManageFileModalProps) => {
     isExportMode,
   } = props;
   const [storageKeys, setStorageKeys] = useState<string[]>([]);
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showNotificationModal, setShowNotificationModal] = useState(false);
 
   const hideModal = () => setVisible(false);
 
@@ -47,6 +47,8 @@ const ManageFileModal = (props: ManageFileModalProps) => {
   const messageMap = {
     exportDataFor: "Export data for {key}",
     importDataFor: "Import data for {key}",
+    success: "Success! \u{1F389}",
+    failed: "Failed! \u{1F6AB}",
   };
 
   // load AsyncStorage keys when modal is shown
@@ -82,9 +84,12 @@ const ManageFileModal = (props: ManageFileModalProps) => {
             onPress={async () => {
               if (button1Action) {
                 const result = await button1Action();
-                console.log("(manageFileModal onpress) Result for button1Action: " + result);
+                console.log(
+                  "(manageFileModal onpress) Result for button1Action: " +
+                    result,
+                );
                 hideModal();
-                setShowSuccessModal(result);
+                setShowNotificationModal(result);
               }
             }}
           >
@@ -109,7 +114,7 @@ const ManageFileModal = (props: ManageFileModalProps) => {
                       result,
                   );
                   hideModal();
-                  setShowSuccessModal(result);
+                  setShowNotificationModal(result);
                 } else {
                   // handle import for this key
                   const result = await importDataFromCSV(key);
@@ -120,7 +125,7 @@ const ManageFileModal = (props: ManageFileModalProps) => {
                       result,
                   );
                   hideModal();
-                  setShowSuccessModal(result);
+                  setShowNotificationModal(result);
                 }
               }}
             >
@@ -131,7 +136,11 @@ const ManageFileModal = (props: ManageFileModalProps) => {
           ))}
         </Modal>
       </Portal>
-      <SuccessModal visible={showSuccessModal} setVisible={setShowSuccessModal} />
+      <NotificationModal
+        visible={showNotificationModal}
+        setVisible={setShowNotificationModal}
+        message={messageMap.success}
+      />
     </>
   );
 };

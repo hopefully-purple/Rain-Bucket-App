@@ -4,13 +4,14 @@ import { useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { Modal, Portal, Text } from "react-native-paper";
 
-type SuccessModalProps = {
+type NotificationModalProps = {
   visible: boolean;
   setVisible: (value: boolean) => void;
+  message: string;
 };
 
-const SuccessModal = (props: SuccessModalProps) => {
-  const { visible, setVisible } = props;
+const NotificationModal = (props: NotificationModalProps) => {
+  const { visible, setVisible, message } = props;
 
   const hideModal = () => setVisible(false);
 
@@ -32,7 +33,7 @@ const SuccessModal = (props: SuccessModalProps) => {
         contentContainerStyle={localStyles.contentContainer}
         style={localStyles.container}
       >
-        <Text style={localStyles.messageText}>Success! {"\u{1F389}"}</Text>
+        <Text style={localStyles.messageText}>{message}</Text>
       </Modal>
     </Portal>
   );
@@ -58,4 +59,4 @@ const localStyles = StyleSheet.create({
   },
 });
 
-export default SuccessModal;
+export default NotificationModal;
