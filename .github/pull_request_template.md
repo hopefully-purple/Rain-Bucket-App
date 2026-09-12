@@ -10,7 +10,7 @@ Checklist:
   - [ ] Delete Word
   - [ ] Edit Word
   - [ ] Export
-  - [ ] Import (console reads file contents)
+  - [ ] Import
 - [ ] If applicable, organize new styles
 - [ ] If applicable, add new screenshots to README
 - [ ] Double check google doc checklists match what was done
