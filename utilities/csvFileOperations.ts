@@ -3,18 +3,23 @@ import { jsonToCSV, readString } from "react-native-csv";
 import * as Sharing from "expo-sharing";
 import * as DocumentPicker from "expo-document-picker";
 import { ILanguageObject, IWord } from "@/interfaces/languageObjectInterface";
-import { asyncStorageGetAllKeys, asyncStorageSaveData } from "./utility-async-storage";
+import {
+  asyncStorageGetAllKeys,
+  asyncStorageSaveData,
+} from "./utility-async-storage";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 /**
  * Imports data from a CSV file and saves it to AsyncStorage
  * If languageKey is "NEW_LANGUAGE", the file name (without .csv) will be used as the new language key
  * Otherwise, the provided languageKey will be used to save the data
- * 
+ *
  * @param languageKey async storage key for language to import
  * @returns true if the data was imported and saved successfully, false otherwise
  */
-export const importDataFromCSV = async (languageKey: string): Promise<boolean> => {
+export const importDataFromCSV = async (
+  languageKey: string,
+): Promise<boolean> => {
   console.log("Importing data from CSV... = ", languageKey);
 
   try {
@@ -29,7 +34,7 @@ export const importDataFromCSV = async (languageKey: string): Promise<boolean> =
 
       // 2. Initialize the modern Expo File class
       const pickedFile = new File(fileUri);
-      
+
       // 3. Perform actions (e.g., read file contents as text)
       const fileContent = await pickedFile.text();
       console.log("File Content:", fileContent);
@@ -39,8 +44,14 @@ export const importDataFromCSV = async (languageKey: string): Promise<boolean> =
 
       // TO DO: make use of fileContentAsJson.errors https://react-native-csv.js.org/docs#errors
 
-      const languageName = languageKey === "NEW_LANGUAGE" ? fileName.replace(".csv", "") : languageKey;
-      console.log("Proceeding to save data to AsyncStorage for language: ", languageName);
+      const languageName =
+        languageKey === "NEW_LANGUAGE"
+          ? fileName.replace(".csv", "")
+          : languageKey;
+      console.log(
+        "Proceeding to save data to AsyncStorage for language: ",
+        languageName,
+      );
 
       const saveResult = await saveCSVJSONToAsyncStorage(
         fileContentAsJson.data,
@@ -48,9 +59,7 @@ export const importDataFromCSV = async (languageKey: string): Promise<boolean> =
         languageName,
       );
 
-      // TODO: If saveResult, notify user of success!
       if (saveResult) {
-        console.log("NOTIFY USER OF SUCCESS");
         return true;
       }
     } else {
@@ -68,7 +77,7 @@ export const importDataFromCSV = async (languageKey: string): Promise<boolean> =
 /**
  * Helper for importDataFromCSV
  * Saves the parsed CSV JSON data to AsyncStorage under the specified language key.
- * 
+ *
  * @param csvJson array of data converted from CSV to JSON
  * @param parseResultMeta metadata from file parsing object
  * @param languageKey async storage key for language to save
@@ -80,7 +89,7 @@ const saveCSVJSONToAsyncStorage = async (
   languageKey: string,
 ): Promise<boolean> => {
   console.log("Saving CSV JSON to AsyncStorage...");
-  
+
   console.log(parseResultMeta); // TO Do: evaluate if having the "meta" data is necessary in this function
 
   let newWordsList: IWord[] = [];
@@ -98,7 +107,12 @@ const saveCSVJSONToAsyncStorage = async (
   return asyncStorageSaveData(newLanguageObject);
 };
 
-export const exportAllDataToCSV = async () => {
+/**
+ * Exports all language data to CSV files.
+ * 
+ * @returns true if all languages are successfully exported. False otherwise.
+ */
+export const exportAllDataToCSV = async (): Promise<boolean> => {
   console.log("Exporting all data to CSV...");
   try {
     const allKeys = await asyncStorageGetAllKeys();
@@ -108,27 +122,34 @@ export const exportAllDataToCSV = async () => {
       const languageDataString = await AsyncStorage.getItem(key);
       if (languageDataString) {
         const languageData = JSON.parse(languageDataString);
-        console.log(`(exportAllDataToCSV) Exporting data for key: ${key}`, languageData);
-        await saveDataToCSV(languageData, key);
+        console.log(
+          `(exportAllDataToCSV) Exporting data for key: ${key}`,
+          languageData,
+        );
+        await exportDataToCSV(languageData, key);
       } else {
         console.warn(`No data found for key: ${key}`);
       }
     }
 
-    // TODO: Notify user of success after all exports are complete
+    return true;
   } catch (error) {
     console.error("Error exporting data to CSV:", error);
   }
-
+  return Promise.resolve(false);
 };
 
-export const saveDataToCSV = async (
+/**
+ * Saves language data to a CSV file and saves it using the device's sharing options.
+ *
+ * @param languageData async storage value from language key
+ * @param languageName the async storage language key
+ */
+export const exportDataToCSV = async (
   languageData: string,
   languageName: string,
-) => {
+): Promise<boolean> => {
   // step 1: convert JSON to string using react-native-csv
-
-  // Specifying fields and data explicitly
   const csv = jsonToCSV({
     fields: ["id", "word", "definition", "pronun", "notes"],
     data: languageData,
@@ -137,17 +158,28 @@ export const saveDataToCSV = async (
   // step 2: call createFile with the file name and content
   const fileName = languageName + "_vocab.csv";
   const file = createFile(fileName, csv);
+
   // step 4: upload file?
-  console.log("(saveDataToCSV) awaiting Sharing.isAvailableAsync()...");
+  console.log("(exportDataToCSV) awaiting Sharing.isAvailableAsync()...");
   await Sharing.isAvailableAsync().then(async (isAvailable) => {
     if (isAvailable) {
       await Sharing.shareAsync(file.uri);
     } else {
-      console.log("(saveDataToCSV) Sharing is not available");
+      console.log("(exportDataToCSV) Sharing is not available");
+      return false;
     }
   });
+  // return Promise.resolve(true);// TODO: what is Promise.resolve() and should I be using it?
+  return true;
 };
 
+/**
+ * Helper function for exportDataToCSV to create a file in the cache directory with the specified name and content.
+ *
+ * @param fileName name for the file to create
+ * @param content content to write to created file
+ * @returns new File object
+ */
 const createFile = (fileName: string, content: string): File => {
   try {
     const file = new File(Paths.cache, fileName);

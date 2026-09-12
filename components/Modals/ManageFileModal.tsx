@@ -10,7 +10,7 @@ import { StyleSheet } from "react-native";
 import { Button, Modal, Portal, Text } from "react-native-paper";
 import {
   importDataFromCSV,
-  saveDataToCSV,
+  exportDataToCSV,
 } from "@/utilities/csvFileOperations";
 import SuccessModal from "./SuccessModal";
 
@@ -101,7 +101,15 @@ const ManageFileModal = (props: ManageFileModalProps) => {
                   // handle export for this key
                   const data = await asyncStorageGetDataFromKey(key);
                   // console.log("(manageFileModal onpress) Data for key " + key + ": " + data);
-                  await saveDataToCSV(data, key);
+                  const result = await exportDataToCSV(data, key);
+                  console.log(
+                    "(manageFileModal onpress) Export result for key " +
+                      key +
+                      ": " +
+                      result,
+                  );
+                  hideModal();
+                  setShowSuccessModal(result);
                 } else {
                   // handle import for this key
                   const result = await importDataFromCSV(key);
