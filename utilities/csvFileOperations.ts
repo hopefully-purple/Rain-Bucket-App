@@ -4,7 +4,8 @@ import * as Sharing from "expo-sharing";
 import * as DocumentPicker from "expo-document-picker";
 // import LanguageObject from "@/contexts/LanguageObject";
 import { ILanguageObject, IWord } from "@/interfaces/languageObjectInterface";
-import { asyncStorageSaveData } from "./utility-async-storage";
+import { asyncStorageGetAllKeys, asyncStorageSaveData } from "./utility-async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 // TODO - uninstall @react-native-documents/picker
 
 // Big picture steps:
@@ -83,6 +84,28 @@ const saveCSVJSONToAsyncStorage = async (
   return asyncStorageSaveData(newLanguageObject);
 };
 
+export const exportAllDataToCSV = async () => {
+  console.log("Exporting all data to CSV...");
+  try {
+    const allKeys = await asyncStorageGetAllKeys();
+    console.log("All keys retrieved:", allKeys);
+
+    for (const key of allKeys) {
+      const languageDataString = await AsyncStorage.getItem(key);
+      if (languageDataString) {
+        const languageData = JSON.parse(languageDataString);
+        console.log(`(exportAllDataToCSV) Exporting data for key: ${key}`, languageData);
+        await saveDataToCSV(languageData, key);
+      } else {
+        console.warn(`No data found for key: ${key}`);
+      }
+    }
+  } catch (error) {
+    console.error("Error exporting data to CSV:", error);
+  }
+
+};
+
 export const saveDataToCSV = async (
   languageData: string,
   languageName: string,
@@ -110,28 +133,31 @@ export const saveDataToCSV = async (
   const fileName = languageName + "_vocab.csv";
   const file = createFile(fileName, csv);
   // step 4: upload file?
-  await Sharing.isAvailableAsync().then((isAvailable) => {
+  console.log("(saveDataToCSV) awaiting Sharing.isAvailableAsync()...");
+  await Sharing.isAvailableAsync().then(async (isAvailable) => {
     if (isAvailable) {
-      Sharing.shareAsync(file.uri);
+      await Sharing.shareAsync(file.uri);
     } else {
-      console.log("Sharing is not available");
+      console.log("(saveDataToCSV) Sharing is not available");
     }
   });
+
+  // return sharingComplete;
 };
 
 const createFile = (fileName: string, content: string): File => {
   try {
     const file = new File(Paths.cache, fileName);
-    console.log("File path:", file.uri);
+    console.log("(createFile) File path:", file.uri);
     if (!file.exists) {
-      console.log("file.create() called");
+      console.log("(createFile) file.create() called");
       file.create(); // can throw an error if the file already exists or no permission to create it
     }
     // } else { // Not sure if I should do this
     //   console.log("File already exists, overwriting...");
     //   file.rename(fileName); // overwrite existing file
     // }
-    console.log("file.write() called");
+    console.log("(createFile) file.write() called");
     file.write(content);
     // console.log(file.textSync()); // Hello, world!
 
