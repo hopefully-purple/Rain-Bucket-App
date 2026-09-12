@@ -10,8 +10,6 @@ import { asyncStorageSaveData } from "./utility-async-storage";
 // Big picture steps:
 // 3. Then worry about writing multiple files if necessary
 
-// next phase: the reverse
-// 3.1 account for imported language to not already exist
 
 export const importDataFromCSV = async (languageKey: string) => {
   console.log("Importing data from CSV... = ", languageKey);
@@ -37,11 +35,6 @@ export const importDataFromCSV = async (languageKey: string) => {
       console.log("JSON Data:", fileContentAsJson);
 
       // TO DO: make use of fileContentAsJson.errors https://react-native-csv.js.org/docs#errors
-
-      // if (languageKey === "NEW_LANGUAGE") {
-      //   console.log("Importing data for a new language !!! = ", fileName);
-      //   return;
-      // }
 
       const languageName = languageKey === "NEW_LANGUAGE" ? fileName.replace(".csv", "") : languageKey;
       console.log("Proceeding to save data to AsyncStorage for language: ", languageName);
@@ -72,7 +65,7 @@ const saveCSVJSONToAsyncStorage = async (
   languageKey: string,
 ): Promise<boolean> => {
   console.log("Saving CSV JSON to AsyncStorage...");
-  // console.log(csvJson);
+  
   console.log(parseResultMeta); // TO Do: evaluate if having the "meta" data is necessary in this function
 
   let newWordsList: IWord[] = [];
