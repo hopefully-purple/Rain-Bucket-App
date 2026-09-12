@@ -1,14 +1,11 @@
 import Colors from "@/assets/colors/colors";
 import styles from "@/assets/styles/styleSheet";
-import LanguageObjectContext from "@/contexts/LanguageObject";
-import SelectedItemContext from "@/contexts/SelectedItem";
 import { ILanguageObject } from "@/interfaces/languageObjectInterface";
 import {
   asyncStorageGetAllKeys,
   asyncStorageGetDataFromKey,
 } from "@/utilities/utility-async-storage";
-import * as React from "react";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import { Button, Modal, Portal, Text } from "react-native-paper";
 import {
@@ -41,8 +38,6 @@ const ManageFileModal = (props: ManageFileModalProps) => {
     button1Action,
     isExportMode,
   } = props;
-  // const { languageObj, setLanguageObj } = useContext(LanguageObjectContext);
-  // const { selectedItem, setSelectedItem } = useContext(SelectedItemContext);
   const [storageKeys, setStorageKeys] = useState<string[]>([]);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 

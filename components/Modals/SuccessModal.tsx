@@ -2,7 +2,7 @@ import Colors from "@/assets/colors/colors";
 import styles from "@/assets/styles/styleSheet";
 import { useEffect } from "react";
 import { StyleSheet } from "react-native";
-import { Button, Modal, Portal, Text } from "react-native-paper";
+import { Modal, Portal, Text } from "react-native-paper";
 
 type SuccessModalProps = {
   visible: boolean;
@@ -14,6 +14,7 @@ const SuccessModal = (props: SuccessModalProps) => {
 
   const hideModal = () => setVisible(false);
 
+  // TO DO - uncomment for auto-hide modal after 2 seconds
   useEffect(() => {
     if (!visible) return;
     const timer = setTimeout(() => {
@@ -31,48 +32,29 @@ const SuccessModal = (props: SuccessModalProps) => {
         contentContainerStyle={localStyles.contentContainer}
         style={localStyles.container}
       >
-        <Text style={localStyles.wText}>Success!</Text>
+        <Text style={localStyles.messageText}>Success! {"\u{1F389}"}</Text>
       </Modal>
     </Portal>
   );
 };
 
+// TODO - check if these styles are duplicates that should be reusable.
 const localStyles = StyleSheet.create({
   container: {
     flex: 1,
     margin: 20,
   },
   contentContainer: {
-    backgroundColor: "white",
+    backgroundColor: Colors.main_theme.BACKGROUND_COLOR,
     padding: 20,
     borderRadius: 12,
   },
-  button: {
-    ...styles.buttonRadius12M10,
-    backgroundColor: Colors.WHITE,
-    width: 300,
-    alignSelf: "center",
-  },
-  wText: {
-    ...styles.boldText,
+  messageText: {
+    color: Colors.main_theme.ACTIVE_ACCENT_COLOR,
+    fontWeight: "bold",
     fontSize: 30,
     margin: 20,
-  },
-  prText: {
-    color: Colors.main_theme.TEXT_DARK_GRAY,
-    fontSize: 15,
-    fontStyle: "italic",
-    marginHorizontal: 20,
-    marginBottom: 20,
-  },
-  dText: {
-    ...styles.regularText,
-    marginHorizontal: 20,
-  },
-  otherText: {
-    ...styles.regularText,
-    marginHorizontal: 20,
-    marginTop: 20,
+    textAlign: "center",
   },
 });
 
