@@ -10,7 +10,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import styles from "@/assets/styles/styleSheet";
 import ManageFileModal from "@/components/ManageFileModal";
 import { asyncStorageGetAllKeys } from "@/utilities/utility-async-storage";
-import { importDataFromCSV } from "@/utilities/csvFileOperations";
+import { exportAllDataToCSV, importDataFromCSV } from "@/utilities/csvFileOperations";
 
 // to do: messagemap
 
@@ -178,7 +178,7 @@ export default function SettingsScreen() {
           descriptionText="Here you can export your data as a CSV file and save it to your device."
           button1Text="Export All Data"
           isExportMode={true}
-          button1Action={() => console.log("TODO - implement export all data")}
+          button1Action={exportAllDataToCSV}
         />
         <ManageFileModal
           visible={importModalVisible}
