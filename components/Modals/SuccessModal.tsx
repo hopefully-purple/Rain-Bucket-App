@@ -1,68 +1,17 @@
 import Colors from "@/assets/colors/colors";
 import styles from "@/assets/styles/styleSheet";
-import LanguageObjectContext from "@/contexts/LanguageObject";
-import SelectedItemContext from "@/contexts/SelectedItem";
-import { ILanguageObject } from "@/interfaces/languageObjectInterface";
-import {
-  asyncStorageGetAllKeys,
-  asyncStorageGetDataFromKey,
-} from "@/utilities/utility-async-storage";
-import * as React from "react";
-import { useContext, useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import { Button, Modal, Portal, Text } from "react-native-paper";
-import { importDataFromCSV, saveDataToCSV } from "@/utilities/csvFileOperations";
 
-type ManageFileModalProps = {
+type SuccessModalProps = {
   visible: boolean;
   setVisible: (value: boolean) => void;
-  item: ILanguageObject;
-  title: string;
-  descriptionText: string;
-  button1Text: string;
-  button1Action?: () => void;
-  isExportMode: boolean;
 };
 
-// TODO - rename some variables?
-
-const ManageFileModal = (props: ManageFileModalProps) => {
-  const {
-    visible,
-    setVisible,
-    item,
-    title,
-    descriptionText,
-    button1Text,
-    button1Action,
-    isExportMode,
-  } = props;
-  // const { languageObj, setLanguageObj } = useContext(LanguageObjectContext);
-  // const { selectedItem, setSelectedItem } = useContext(SelectedItemContext);
-  const [storageKeys, setStorageKeys] = useState<string[]>([]);
+const SuccessModal = (props: SuccessModalProps) => {
+  const { visible, setVisible } = props;
 
   const hideModal = () => setVisible(false);
-
-  // TODO: make messageMap dynamic
-  const messageMap = {
-    exportDataFor: "Export data for {key}",
-    importDataFor: "Import data for {key}",
-  };
-
-  // load AsyncStorage keys when modal is shown
-  useEffect(() => {
-    let mounted = true;
-    if (!visible) return;
-    console.log("[ManageFileModal] (useEffect) how many times does this run?"); // Just the 1 so far.
-    asyncStorageGetAllKeys()
-      .then((keys: string[]) => {
-        if (mounted) setStorageKeys(keys);
-      })
-      .catch((err) => console.warn("Failed to load storage keys", err));
-    return () => {
-      mounted = false;
-    };
-  }, [visible]);
 
   return (
     <Portal>
@@ -72,43 +21,7 @@ const ManageFileModal = (props: ManageFileModalProps) => {
         contentContainerStyle={localStyles.contentContainer}
         style={localStyles.container}
       >
-        <Text style={localStyles.wText}>{title}</Text>
-        <Text style={localStyles.prText}>{descriptionText}</Text>
-        <Button
-          mode="outlined"
-          style={localStyles.button}
-          textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
-          onPress={() => {
-            if (button1Action) {
-              button1Action();
-            }
-          }}
-        >
-          {button1Text}
-        </Button>
-        {storageKeys.map((key: string) => (
-          <Button
-            key={key}
-            mode="outlined"
-            style={localStyles.button}
-            textColor={Colors.main_theme.ACTIVE_ACCENT_COLOR}
-            onPress={async () => {
-              if (isExportMode) {
-                // handle export for this key
-                const data = await asyncStorageGetDataFromKey(key);
-                // console.log("(manageFileModal onpress) Data for key " + key + ": " + data);
-                await saveDataToCSV(data, key);
-              } else {
-                // handle import for this key
-                await importDataFromCSV(key);
-              }
-            }}
-          >
-            {isExportMode
-              ? messageMap.exportDataFor.replace("{key}", key)
-              : messageMap.importDataFor.replace("{key}", key)}
-          </Button>
-        ))}
+       Success!
       </Modal>
     </Portal>
   );
@@ -153,4 +66,4 @@ const localStyles = StyleSheet.create({
   },
 });
 
-export default ManageFileModal;
+export default SuccessModal;
