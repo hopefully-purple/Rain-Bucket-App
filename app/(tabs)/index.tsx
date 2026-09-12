@@ -2,31 +2,52 @@ import ImageViewer from "@/components/ImageViewer";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import Colors from "@/assets/colors/colors";
 import { router } from "expo-router";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import LanguageObjectContext from "@/contexts/LanguageObject";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ILanguageObject } from "@/interfaces/languageObjectInterface";
 import { Icon } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styles from "@/assets/styles/styleSheet";
+import { asyncStorageGetAllKeys } from "@/utilities/utility-async-storage";
 
 const RainBucketImage = require("@/assets/images/ORIGpurple_rainbucket_2.jpeg");
 
 export default function Index() {
   const { languageObj, setLanguageObj } = useContext(LanguageObjectContext);
+  const [storageKeys, setStorageKeys] = useState<string[]>([]);
+
+  // load AsyncStorage keys when modal is shown
+  useEffect(() => {
+    let mounted = true;
+    console.log("[App.Index] (useEffect) how many times does this run?"); // Just the 1 so far.
+    asyncStorageGetAllKeys()
+      .then((keys: string[]) => {
+        if (mounted) setStorageKeys(keys);
+      })
+      .catch((err) => console.warn("Failed to load storage keys", err));
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   const readData = async (language: string) => {
     try {
       const value = await AsyncStorage.getItem(language);
       // console.log('(App.readData) value:' + value);
       if (value !== null) {
+        console.log(
+          "(App.readData) Found data for language " +
+            language +
+            ", setting context to that data",
+        );
         setLanguageObj({ language: language, words: JSON.parse(value) });
       } else {
-        // console.log(
-        //   "(App.readData).getItem value is null! create a new " +
-        //     language +
-        //     " object"
-        // );
+        console.log(
+          "(App.readData).getItem value is null! create a new " +
+            language +
+            " object",
+        );
         const newLanguage: ILanguageObject = {
           language: language,
           words: [{ id: "0", word: "", pronun: "", definition: "" }],
@@ -35,7 +56,7 @@ export default function Index() {
       }
     } catch (e) {
       console.log(
-        "(App.readData) Failed to fetch the input from storage: " + e
+        "(App.readData) Failed to fetch the input from storage: " + e,
       );
       throw e;
     }
@@ -52,7 +73,20 @@ export default function Index() {
         style={styles.screenContainer}
         edges={["right", "bottom", "left"]}
       >
-        <TouchableOpacity onPress={() => handleLanguageSelection("Spanish")}>
+        {storageKeys.map((key) => (
+          <TouchableOpacity key={key} onPress={() => handleLanguageSelection(key)}>
+            <View style={localStyle.languageRow}>
+              <Text style={localStyle.languageText}>{key}</Text>
+              <Icon
+                source="chevron-right"
+                color={Colors.main_theme.TEXT_DARK_GRAY}
+                size={30}
+              />
+            </View>
+          </TouchableOpacity>
+        ))}
+
+        {/* <TouchableOpacity onPress={() => handleLanguageSelection("Spanish")}>
           <View style={localStyle.languageRow}>
             <Text style={localStyle.languageText}>Spanish</Text>
             <Icon
@@ -71,7 +105,7 @@ export default function Index() {
               size={30}
             />
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <View style={localStyle.logoContainer}>
           <ImageViewer imgSource={RainBucketImage} />
           <Text style={localStyle.logoText}>Rainbucket App</Text>

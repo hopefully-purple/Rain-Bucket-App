@@ -16,7 +16,7 @@ import { importDataFromCSV } from "@/utilities/csvFileOperations";
 
 export default function SettingsScreen() {
   const { languageObj, setLanguageObj } = useContext(LanguageObjectContext);
-  const [output, setOutput] = useState("");
+  const [outputForUser, setOutputForUser] = useState("");
   const [exportModalVisible, setExportModalVisible] = useState(false);
   const [importModalVisible, setImportModalVisible] = useState(false);
 
@@ -52,7 +52,7 @@ export default function SettingsScreen() {
     try {
       const result = await AsyncStorage.getItem(languageObj.language);
       let itemCount = result != null ? JSON.parse(result).length : "";
-      setOutput("ITEMCOUNT=" + itemCount + "\n" + result);
+      setOutputForUser("ITEMCOUNT=" + itemCount + "\n" + result);
     } catch (e) {
       // clear error
       console.log("getCurrentData storage threw error " + e);
@@ -60,10 +60,9 @@ export default function SettingsScreen() {
     }
   };
 
-  // TODO: remove and use the utility function instead
   const getAllKeys = async () => {
     const keys = await asyncStorageGetAllKeys();
-    setOutput(keys[0] + ", " + keys[1]);
+    setOutputForUser(keys.map((key) => key + ", ").join(""));
     // return keys;
     // console.log(JSON.stringify(keys));
     // return [];
@@ -72,7 +71,22 @@ export default function SettingsScreen() {
   };
 
   const deleteCertainData = async () => {
-    setOutput("Deleted words from context and storage that are missing an id");
+    console.log("Delete English language object");
+    setOutputForUser("Deleting English language object");
+
+    try {
+      await AsyncStorage.removeItem("English");
+    } catch (e) {
+      console.log("deleteCertainData storage threw error " + e);
+      throw e;
+    }
+  };
+  
+  const deleteCertainDataInLanguage = async () => {
+    console.log(
+      "Deleting words from context and storage that are missing an id",
+    );
+    setOutputForUser("Deleting words from context and storage that are missing an id");
 
     // Filter condition
     function excludeItems(i: IWord) {
@@ -154,7 +168,7 @@ export default function SettingsScreen() {
           RUN CUSTOM DELETE METHOD
         </Button>
         <ScrollView>
-          <Text style={localStyles.text}>{output}</Text>
+          <Text style={localStyles.text}>{outputForUser}</Text>
         </ScrollView>
         <ManageFileModal
           visible={exportModalVisible}
@@ -172,9 +186,9 @@ export default function SettingsScreen() {
           item={languageObj}
           title="Import Data"
           descriptionText="Here you can import your data from a CSV file. Warning: this will overwrite any existing data for an existing language."
-          button1Text="Import Data"
+          button1Text="Import Data for a new language"
           isExportMode={false}
-          button1Action={() => console.log("TODO - implement import NEW language")}
+          button1Action={() => importDataFromCSV("NEW_LANGUAGE")}
         />
       </View>
     </SafeAreaView>

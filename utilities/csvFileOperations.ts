@@ -2,16 +2,13 @@ import { File, Paths } from "expo-file-system";
 import { jsonToCSV, readString } from "react-native-csv";
 import * as Sharing from "expo-sharing";
 import * as DocumentPicker from "expo-document-picker";
-import LanguageObject from "@/contexts/LanguageObject";
+// import LanguageObject from "@/contexts/LanguageObject";
 import { ILanguageObject, IWord } from "@/interfaces/languageObjectInterface";
 import { asyncStorageSaveData } from "./utility-async-storage";
 // TODO - uninstall @react-native-documents/picker
 
 // Big picture steps:
 // 3. Then worry about writing multiple files if necessary
-
-// next phase: the reverse
-// 3.1 account for imported language to not already exist
 
 
 export const importDataFromCSV = async (languageKey: string) => {
@@ -25,10 +22,11 @@ export const importDataFromCSV = async (languageKey: string) => {
     if (!result.canceled) {
       // 1. Get the URI of the picked file
       const fileUri = result.assets[0].uri;
+      const fileName = result.assets[0].name;
 
       // 2. Initialize the modern Expo File class
       const pickedFile = new File(fileUri);
-
+      
       // 3. Perform actions (e.g., read file contents as text)
       const fileContent = await pickedFile.text();
       console.log("File Content:", fileContent);
@@ -38,13 +36,19 @@ export const importDataFromCSV = async (languageKey: string) => {
 
       // TO DO: make use of fileContentAsJson.errors https://react-native-csv.js.org/docs#errors
 
-      const saveResult = await saveCSVJSONToAsyncStorage(fileContentAsJson.data, fileContentAsJson.meta, languageKey);
+      const languageName = languageKey === "NEW_LANGUAGE" ? fileName.replace(".csv", "") : languageKey;
+      console.log("Proceeding to save data to AsyncStorage for language: ", languageName);
+
+      const saveResult = await saveCSVJSONToAsyncStorage(
+        fileContentAsJson.data,
+        fileContentAsJson.meta,
+        languageName,
+      );
 
       // TODO: If saveResult, notify user of success!
       if (saveResult) {
         console.log("NOTIFY USER OF SUCCESS");
       }
-
     } else {
       // TODO: Notify user
       console.log("Operation cancelled.");
@@ -55,9 +59,13 @@ export const importDataFromCSV = async (languageKey: string) => {
   }
 };
 
-const saveCSVJSONToAsyncStorage = async (csvJson: any[], parseResultMeta: any, languageKey: string): Promise<boolean> => {
+const saveCSVJSONToAsyncStorage = async (
+  csvJson: any[],
+  parseResultMeta: any,
+  languageKey: string,
+): Promise<boolean> => {
   console.log("Saving CSV JSON to AsyncStorage...");
-  // console.log(csvJson);
+  
   console.log(parseResultMeta); // TO Do: evaluate if having the "meta" data is necessary in this function
 
   let newWordsList: IWord[] = [];
@@ -68,9 +76,10 @@ const saveCSVJSONToAsyncStorage = async (csvJson: any[], parseResultMeta: any, l
 
   const newLanguageObject: ILanguageObject = {
     language: languageKey,
-    words: newWordsList
+    words: newWordsList,
   };
 
+  console.log("New Language Object to be saved:", newLanguageObject);
   return asyncStorageSaveData(newLanguageObject);
 };
 
