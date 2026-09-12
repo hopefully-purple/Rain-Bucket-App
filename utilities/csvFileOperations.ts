@@ -63,12 +63,10 @@ export const importDataFromCSV = async (
         return true;
       }
     } else {
-      // TODO: Notify user
       console.log("Operation cancelled.");
       return false;
     }
   } catch (error) {
-    // TODO: Notify user
     console.error(error);
   }
   return Promise.resolve(false);
@@ -163,6 +161,7 @@ export const exportDataToCSV = async (
   console.log("(exportDataToCSV) awaiting Sharing.isAvailableAsync()...");
   await Sharing.isAvailableAsync().then(async (isAvailable) => {
     if (isAvailable) {
+      // TO DO: figure out if there's a way to detect that the user hit X or otherwise dismissed the share modal.
       await Sharing.shareAsync(file.uri);
     } else {
       console.log("(exportDataToCSV) Sharing is not available");

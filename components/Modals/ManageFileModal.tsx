@@ -67,6 +67,12 @@ const ManageFileModal = (props: ManageFileModalProps) => {
     };
   }, [visible]);
 
+  const handleActionResult = (result: boolean) => {
+    setNotificationMessage(result ? messageMap.success : messageMap.failed);
+    hideModal();
+    setShowNotificationModal(true);
+  };
+
   return (
     <>
       <Portal>
@@ -89,9 +95,7 @@ const ManageFileModal = (props: ManageFileModalProps) => {
                   "(manageFileModal onpress) Result for button1Action: " +
                     result,
                 );
-                setNotificationMessage(result ? messageMap.success : messageMap.failed);
-                hideModal();
-                setShowNotificationModal(true);
+                handleActionResult(result);
               }
             }}
           >
@@ -115,9 +119,7 @@ const ManageFileModal = (props: ManageFileModalProps) => {
                       ": " +
                       result,
                   );
-                  setNotificationMessage(result ? messageMap.success : messageMap.failed);
-                  hideModal();
-                  setShowNotificationModal(true);
+                  handleActionResult(result);
                 } else {
                   // handle import for this key
                   const result = await importDataFromCSV(key);
@@ -127,9 +129,7 @@ const ManageFileModal = (props: ManageFileModalProps) => {
                       ": " +
                       result,
                   );
-                  setNotificationMessage(result ? messageMap.success : messageMap.failed);
-                  hideModal();
-                  setShowNotificationModal(true);
+                  handleActionResult(result);
                 }
               }}
             >
