@@ -40,6 +40,7 @@ const ManageFileModal = (props: ManageFileModalProps) => {
   } = props;
   const [storageKeys, setStorageKeys] = useState<string[]>([]);
   const [showNotificationModal, setShowNotificationModal] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState("");
 
   const hideModal = () => setVisible(false);
 
@@ -88,8 +89,9 @@ const ManageFileModal = (props: ManageFileModalProps) => {
                   "(manageFileModal onpress) Result for button1Action: " +
                     result,
                 );
+                setNotificationMessage(result ? messageMap.success : messageMap.failed);
                 hideModal();
-                setShowNotificationModal(result);
+                setShowNotificationModal(true);
               }
             }}
           >
@@ -113,8 +115,9 @@ const ManageFileModal = (props: ManageFileModalProps) => {
                       ": " +
                       result,
                   );
+                  setNotificationMessage(result ? messageMap.success : messageMap.failed);
                   hideModal();
-                  setShowNotificationModal(result);
+                  setShowNotificationModal(true);
                 } else {
                   // handle import for this key
                   const result = await importDataFromCSV(key);
@@ -124,8 +127,9 @@ const ManageFileModal = (props: ManageFileModalProps) => {
                       ": " +
                       result,
                   );
+                  setNotificationMessage(result ? messageMap.success : messageMap.failed);
                   hideModal();
-                  setShowNotificationModal(result);
+                  setShowNotificationModal(true);
                 }
               }}
             >
@@ -139,7 +143,7 @@ const ManageFileModal = (props: ManageFileModalProps) => {
       <NotificationModal
         visible={showNotificationModal}
         setVisible={setShowNotificationModal}
-        message={messageMap.success}
+        message={notificationMessage}
       />
     </>
   );
