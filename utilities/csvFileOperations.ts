@@ -5,7 +5,6 @@ import * as DocumentPicker from "expo-document-picker";
 import { ILanguageObject, IWord } from "@/interfaces/languageObjectInterface";
 import { asyncStorageGetAllKeys, asyncStorageSaveData } from "./utility-async-storage";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-// TODO - uninstall @react-native-documents/picker
 
 export const importDataFromCSV = async (languageKey: string) => {
   console.log("Importing data from CSV... = ", languageKey);
