@@ -2,15 +2,10 @@ import { File, Paths } from "expo-file-system";
 import { jsonToCSV, readString } from "react-native-csv";
 import * as Sharing from "expo-sharing";
 import * as DocumentPicker from "expo-document-picker";
-// import LanguageObject from "@/contexts/LanguageObject";
 import { ILanguageObject, IWord } from "@/interfaces/languageObjectInterface";
 import { asyncStorageGetAllKeys, asyncStorageSaveData } from "./utility-async-storage";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 // TODO - uninstall @react-native-documents/picker
-
-// Big picture steps:
-// 3. Then worry about writing multiple files if necessary
-
 
 export const importDataFromCSV = async (languageKey: string) => {
   console.log("Importing data from CSV... = ", languageKey);
@@ -100,6 +95,8 @@ export const exportAllDataToCSV = async () => {
         console.warn(`No data found for key: ${key}`);
       }
     }
+
+    // TODO: Notify user of success after all exports are complete
   } catch (error) {
     console.error("Error exporting data to CSV:", error);
   }
@@ -111,23 +108,12 @@ export const saveDataToCSV = async (
   languageName: string,
 ) => {
   // step 1: convert JSON to string using react-native-csv
-  // console.log("languageObj to be saved: " + JSON.stringify(languageObj));
-  // console.log(languageName + "blahhhhhhh");
+
   // Specifying fields and data explicitly
   const csv = jsonToCSV({
     fields: ["id", "word", "definition", "pronun", "notes"],
     data: languageData,
   });
-
-  // const csv = jsonToCSV({
-  //   fields: ["Column 1", "Column 2"],
-  //   data: [
-  //     ["foo", "bar"],
-  //     ["abc", "def"],
-  //   ],
-  // });
-  // console.log("csv content: ");
-  // console.log(csv);
 
   // step 2: call createFile with the file name and content
   const fileName = languageName + "_vocab.csv";
@@ -141,8 +127,6 @@ export const saveDataToCSV = async (
       console.log("(saveDataToCSV) Sharing is not available");
     }
   });
-
-  // return sharingComplete;
 };
 
 const createFile = (fileName: string, content: string): File => {
@@ -153,13 +137,9 @@ const createFile = (fileName: string, content: string): File => {
       console.log("(createFile) file.create() called");
       file.create(); // can throw an error if the file already exists or no permission to create it
     }
-    // } else { // Not sure if I should do this
-    //   console.log("File already exists, overwriting...");
-    //   file.rename(fileName); // overwrite existing file
-    // }
+
     console.log("(createFile) file.write() called");
     file.write(content);
-    // console.log(file.textSync()); // Hello, world!
 
     return file;
   } catch (error) {
